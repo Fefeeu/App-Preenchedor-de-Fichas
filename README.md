@@ -1,5 +1,9 @@
 # RPP - RPG Player Pack
 
+<p>
+    Um local onde jogadores podem criar, editar e armazenar fichas de RPG diretamente pelo seu celular ou computador.
+</p>
+
 <h2>Development Stack:</h2>
 <ul>
     <li>
