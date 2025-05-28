@@ -1,8 +1,8 @@
 package br.rpp.inventario.item;
 
-import br.rpp.interfaces.Consumivel;
+import br.rpp.interfaces.Usavel;
 
-public class ItemConsumivel extends Item implements Consumivel {
+public class ItemConsumivel extends Item implements Usavel {
     private int usos = 0;
     private int usosMaximo;
 

@@ -1,14 +1,15 @@
 package br.rpp.inventario.item;
 
-import br.rpp.interfaces.Consumivel;
+import br.rpp.interfaces.Usavel;
 
-public class EquipavelMagico implements Consumivel {
+public class EquipavelMagico extends Equipavel implements Usavel {
     public String efeito;
     private int cargas;
     private int cargasMaxima;
     public int bonus;
 
-    public EquipavelMagico(String efeito, int cargas, int bonus){
+    public EquipavelMagico(String nome, String descricao, float peso, char moeda, int preco, int bonusCA, boolean proficiencia, String efeito, int cargas, int bonus){
+        super(nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
         this.efeito = efeito;
         this.cargas = cargas;
         this.cargasMaxima = cargas;
