@@ -13,11 +13,10 @@ public class Inventario {
     public int pl = 0; // Peça de pLatina
 
     public Inventario() {
-        itens = new ArrayList<Item>();
+        itens = new ArrayList<>();
     }
 
-    private Item criarItem(int tipo){
-        // entrada de dados
+    private Item criarItem(int tipo){ // TODO(front): entrada de dados
         String nome = "";
         String descricao = "";
         float peso = 0.01f;
@@ -60,7 +59,7 @@ public class Inventario {
                 boolean proficiencia = false;
                 return new Equipavel(nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
             }
-            case 6:{
+            case 6:{    // Equipavel Magico
                 int bonusCA = 0;
                 boolean proficiencia = false;
                 String efeito = "";
@@ -69,23 +68,38 @@ public class Inventario {
                 return new EquipavelMagico(nome, descricao, peso, moeda, preco, bonusCA,
                                         proficiencia, efeito, usos, bonus);
             }
-            default: return new Item("generico", "generico", 0.01f, 'o', 0);
+            default: return new Item("genérico", "genérico", 0.01f, 'o', 0);
         }
     }
 
     public void guardarItem(){
 
-        int tipoDoItem = 0; // entrada de dados com seleção de opções
+        int tipoDoItem = 0; // TODO(front): entrada de dados com seleção de opções
         itens.add(criarItem(tipoDoItem));
-        // criar item e adicionar
-        // perguntar o tipo de item antes de criar
     }
 
-    public void descartarItem(Item item){
-        // remove o item
+    public void descartarItem(Item item){   // TODO(front): seleciona o item e a opcao de descartar
+        itens.remove(item);
     }
 
-    public void venderItem(Item item){
-        // remove o item e adiciona moeda ao inventario
+    public void venderItem(Item item){  // TODO(front): seleciona o item e a opcao de vender
+        venderItemPersonalizado(item, item.moeda, item.preco);
+    }
+
+    public void venderItemPersonalizado(Item item, char moeda, int valor){
+        boolean valido = true;
+        switch (moeda){
+            case 'c': this.pc += valor;
+            case 'p': this.pp += valor;
+            case 'e': this.pe += valor;
+            case 'o': this.po += valor;
+            case 'l': this.pl += valor;
+            default: valido = false;
+        }
+        if(valido){
+            itens.remove(item);
+        } else {
+            System.out.println("compra negada, moeda invalida");
+        }
     }
 }
