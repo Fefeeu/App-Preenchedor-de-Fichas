@@ -1,14 +1,14 @@
 package br.rpp.inventario.item;
 
-import br.rpp.interfaces.Consumivel;
+import br.rpp.interfaces.Usavel;
 
-public class ArmaMagica extends Arma implements Consumivel {
+public class ArmaMagica extends Arma implements Usavel {
     public String efeito;
     private int cargas;
     private int cargasMaxima;
     public int bonus;
 
-    public ArmaMagica(String nome, String descricao, float peso, char moeda, int preco, Dado dado, int quantidade, int atributo, boolean proficiencia, String efeito, int cargas, int bonus) {
+    public ArmaMagica(String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int bonus) {
         super(nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
         this.efeito = efeito;
         this.cargas = cargas;

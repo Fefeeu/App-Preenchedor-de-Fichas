@@ -4,12 +4,12 @@ import br.rpp.interfaces.roll20;
 import br.rpp.interfaces.rollADice;
 
 public class Arma extends Item implements roll20, rollADice {
-    public Dado dadoDeDano;
+    public int dadoDeDano;
     public int quantidadeDeDados;
-    public int atributo;
+    public String atributo;
     public boolean proficiencia;
 
-    public Arma(String nome, String descricao, float peso, char moeda, int preco, Dado dado, int quantidade, int atributo, boolean proficiencia) {
+    public Arma(String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia) {
         super(nome, descricao, peso, moeda, preco);
         this.dadoDeDano = dado;
         this.quantidadeDeDados = quantidade;
@@ -28,6 +28,4 @@ public class Arma extends Item implements roll20, rollADice {
         // return Dado.rodarD20(vantagens, desvantagem, normal) + bonus
         return 0;
     }
-
-    public
 }

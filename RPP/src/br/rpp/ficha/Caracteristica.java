@@ -1,6 +1,5 @@
-package br.rpp;
+package br.rpp.ficha;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Caracteristica {

@@ -1,4 +1,4 @@
-package br.rpp;
+package br.rpp.ficha;
 
 import java.util.HashMap;
 

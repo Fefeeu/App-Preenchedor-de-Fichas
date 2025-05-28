@@ -1,6 +1,6 @@
 package br.rpp.interfaces;
 
-public interface Consumivel {
+public interface Usavel {
 
     void usar();
 

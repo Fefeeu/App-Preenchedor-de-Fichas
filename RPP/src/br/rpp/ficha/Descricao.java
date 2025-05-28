@@ -1,4 +1,4 @@
-package br.rpp;
+package br.rpp.ficha;
 
 public class Descricao {
 
