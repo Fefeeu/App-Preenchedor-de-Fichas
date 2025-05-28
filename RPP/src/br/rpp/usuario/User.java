@@ -1,6 +1,7 @@
-package br.rpp;
+package br.rpp.usuario;
 
-import java.lang.reflect.Array;
+import br.rpp.ficha.Ficha;
+
 import java.util.ArrayList;
 
 public class User {

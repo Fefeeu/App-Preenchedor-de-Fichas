@@ -1,9 +1,11 @@
-package br.rpp;
+package br.rpp.ficha;
+
+import br.rpp.magia.Magia;
 
 import java.util.HashMap;
 
 public class TabelaMagia {
-    HashMap<Integer,Magia> listaDeMagias;
+    HashMap<Integer, Magia> listaDeMagias;
 
     public TabelaMagia(){
         this.listaDeMagias = new HashMap<>();

@@ -1,4 +1,4 @@
-package br.rpp;
+package br.rpp.magia;
 
 public class Magia {
     String nome;
