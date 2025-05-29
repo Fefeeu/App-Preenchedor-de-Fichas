@@ -17,54 +17,54 @@ public class Inventario {
     }
 
     private Item criarItem(int tipo){ // TODO(front): entrada de dados
-        String nome = "";
-        String descricao = "";
-        float peso = 0.01f;
-        char moeda = 'o';
-        int preco = 0;
+        String nome = "";       // TODO(front): entrada de dados
+        String descricao = "";  // TODO(front): entrada de dados
+        float peso = 0.01f;     // TODO(front): entrada de dados
+        char moeda = 'o';       // TODO(front): entrada de dados
+        int preco = 0;          // TODO(front): entrada de dados
 
         switch(tipo){
             case 0:{    // Item
                 return new Item(nome, descricao, peso, moeda, preco);
             }
             case 1:{    // Consumivel
-                int usos = 0;
+                int usos = 0;   // TODO(front): entrada de dados
                 return new ItemConsumivel(nome, descricao, peso, moeda, preco, usos);
             }
             case 2:{    // Magico
-                String efeito = "";
+                String efeito = ""; // TODO(front): entrada de dados
                 return new ItemMagico(nome, descricao, peso, moeda, preco, efeito);
             }
             case 3:{    // Arma
-                int dado = 1;
-                int quantidade = 1;
-                String atributo = "";
-                boolean proficiencia = false;
+                int dado = 1;                   // TODO(front): entrada de dados
+                int quantidade = 1;             // TODO(front): entrada de dados
+                String atributo = "";           // TODO(front): entrada de dados
+                boolean proficiencia = false;   // TODO(front): entrada de dados
                 return new Arma(nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
             }
             case 4:{    // Arma Magica
-                int dado = 1;
-                int quantidade = 1;
-                String atributo = "";
-                boolean proficiencia = false;
-                int bonus = 0;
-                String efeito = "";
-                int usos = 0;
+                int dado = 1;                   // TODO(front): entrada de dados
+                int quantidade = 1;             // TODO(front): entrada de dados
+                String atributo = "";           // TODO(front): entrada de dados
+                boolean proficiencia = false;   // TODO(front): entrada de dados
+                int bonus = 0;                  // TODO(front): entrada de dados
+                String efeito = "";             // TODO(front): entrada de dados
+                int usos = 0;                   // TODO(front): entrada de dados
 
                 return new ArmaMagica(nome, descricao, peso, moeda, preco, dado, quantidade,
                                     atributo, proficiencia, efeito, usos, bonus);
             }
             case 5:{    // Equipavel
-                int bonusCA = 0;
-                boolean proficiencia = false;
+                int bonusCA = 0;                // TODO(front): entrada de dados
+                boolean proficiencia = false;   // TODO(front): entrada de dados
                 return new Equipavel(nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
             }
             case 6:{    // Equipavel Magico
-                int bonusCA = 0;
-                boolean proficiencia = false;
-                String efeito = "";
-                int usos = 0;
-                int bonus = 0;
+                int bonusCA = 0;                // TODO(front): entrada de dados
+                boolean proficiencia = false;   // TODO(front): entrada de dados
+                String efeito = "";             // TODO(front): entrada de dados
+                int usos = 0;                   // TODO(front): entrada de dados
+                int bonus = 0;                  // TODO(front): entrada de dados
                 return new EquipavelMagico(nome, descricao, peso, moeda, preco, bonusCA,
                                         proficiencia, efeito, usos, bonus);
             }
@@ -86,7 +86,7 @@ public class Inventario {
         venderItemPersonalizado(item, item.moeda, item.preco);
     }
 
-    public void venderItemPersonalizado(Item item, char moeda, int valor){
+    public void venderItemPersonalizado(Item item, char moeda, int valor){  // TODO(front): entrada de dados
         boolean valido = true;
         switch (moeda){
             case 'c': this.pc += valor;
