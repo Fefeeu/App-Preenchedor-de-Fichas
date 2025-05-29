@@ -9,6 +9,7 @@ public class ArmaMagica extends Arma implements Usavel {
     private int cargas;
     private int cargasMaxima;
     public int bonus;
+    private Ficha ficha;
 
     public ArmaMagica(Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int bonus) {
         super(ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);

@@ -1,5 +1,6 @@
 package br.rpp.inventario;
 
+import br.rpp.ficha.Ficha;
 import br.rpp.inventario.item.*;
 
 import java.util.ArrayList;
@@ -11,9 +12,11 @@ public class Inventario {
     public int pe = 0; // Peça de Electro
     public int po = 0; // Peça de Ouro
     public int pl = 0; // Peça de pLatina
+    private Ficha ficha;
 
-    public Inventario() {
+    public Inventario(Ficha ficha) {
         itens = new ArrayList<>();
+        this.ficha = ficha;
     }
 
     private Item criarItem(int tipo){ // TODO(front): entrada de dados
@@ -29,7 +32,7 @@ public class Inventario {
             }
             case 1:{    // Consumivel
                 int usos = 0;   // TODO(front): entrada de dados
-                return new ItemConsumivel(nome, descricao, peso, moeda, preco, usos);
+                return new ItemConsumivel(this.ficha, nome, descricao, peso, moeda, preco, usos);
             }
             case 2:{    // Magico
                 String efeito = ""; // TODO(front): entrada de dados
@@ -40,7 +43,7 @@ public class Inventario {
                 int quantidade = 1;             // TODO(front): entrada de dados
                 String atributo = "";           // TODO(front): entrada de dados
                 boolean proficiencia = false;   // TODO(front): entrada de dados
-                return new Arma(nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
+                return new Arma(this.ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
             }
             case 4:{    // Arma Magica
                 int dado = 1;                   // TODO(front): entrada de dados
@@ -51,7 +54,7 @@ public class Inventario {
                 String efeito = "";             // TODO(front): entrada de dados
                 int usos = 0;                   // TODO(front): entrada de dados
 
-                return new ArmaMagica(nome, descricao, peso, moeda, preco, dado, quantidade,
+                return new ArmaMagica(this.ficha, nome, descricao, peso, moeda, preco, dado, quantidade,
                                     atributo, proficiencia, efeito, usos, bonus);
             }
             case 5:{    // Equipavel

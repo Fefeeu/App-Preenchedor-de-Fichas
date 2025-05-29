@@ -6,7 +6,7 @@ import br.rpp.interfaces.roll20;
 import br.rpp.interfaces.rollADice;
 
 public class Arma extends Item implements roll20, rollADice {
-    Ficha ficha;
+    private Ficha ficha;
     public int dadoDeDano;
     public int quantidadeDeDados;
     public String atributo;
