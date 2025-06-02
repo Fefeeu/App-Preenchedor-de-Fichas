@@ -1,4 +1,4 @@
-package br.rpp;
+package br.rpp.personagem;
 
 import java.util.HashMap;
 
@@ -15,7 +15,7 @@ public class Ficha {
     Dado dadoDeVida;
     Inventario inventario;
     Descricao descricao;
-    TabelaMagia magias;
+    private TabelaMagia magias;
     private int[] proeficiencia = new int[20];
     boolean inspiracao;
 
@@ -24,4 +24,6 @@ public class Ficha {
         this.atributos = new HashMap<>();
         this.pericias = new HashMap<>();
     }
+
+
 }

@@ -1,6 +1,5 @@
-package br.rpp;
+package br.rpp.personagem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Caracteristica {
@@ -41,7 +40,9 @@ public class Caracteristica {
         this.cabelo = cabelo;
         this.idiomas = new ArrayList<>();
         this.proeficiencia = new ArrayList<>();
+    }
 
-
+    public String getUserName() {
+        return userName;
     }
 }
