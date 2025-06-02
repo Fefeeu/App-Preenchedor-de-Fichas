@@ -28,7 +28,7 @@ public class ItemConsumivel extends Item implements Usavel {
 
         if (this.usos == 0){
             Scanner sc = new Scanner(System.in);
-            boolean descartar = sc.nextBoolean(); // // TODO(front): entrada de dados
+            boolean descartar = sc.nextBoolean(); // TODO(front): entrada de dados
             if(descartar){
                 ficha.inventario.descartarItem(this);
             }
