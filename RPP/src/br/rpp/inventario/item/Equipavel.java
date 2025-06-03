@@ -9,5 +9,4 @@ public class Equipavel extends Item {
         this.bonusCA = bonusCA;
         this.proficiencia = proficiencia;
     }
-
 }

@@ -18,18 +18,25 @@ public class EquipavelMagico extends Equipavel implements Usavel {
 
     @Override
     public void usar(){
-        // --cargas
-        // exeption, se nao tiver carga
+        if (this.cargas > 0){
+            this.cargas--;
+        } else {
+            System.out.println("Cargas Insuficiente");
+        }
     }
 
     @Override
     public void recuperarUsos(){
-        // cargas ++
-        // exeption, se nao tiver carga
+        this.cargas = this.cargasMaxima;
     }
 
     @Override
     public void recuperarQuantidadeDeUsos(int usos){
-        // cargas += usos
+        usos = Math.max(0, usos); // garante que não seja negativo
+        if(usos > cargasMaxima - cargas){
+            this.cargas = this.cargasMaxima;
+        } else {
+            this.cargas+= usos;
+        }
     }
 }
