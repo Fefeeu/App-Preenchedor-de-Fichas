@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:RPP/src/br/rpp/ficha/Caracteristica.java
 package br.rpp.ficha;
-========
-package br.rpp.personagem;
->>>>>>>> 39744c5f9f67744ed33029f4fd53acc53a80b440:RPP/src/br/rpp/personagem/Caracteristica.java
 
 import java.util.ArrayList;
 
