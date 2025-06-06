@@ -6,10 +6,10 @@ public class Magia {
     int nivel;
     String tempoConjuracao;
     String duracao;
-    float alcance;
+    String alcance;
     String area;
     String escola;
-    char tipo;
+    String tipo;
 
     public Magia() {
     }
