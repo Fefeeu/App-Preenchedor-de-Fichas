@@ -8,12 +8,13 @@ public class EquipavelMagico extends Equipavel implements Usavel {
     private int cargasMaxima;
     public int bonus;
 
-    public EquipavelMagico(String nome, String descricao, float peso, char moeda, int preco, int bonusCA, boolean proficiencia, String efeito, int cargas, int bonus){
-        super(nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
+    public EquipavelMagico(int id, String nome, String descricao, float peso, char moeda, int preco, int bonusCA, boolean proficiencia, String efeito, int cargas, int bonus){
+        super(id, nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
         this.efeito = efeito;
         this.cargas = cargas;
         this.cargasMaxima = cargas;
         this.bonus = bonus;
+        this.setTipo("equipavelMagico");
     }
 
     @Override
@@ -38,5 +39,13 @@ public class EquipavelMagico extends Equipavel implements Usavel {
         } else {
             this.cargas+= usos;
         }
+    }
+
+    public int getCargas() {
+        return cargas;
+    }
+
+    public int getCargasMaxima() {
+        return cargasMaxima;
     }
 }

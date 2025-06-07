@@ -3,6 +3,7 @@ package br.rpp.inventario;
 import br.rpp.ficha.Ficha;
 import br.rpp.inventario.item.*;
 
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Inventario {
@@ -19,7 +20,8 @@ public class Inventario {
         this.ficha = ficha;
     }
 
-    private Item criarItem(int tipo){ // TODO(front): entrada de dados
+    private Item criarItem(String tipo){ // TODO(front): entrada de dados
+        int id = 0;
         String nome = "";       // TODO(front): entrada de dados
         String descricao = "";  // TODO(front): entrada de dados
         float peso = 0.01f;     // TODO(front): entrada de dados
@@ -27,25 +29,26 @@ public class Inventario {
         int preco = 0;          // TODO(front): entrada de dados
 
         switch(tipo){
-            case 0:{    // Item
-                return new Item(nome, descricao, peso, moeda, preco);
+            case "comum":{    // Item
+                return new Item(id, nome, descricao, peso, moeda, preco);
             }
-            case 1:{    // Consumivel
+            case "consumivel":{    // Consumivel
                 int usos = 0;   // TODO(front): entrada de dados
-                return new ItemConsumivel(this.ficha, nome, descricao, peso, moeda, preco, usos);
+                return new ItemConsumivel(id, this.ficha, nome, descricao, peso, moeda, preco, usos);
             }
-            case 2:{    // Magico
-                String efeito = ""; // TODO(front): entrada de dados
-                return new ItemMagico(nome, descricao, peso, moeda, preco, efeito);
+            case "magico":{    // Magico
+                String efeito = ""; // TODO(front): entrada de
+                int cargas = 0;
+                return new ItemMagico(id, nome, descricao, peso, moeda, preco, efeito, cargas);
             }
-            case 3:{    // Arma
+            case "arma":{    // Arma
                 int dado = 1;                   // TODO(front): entrada de dados
                 int quantidade = 1;             // TODO(front): entrada de dados
                 String atributo = "";           // TODO(front): entrada de dados
                 boolean proficiencia = false;   // TODO(front): entrada de dados
-                return new Arma(this.ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
+                return new Arma(id, this.ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
             }
-            case 4:{    // Arma Magica
+            case "armaMagica":{    // Arma Magica
                 int dado = 1;                   // TODO(front): entrada de dados
                 int quantidade = 1;             // TODO(front): entrada de dados
                 String atributo = "";           // TODO(front): entrada de dados
@@ -54,30 +57,30 @@ public class Inventario {
                 String efeito = "";             // TODO(front): entrada de dados
                 int usos = 0;                   // TODO(front): entrada de dados
 
-                return new ArmaMagica(this.ficha, nome, descricao, peso, moeda, preco, dado, quantidade,
-                                    atributo, proficiencia, efeito, usos, bonus);
+                return new ArmaMagica(id, this.ficha, nome, descricao, peso, moeda, preco, dado, quantidade,
+                        atributo, proficiencia, efeito, usos, bonus);
             }
-            case 5:{    // Equipavel
+            case "equipavel":{    // Equipavel
                 int bonusCA = 0;                // TODO(front): entrada de dados
                 boolean proficiencia = false;   // TODO(front): entrada de dados
-                return new Equipavel(nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
+                return new Equipavel(id, nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
             }
-            case 6:{    // Equipavel Magico
+            case "equipavelMagico":{    // Equipavel Magico
                 int bonusCA = 0;                // TODO(front): entrada de dados
                 boolean proficiencia = false;   // TODO(front): entrada de dados
                 String efeito = "";             // TODO(front): entrada de dados
                 int usos = 0;                   // TODO(front): entrada de dados
                 int bonus = 0;                  // TODO(front): entrada de dados
-                return new EquipavelMagico(nome, descricao, peso, moeda, preco, bonusCA,
-                                        proficiencia, efeito, usos, bonus);
+                return new EquipavelMagico(id, nome, descricao, peso, moeda, preco, bonusCA,
+                        proficiencia, efeito, usos, bonus);
             }
-            default: return new Item("genérico", "genérico", 0.01f, 'o', 0);
+            default: return new Item(id, "genérico", "genérico", 0.01f, 'o', 0);
         }
     }
 
     public void guardarItem(){
 
-        int tipoDoItem = 0; // TODO(front): entrada de dados com seleção de opções
+        String tipoDoItem = "comum"; // TODO(front): entrada de dados com seleção de opções
         itens.add(criarItem(tipoDoItem));
     }
 
@@ -104,5 +107,107 @@ public class Inventario {
         } else {
             System.out.println("compra negada, moeda invalida");
         }
+    }
+
+    public static int createItem(Connection connection, Item item, int idUser, int idFicha) throws SQLException {
+
+        String sql = "INSERT INTO item (" +
+                "iditem, ficha_user_idUser, ficha_idFicha, tipo, " +
+                "nome, descricao, peso, moeda, preco, " +
+                "usosMaximo, usos, efeito, bonus, bonus_ca, " +
+                "proficiencia, numeroDeDados, dadoDeDano, atributo" +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            int index = 1;
+
+            // Dados básicos (3 parâmetros - chaves primárias)
+            stmt.setInt(index++, item.getId()); // iditem (auto-increment)
+            stmt.setInt(index++, idUser); // ficha_user_idUser (deve ser fornecido)
+            stmt.setInt(index++, idFicha); // ficha_idFicha (deve ser fornecido)
+
+            // Informações principais (6 parâmetros)
+            stmt.setString(index++, item.getTipo());
+            stmt.setString(index++, item.nome);
+            stmt.setString(index++, item.descricao);
+            stmt.setFloat(index++, item.peso);
+            stmt.setString(index++, String.valueOf(item.moeda));
+            stmt.setInt(index++, item.preco);
+
+            if (item instanceof ItemConsumivel itemConsumivel){
+                stmt.setInt(index++, itemConsumivel.getUsosMaximo());
+                stmt.setInt(index++, itemConsumivel.getUsos());
+                stmt.setString(index++, "");// efeito
+                stmt.setInt(index++, -1);   // bonus
+                stmt.setInt(index++, -1); // bonus CA
+                stmt.setBoolean(index++, false);
+                stmt.setInt(index++, -1);
+                stmt.setInt(index++,-1);
+                stmt.setString(index++, "");
+            } else if (item instanceof ItemMagico itemMagico){
+                stmt.setInt(index++, itemMagico.getCargasMaxima());
+                stmt.setInt(index++, itemMagico.getCargas());
+                stmt.setString(index++, itemMagico.efeito);
+                stmt.setInt(index++, -1);   // bonus
+                stmt.setInt(index++, -1); // bonus CA
+                stmt.setBoolean(index++, false);
+                stmt.setInt(index++, -1);
+                stmt.setInt(index++,-1);
+                stmt.setString(index++, "");
+            } else if (item instanceof Equipavel itemEquipavel){
+                if (item instanceof EquipavelMagico itemEquipavelMagico) {
+                    stmt.setInt(index++, itemEquipavelMagico.getCargasMaxima());
+                    stmt.setInt(index++, itemEquipavelMagico.getCargas());
+                    stmt.setString(index++, itemEquipavelMagico.efeito);
+                    stmt.setInt(index++, itemEquipavelMagico.bonus);
+                } else {
+                    stmt.setInt(index++, -1);   // cargas maximas
+                    stmt.setInt(index++, -1);   // cargas
+                    stmt.setString(index++, "");// efeito
+                    stmt.setInt(index++, -1);   // bonus
+                }
+                stmt.setInt(index++, itemEquipavel.bonusCA);
+                stmt.setBoolean(index++, itemEquipavel.proficiencia);
+                stmt.setInt(index++, -1);
+                stmt.setInt(index++, 1);
+                stmt.setString(index++, "");
+            } else if (item instanceof Arma itemArma){
+                if (itemArma instanceof ArmaMagica itemArmaMagica){
+                    stmt.setInt(index++, itemArmaMagica.getCargasMaxima());
+                    stmt.setInt(index++, itemArmaMagica.getCargas());
+                    stmt.setString(index++, itemArmaMagica.efeito);
+                    stmt.setInt(index++, itemArmaMagica.bonus);
+                } else {
+                    stmt.setInt(index++, -1);   // cargas maximas
+                    stmt.setInt(index++, -1);   // cargas
+                    stmt.setString(index++, "");// efeito
+                    stmt.setInt(index++, -1);   // bonus
+                }
+                stmt.setInt(index++, -1); // bonus CA
+                stmt.setBoolean(index++, itemArma.proficiencia);
+                stmt.setInt(index++, itemArma.quantidadeDeDados);
+                stmt.setInt(index++, itemArma.dadoDeDano);
+                stmt.setString(index++, itemArma.atributo);
+            } else {
+                stmt.setInt(index++, -1);   // cargas maximas
+                stmt.setInt(index++, -1);   // cargas
+                stmt.setString(index++, "");// efeito
+                stmt.setInt(index++, -1);   // bonus
+                stmt.setInt(index++, -1); // bonus CA
+                stmt.setBoolean(index++, false);
+                stmt.setInt(index++, -1);
+                stmt.setInt(index++,-1);
+                stmt.setString(index++, "");
+            }
+
+            stmt.executeUpdate();
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+            }
+        }
+        return -1;
     }
 }

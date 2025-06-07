@@ -12,14 +12,15 @@ public class Arma extends Item implements roll20, rollADice {
     public String atributo;
     public boolean proficiencia;
 
-    public Arma(Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia) {
-        super(nome, descricao, peso, moeda, preco);
+    public Arma(int id, Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia) {
+        super(id, nome, descricao, peso, moeda, preco);
         this.dadoDeDano = dado;
         this.quantidadeDeDados = quantidade;
         this.atributo = atributo;
         this.proficiencia = proficiencia;
 
         this.ficha = ficha;
+        this.setTipo("arma");
     }
 
     @Override

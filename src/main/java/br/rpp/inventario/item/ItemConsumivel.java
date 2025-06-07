@@ -10,12 +10,13 @@ public class ItemConsumivel extends Item implements Usavel {
     private int usosMaximo = 0;
     Ficha ficha;
 
-    public ItemConsumivel(Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int usos) {
-        super(nome, descricao, peso, moeda, preco);
+    public ItemConsumivel(int id, Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int usos) {
+        super(id, nome, descricao, peso, moeda, preco);
         this.usos = usos;
         usosMaximo = usos;
 
         this.ficha = ficha;
+        this.setTipo("consumivel");
     }
 
     @Override
@@ -50,4 +51,10 @@ public class ItemConsumivel extends Item implements Usavel {
         }
     }
 
+    public int getUsos() {
+        return usos;
+    }
+    public int getUsosMaximo() {
+        return usosMaximo;
+    }
 }

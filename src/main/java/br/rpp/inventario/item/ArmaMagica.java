@@ -11,13 +11,14 @@ public class ArmaMagica extends Arma implements Usavel {
     public int bonus;
     private Ficha ficha;
 
-    public ArmaMagica(Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int bonus) {
-        super(ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
+    public ArmaMagica(int id, Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int bonus) {
+        super(id, ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
         this.efeito = efeito;
         this.cargas = cargas;
         this.bonus = bonus;
 
         this.ficha = ficha;
+        this.setTipo("armaMagica");
     }
 
 
@@ -51,5 +52,13 @@ public class ArmaMagica extends Arma implements Usavel {
             return Dado.rollD20(tipo) + ficha.atributos.get(tipo) + this.bonus;
         }
         return Dado.rollD20(tipo) + this.bonus;
+    }
+
+    public int getCargasMaxima() {
+        return cargasMaxima;
+    }
+
+    public int getCargas(){
+        return cargas;
     }
 }

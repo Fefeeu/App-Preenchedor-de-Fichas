@@ -7,16 +7,12 @@ public class ItemMagico extends Item implements Usavel {
     private int cargas;
     private int cargasMaxima;
 
-    public ItemMagico(String nome, String descricao, float peso, char moeda, int preco, String efeito) {
-        super(nome, descricao, peso, moeda, preco);
-        this.efeito = efeito;
-    }
-
-    public ItemMagico(String nome, String descricao, float peso, char moeda, int preco, String efeito, int cargas) {
-        super(nome, descricao, peso, moeda, preco);
+    public ItemMagico(int id, String nome, String descricao, float peso, char moeda, int preco, String efeito, int cargas) {
+        super(id, nome, descricao, peso, moeda, preco);
         this.efeito = efeito;
         this.cargas = cargas;
         this.cargasMaxima = cargas;
+        this.setTipo("magico");
     }
 
     @Override
@@ -43,4 +39,11 @@ public class ItemMagico extends Item implements Usavel {
         }
     }
 
+    public int getCargasMaxima() {
+        return cargasMaxima;
+    }
+
+    public int getCargas() {
+        return cargas;
+    }
 }

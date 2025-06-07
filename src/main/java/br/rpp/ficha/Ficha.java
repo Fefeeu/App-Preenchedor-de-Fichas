@@ -54,34 +54,34 @@ public class Ficha {
 
     }
 
-    public static int create(Connection connection, Ficha ficha) throws SQLException {
+    public static int create(Connection connection, Ficha ficha, int id) throws SQLException {
         String sql = "INSERT INTO ficha (" +
-                "  idFicha, user_idUser, vivo, nivel, deslocamento, dadoDeVida, pontosDeVidaBase, pontosDeVidaTemporario, inspiracao," +
-                "  nomePersonagem, classe_idClasse, Raca_idRaca, antecedente, tendencia, xp, idade, altura, peso," +
-                "  olho, pele, cabelo," +
-                "  forca, destreza, constituicao, inteligencia, sabedoria, carisma," +
-                "  p_forca, p_destreza, p_constituicao, p_inteligencia, p_sabedoria, p_carisma," +
-                "  p_acrobacia, p_arcanismo, p_atletismo, p_atuacao, p_blefar, p_furtividade," +
-                "  p_historia, p_intimidacao, p_intuicao, p_investigacao, p_lidarComAnimais, p_medicina," +
-                "  p_natureza, p_percepcao, p_persuasao, p_prestigitacao, p_religiao, p_sobrevivencia," +
-                "  historia, aparencia, personalidade, ideal, ligacao, defeitos" +
+                    "  idFicha, user_idUser, vivo, nivel, deslocamento, dadoDeVida, pontosDeVidaBase, pontosDeVidaTemporario, inspiracao," +
+                    "  nomePersonagem, classe_idClasse, Raca_idRaca, antecedente, tendencia, xp, idade, altura, peso," +
+                    "  olho, pele, cabelo," +
+                    "  forca, destreza, constituicao, inteligencia, sabedoria, carisma," +
+                    "  p_forca, p_destreza, p_constituicao, p_inteligencia, p_sabedoria, p_carisma," +
+                    "  p_acrobacia, p_arcanismo, p_atletismo, p_atuacao, p_blefar, p_furtividade," +
+                    "  p_historia, p_intimidacao, p_intuicao, p_investigacao, p_lidarComAnimais, p_medicina," +
+                    "  p_natureza, p_percepcao, p_persuasao, p_prestigitacao, p_religiao, p_sobrevivencia," +
+                    "  historia, aparencia, personalidade, ideal, ligacao, defeitos" +
                 ") VALUES (" +
-                "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?" +
+                    "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
+                    "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
+                    "  ?, ?, ?," +
+                    "  ?, ?, ?, ?, ?, ?," +
+                    "  ?, ?, ?, ?, ?, ?," +
+                    "  ?, ?, ?, ?, ?, ?," +
+                    "  ?, ?, ?, ?, ?, ?," +
+                    "  ?, ?, ?, ?, ?, ?," +
+                    "  ?, ?, ?, ?, ?, ?" +
                 ")";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
 
             // Dados básicos (8 parâmetros)
-            stmt.setInt(index++, 0); // idFicha (auto-increment)
+            stmt.setInt(index++, id); // idFicha (auto-increment)
             stmt.setInt(index++, 0); // user_idUser (deve ser fornecido)
             stmt.setBoolean(index++, ficha.estado);
             stmt.setInt(index++, ficha.nivel);
