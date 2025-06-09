@@ -1,8 +1,10 @@
 package br.rpp.inventario.item;
 
+import br.rpp.magias.Magia;
+
 public class Item {
     private String tipo;
-    private int id;
+    private final int id;
     public String nome;
     public String descricao;
     public float peso;

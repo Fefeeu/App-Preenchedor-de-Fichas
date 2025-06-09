@@ -1,4 +1,4 @@
-package br.rpp.auxiliar;
+package br.rpp.dado;
 
 import java.util.Random;
 

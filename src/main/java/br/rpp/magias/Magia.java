@@ -1,18 +1,25 @@
 package br.rpp.magias;
 
-public class Magia {
-    private String nome;
-    String descricao;
-    int nivel;
-    String tempoConjuracao;
-    String duracao;
-    float alcance;
-    String area;
-    String escola;
-    char tipo;
+import br.rpp.sql.SQLMagia;
 
-    public Magia(String nome, String descricao, int nivel, String tempoConjuracao,
-                 String duracao, float alcance, String area, String escola, char tipo) {
+import java.sql.SQLException;
+
+public class Magia {
+    private int idMagia;
+    public String tipo;
+    public String nome;
+    public String descricao;
+    public int nivel;
+    public String tempoConjuracao;
+    public String duracao;
+    public String alcance;
+    public String area;
+    public String escola;
+    public String tipoAcerto;
+
+    public Magia(String tipo, String nome, String descricao, int nivel, String tempoConjuracao,
+                 String duracao, String alcance, String area, String escola, String tipoAcerto) {
+        this.tipo = tipo;
         this.nome = nome;
         this.descricao = descricao;
         this.nivel = nivel;
@@ -21,28 +28,18 @@ public class Magia {
         this.alcance = alcance;
         this.area = area;
         this.escola = escola;
-        this.tipo = tipo;
-    }
+        this.tipoAcerto = tipoAcerto;
 
-    public String getNome() {
-        return nome;
-    }
-
-    public int getNivel() {
-        return nivel;
+        idMagia = SQLMagia.gerarIdMagia();
     }
 
 
-
-    public void setNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome da magia não pode ser vazio!");
-        }
-        this.nome = nome;
+    public int usarMagia(){
+        System.out.println("usando magia");
+        return 0;
     }
 
-
-    public void usarMagia(){
-        System.out.println(nome + " " + descricao + " " + nivel + " " + tempoConjuracao ); //analisar melhor o que será mostrado
+    public int getIdMagia() {
+        return idMagia;
     }
 }

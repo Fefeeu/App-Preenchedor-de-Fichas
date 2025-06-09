@@ -2,6 +2,7 @@ package br.rpp.inventario;
 
 import br.rpp.ficha.Ficha;
 import br.rpp.inventario.item.*;
+import br.rpp.sql.SQLItem;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ public class Inventario {
         this.ficha = ficha;
     }
 
-    private Item criarItem(String tipo){ // TODO(front): entrada de dados
-        int id = 0;
+    private Item criarItem(String tipo) throws SQLException { // TODO(front): entrada de dados
+        int id = SQLItem.gerarIdItem();
         String nome = "";       // TODO(front): entrada de dados
         String descricao = "";  // TODO(front): entrada de dados
         float peso = 0.01f;     // TODO(front): entrada de dados
@@ -34,7 +35,7 @@ public class Inventario {
             }
             case "consumivel":{    // Consumivel
                 int usos = 0;   // TODO(front): entrada de dados
-                return new ItemConsumivel(id, this.ficha, nome, descricao, peso, moeda, preco, usos);
+                return new ItemConsumivel(id, nome, descricao, peso, moeda, preco, usos);
             }
             case "magico":{    // Magico
                 String efeito = ""; // TODO(front): entrada de
@@ -78,7 +79,7 @@ public class Inventario {
         }
     }
 
-    public void guardarItem(){
+    public void guardarItem() throws SQLException {
 
         String tipoDoItem = "comum"; // TODO(front): entrada de dados com seleção de opções
         itens.add(criarItem(tipoDoItem));
@@ -109,105 +110,4 @@ public class Inventario {
         }
     }
 
-    public static int createItem(Connection connection, Item item, int idUser, int idFicha) throws SQLException {
-
-        String sql = "INSERT INTO item (" +
-                "iditem, ficha_user_idUser, ficha_idFicha, tipo, " +
-                "nome, descricao, peso, moeda, preco, " +
-                "usosMaximo, usos, efeito, bonus, bonus_ca, " +
-                "proficiencia, numeroDeDados, dadoDeDano, atributo" +
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            int index = 1;
-
-            // Dados básicos (3 parâmetros - chaves primárias)
-            stmt.setInt(index++, item.getId()); // iditem (auto-increment)
-            stmt.setInt(index++, idUser); // ficha_user_idUser (deve ser fornecido)
-            stmt.setInt(index++, idFicha); // ficha_idFicha (deve ser fornecido)
-
-            // Informações principais (6 parâmetros)
-            stmt.setString(index++, item.getTipo());
-            stmt.setString(index++, item.nome);
-            stmt.setString(index++, item.descricao);
-            stmt.setFloat(index++, item.peso);
-            stmt.setString(index++, String.valueOf(item.moeda));
-            stmt.setInt(index++, item.preco);
-
-            if (item instanceof ItemConsumivel itemConsumivel){
-                stmt.setInt(index++, itemConsumivel.getUsosMaximo());
-                stmt.setInt(index++, itemConsumivel.getUsos());
-                stmt.setString(index++, "");// efeito
-                stmt.setInt(index++, -1);   // bonus
-                stmt.setInt(index++, -1); // bonus CA
-                stmt.setBoolean(index++, false);
-                stmt.setInt(index++, -1);
-                stmt.setInt(index++,-1);
-                stmt.setString(index++, "");
-            } else if (item instanceof ItemMagico itemMagico){
-                stmt.setInt(index++, itemMagico.getCargasMaxima());
-                stmt.setInt(index++, itemMagico.getCargas());
-                stmt.setString(index++, itemMagico.efeito);
-                stmt.setInt(index++, -1);   // bonus
-                stmt.setInt(index++, -1); // bonus CA
-                stmt.setBoolean(index++, false);
-                stmt.setInt(index++, -1);
-                stmt.setInt(index++,-1);
-                stmt.setString(index++, "");
-            } else if (item instanceof Equipavel itemEquipavel){
-                if (item instanceof EquipavelMagico itemEquipavelMagico) {
-                    stmt.setInt(index++, itemEquipavelMagico.getCargasMaxima());
-                    stmt.setInt(index++, itemEquipavelMagico.getCargas());
-                    stmt.setString(index++, itemEquipavelMagico.efeito);
-                    stmt.setInt(index++, itemEquipavelMagico.bonus);
-                } else {
-                    stmt.setInt(index++, -1);   // cargas maximas
-                    stmt.setInt(index++, -1);   // cargas
-                    stmt.setString(index++, "");// efeito
-                    stmt.setInt(index++, -1);   // bonus
-                }
-                stmt.setInt(index++, itemEquipavel.bonusCA);
-                stmt.setBoolean(index++, itemEquipavel.proficiencia);
-                stmt.setInt(index++, -1);
-                stmt.setInt(index++, 1);
-                stmt.setString(index++, "");
-            } else if (item instanceof Arma itemArma){
-                if (itemArma instanceof ArmaMagica itemArmaMagica){
-                    stmt.setInt(index++, itemArmaMagica.getCargasMaxima());
-                    stmt.setInt(index++, itemArmaMagica.getCargas());
-                    stmt.setString(index++, itemArmaMagica.efeito);
-                    stmt.setInt(index++, itemArmaMagica.bonus);
-                } else {
-                    stmt.setInt(index++, -1);   // cargas maximas
-                    stmt.setInt(index++, -1);   // cargas
-                    stmt.setString(index++, "");// efeito
-                    stmt.setInt(index++, -1);   // bonus
-                }
-                stmt.setInt(index++, -1); // bonus CA
-                stmt.setBoolean(index++, itemArma.proficiencia);
-                stmt.setInt(index++, itemArma.quantidadeDeDados);
-                stmt.setInt(index++, itemArma.dadoDeDano);
-                stmt.setString(index++, itemArma.atributo);
-            } else {
-                stmt.setInt(index++, -1);   // cargas maximas
-                stmt.setInt(index++, -1);   // cargas
-                stmt.setString(index++, "");// efeito
-                stmt.setInt(index++, -1);   // bonus
-                stmt.setInt(index++, -1); // bonus CA
-                stmt.setBoolean(index++, false);
-                stmt.setInt(index++, -1);
-                stmt.setInt(index++,-1);
-                stmt.setString(index++, "");
-            }
-
-            stmt.executeUpdate();
-
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-            }
-        }
-        return -1;
-    }
 }

@@ -1,5 +1,5 @@
 package br.rpp.interfaces;
 
-public interface roll20 {
+public interface Roll20 {
     int rodarDadoTeste(String tipo);
 }

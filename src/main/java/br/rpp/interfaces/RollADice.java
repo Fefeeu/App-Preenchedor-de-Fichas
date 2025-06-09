@@ -1,5 +1,5 @@
 package br.rpp.interfaces;
 
-public interface rollADice {
+public interface RollADice {
     int rodarDado();
 }
