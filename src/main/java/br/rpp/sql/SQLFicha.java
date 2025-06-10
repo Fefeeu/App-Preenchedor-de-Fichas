@@ -4,9 +4,10 @@ import br.rpp.ficha.Ficha;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class SQLFicha {
-    public static int createFicha(Ficha ficha) throws SQLException {
+    public static void createFicha(Ficha ficha){
         Connection connection = BD.getConnection();
 
         String sql = "INSERT INTO ficha (" +
@@ -18,7 +19,8 @@ public abstract class SQLFicha {
                 "  p_acrobacia, p_arcanismo, p_atletismo, p_atuacao, p_blefar, p_furtividade," +
                 "  p_historia, p_intimidacao, p_intuicao, p_investigacao, p_lidarComAnimais, p_medicina," +
                 "  p_natureza, p_percepcao, p_persuasao, p_prestigitacao, p_religiao, p_sobrevivencia," +
-                "  historia, aparencia, personalidade, ideal, ligacao, defeitos" +
+                "  historia, aparencia, personalidade, ideal, ligacao, defeitos, proficiencias, idiomas," +
+                "  pc, pp, pe, po, pl" +
                 ") VALUES (" +
                 "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
                 "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
@@ -28,11 +30,12 @@ public abstract class SQLFicha {
                 "  ?, ?, ?, ?, ?, ?," +
                 "  ?, ?, ?, ?, ?, ?," +
                 "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?" +
+                "  ?, ?, ?, ?, ?, ?, ?, ?" +
+                "  ?, ?, ?, ?, ?" +
                 ")";
 
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
 
             // Dados básicos (8 parâmetros)
@@ -46,7 +49,7 @@ public abstract class SQLFicha {
             stmt.setInt(index++, ficha.vidaTemporaria);
             stmt.setBoolean(index++, ficha.inspiracao);
 
-            // Info personagem (9 parâmetros)
+            // Info personagem (7 parâmetros)
             stmt.setString(index++, ficha.caracteristicas.nomePersonagem);
             stmt.setString(index++, ficha.caracteristicas.idClasse);
             stmt.setString(index++, ficha.caracteristicas.idRaca);
@@ -54,10 +57,11 @@ public abstract class SQLFicha {
             stmt.setString(index++, ficha.caracteristicas.tendencia);
             stmt.setInt(index++, ficha.caracteristicas.xp);
             stmt.setInt(index++, ficha.caracteristicas.idade);
+            stmt.setString(index++, ficha.caracteristicas.proeficiencias);
+
+            // Aparência (5 parâmetros)
             stmt.setFloat(index++, ficha.caracteristicas.altura);
             stmt.setFloat(index++, ficha.caracteristicas.peso);
-
-            // Aparência (3 parâmetros)
             stmt.setString(index++, ficha.caracteristicas.olho);
             stmt.setString(index++, ficha.caracteristicas.pele);
             stmt.setString(index++, ficha.caracteristicas.cabelo);
@@ -104,25 +108,28 @@ public abstract class SQLFicha {
             stmt.setString(index++, ficha.descricao.personalidade);
             stmt.setString(index++, ficha.descricao.ideal);
             stmt.setString(index++, ficha.descricao.ligacao);
-            stmt.setString(index, ficha.descricao.defeitos);
+            stmt.setString(index++, ficha.descricao.defeitos);
+
+            // Moedas (5 parâmetros)
+            stmt.setInt(index++, ficha.inventario.pc);
+            stmt.setInt(index++, ficha.inventario.pp);
+            stmt.setInt(index++, ficha.inventario.pe);
+            stmt.setInt(index++, ficha.inventario.po);
+            stmt.setInt(index, ficha.inventario.pl);
 
             stmt.executeUpdate();
 
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return -1;
     }
 
-    public static Ficha readFicha(int idFicha) throws SQLException {
+    public static Ficha readFicha(int idFicha){
         Connection connection = BD.getConnection();
 
         String sql = "SELECT * FROM ficha WHERE idFicha = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idFicha);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -145,8 +152,8 @@ public abstract class SQLFicha {
                             rs.getString("olho"),
                             rs.getString("pele"),
                             rs.getString("cabelo"),
-                            new ArrayList<>(), // idiomas
-                            new ArrayList<>(), // proeficiencia
+                            rs.getString("idiomas"),
+                            rs.getString("proficiencias"),
                             rs.getInt("forca"),
                             rs.getInt("destreza"),
                             rs.getInt("constituicao"),
@@ -192,48 +199,31 @@ public abstract class SQLFicha {
                     ficha.pericias.put("religiao", rs.getBoolean("p_religiao"));
                     ficha.pericias.put("sobrevivencia", rs.getBoolean("p_sobrevivencia"));
 
+                    ficha.inventario.pc = rs.getInt("pc");
+                    ficha.inventario.pc = rs.getInt("pp");
+                    ficha.inventario.pc = rs.getInt("pe");
+                    ficha.inventario.pc = rs.getInt("po");
+                    ficha.inventario.pc = rs.getInt("pl");
+
                     return ficha;
                 }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return null; // Retorna null se a ficha não for encontrada
     }
 
-    public static void deleteFicha(int id) throws SQLException {
+    public static void deleteFicha(int id){
         Connection connection = BD.getConnection();
 
         String sql = "DELETE FROM ficha WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, id); // Define o parâmetro ID na query
             stmt.executeUpdate(); // Executa a exclusão
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         // O PreparedStatement é automaticamente fechado ao sair do bloco try
-    }
-
-    public static int gerarIdFicha() {
-        final String sql = "SELECT COALESCE(MAX(idFicha), 0) + 1 FROM ficha";
-
-        try (Connection connection = BD.getConnection()) {
-            assert connection != null;
-            try (Statement stmt = connection.createStatement();
-                 ResultSet rs = stmt.executeQuery(sql)) {
-
-                if (!rs.next()) {
-                    throw new SQLException("Nenhum resultado encontrado ao gerar ID para ficha");
-                }
-                return rs.getInt(1);
-            } catch (SQLException e) {
-                System.err.println("Erro ao executar consulta SQL: " + e.getMessage());
-                throw new SQLException("Falha ao executar consulta para gerar ID", e);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro de conexão com o banco de dados: " + e.getMessage());
-            try {
-                throw new SQLException("Falha na conexão ao tentar gerar ID para ficha", e);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
     }
 }

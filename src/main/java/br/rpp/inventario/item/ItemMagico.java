@@ -1,8 +1,8 @@
 package br.rpp.inventario.item;
 
-import br.rpp.interfaces.Usavel;
+import br.rpp.interfaces.ItemUsavel;
 
-public class ItemMagico extends Item implements Usavel {
+public class ItemMagico extends Item implements ItemUsavel {
     public String efeito;
     private int cargas;
     private int cargasMaxima;

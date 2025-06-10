@@ -5,9 +5,12 @@ public class Classe {
     public String nome;
     public String descricao;
 
-    public void setId(String id) {
+    public Classe(String id, String nome, String descricao) {
         this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
     }
+
     public String getId() {
         return id;
     }

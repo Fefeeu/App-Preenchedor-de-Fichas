@@ -18,14 +18,14 @@ public class Caracteristica {
     public String olho;
     public String pele;
     public String cabelo;
-    public ArrayList<String> idiomas;
-    public ArrayList<String> proeficiencia;
+    public String idiomas;
+    public String proeficiencias;
 
     public Caracteristica(String nomePersonagem, String idClasse, String antecedente,
                           String userName, String idRaca, String tendencia,
                           int xp, int idade, float altura, float peso,
                           String olho, String pele, String cabelo,
-                          ArrayList<String> idiomas, ArrayList<String> proeficiencia)
+                          String idiomas, String proeficiencias)
     {
         this.nomePersonagem = nomePersonagem;
         this.idClasse = idClasse;
@@ -40,8 +40,8 @@ public class Caracteristica {
         this.olho = olho;
         this.pele = pele;
         this.cabelo = cabelo;
-        this.idiomas = new ArrayList<>();
-        this.proeficiencia = new ArrayList<>();
+        this.idiomas = idiomas;
+        this.proeficiencias = proeficiencias;
     }
 
     public String getUserName() {

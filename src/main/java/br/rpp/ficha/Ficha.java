@@ -1,6 +1,8 @@
 package br.rpp.ficha;
 
 import br.rpp.inventario.Inventario;
+import br.rpp.inventario.item.Equipavel;
+import br.rpp.inventario.item.EquipavelMagico;
 import br.rpp.sql.SQLFicha;
 
 import java.sql.*;
@@ -12,16 +14,17 @@ public class Ficha {
 
     private final int idFicha;
     private final int idUser;
-    private final boolean estado;
+    private boolean estado;
     public Caracteristica caracteristicas;
     public HashMap<String, Integer> atributos;
     public HashMap<String, Boolean> pericias;
     public int nivel;
     private int iniciativa;
+    private Equipavel vestido;
     private int classeArmadura;
     public float deslocamento;
     public int pontosVidaBase;
-    public int pontosVidaTotal;
+    private int pontosVidaTotal;
     public int vidaTemporaria;
     public int dadoDeVida;
     public Inventario inventario;
@@ -30,12 +33,12 @@ public class Ficha {
     public boolean inspiracao;
 
 
-    public Ficha(int idUser, boolean estado, int nivel, String nomePersonagem, String idClasse, String antecedente, String userName,
+    public Ficha(int idFicha, int idUser, boolean estado, int nivel, String nomePersonagem, String idClasse, String antecedente, String userName,
                  String idRaca, String tendencia, int xp, int idade, float altura, float peso, String olho,
-                 String pele, String cabelo, ArrayList<String> idiomas, ArrayList<String> proeficiencia,
+                 String pele, String cabelo, String idiomas, String proeficiencia,
                  Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma,
                  float deslocamento, int pontosVidaBase, int vidaTemporaria, int dadoDeVida,
-                 String historia, String aparencia, String personalidade, String ideal, String ligacao, String defeitos) throws SQLException {
+                 String historia, String aparencia, String personalidade, String ideal, String ligacao, String defeitos){
         this.estado = estado;
         this.nivel = nivel;
         this.caracteristicas = new Caracteristica(nomePersonagem, idClasse, antecedente, userName, idRaca, tendencia, xp, idade, altura, peso, olho, pele, cabelo, idiomas, proeficiencia);
@@ -54,10 +57,27 @@ public class Ficha {
         this.pericias = new HashMap<>();
         this.setPericias();
 
-        this.idFicha = SQLFicha.gerarIdFicha();
+        this.iniciativa = this.converteAtributo("destreza");
+        this.classeArmadura = 10 + this.converteAtributo("destreza");
+
         this.idUser = idUser;
+        this.idFicha = idFicha;
 
         this.magias = new TabelaMagia(this);
+        this.inventario = new Inventario(this);
+
+    }
+
+    public int converteAtributo(String atributo){
+        return this.atributos.get(atributo)/2 - 5;
+    }
+
+    public void vestirItem(Equipavel vestimenta){
+        if (vestimenta instanceof EquipavelMagico vestimentaMagica){
+            this.classeArmadura = 10 + this.converteAtributo("classeArmadura") + vestimentaMagica.bonusCA + vestimentaMagica.bonus;
+        } else {
+            this.classeArmadura = 10 + this.converteAtributo("classeArmadura") + vestimenta.bonusCA;
+        }
     }
 
     @Override
@@ -170,6 +190,9 @@ public class Ficha {
     }
 
     public static int getProficiencia(int nivel){
-        return proeficiencia[nivel];
+        if (nivel >= 1 && nivel <= 20){
+            return proeficiencia[nivel];
+        }
+        return 2;
     }
 }

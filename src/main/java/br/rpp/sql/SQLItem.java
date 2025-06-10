@@ -3,19 +3,20 @@ package br.rpp.sql;
 import br.rpp.inventario.item.*;
 
 import java.sql.*;
+import java.util.Objects;
 
 public abstract class SQLItem {
-    public static int createItem(Item item, int idUser, int idFicha) throws SQLException {
+    public static void createItem(Item item, int idUser, int idFicha) {
         Connection connection = BD.getConnection();
 
         String sql = "INSERT INTO item (" +
-                "iditem, ficha_user_idUser, ficha_idFicha, tipo, " +
-                "nome, descricao, peso, moeda, preco, " +
-                "usosMaximo, usos, efeito, bonus, bonus_ca, " +
-                "proficiencia, numeroDeDados, dadoDeDano, atributo" +
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "iditem, ficha_user_idUser, ficha_idFicha, tipo, " +
+            "nome, descricao, peso, moeda, preco, " +
+            "usosMaximo, usos, efeito, bonus, bonus_ca, " +
+            "proficiencia, numeroDeDados, dadoDeDano, atributo" +
+            ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
 
             // Dados básicos (3 parâmetros - chaves primárias)
@@ -120,20 +121,16 @@ public abstract class SQLItem {
 
             stmt.executeUpdate();
 
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return -1;
     }
 
-    public static Item readItem(int idItem) throws SQLException {
+    public static Item readItem(int idItem) {
         Connection connection = BD.getConnection();
         String sql = "SELECT * FROM item WHERE idItem = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idItem);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -247,48 +244,24 @@ public abstract class SQLItem {
                             );
                         }
                     }
-
                     return item;
                 }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return null; // Retorna null se a ficha não for encontrada
     }
 
-    public static void deleteItem(int id) throws SQLException {
+    public static void deleteItem(int id) {
         Connection connection = BD.getConnection();
         String sql = "DELETE FROM item WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, id); // Define o parâmetro ID na query
             stmt.executeUpdate(); // Executa a exclusão
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         // O PreparedStatement é automaticamente fechado ao sair do bloco try
-    }
-
-    public static int gerarIdItem() {
-        final String sql = "SELECT COALESCE(MAX(idItem), 0) + 1 FROM item";
-
-        try (Connection connection = BD.getConnection()) {
-            assert connection != null;
-            try (Statement stmt = connection.createStatement();
-                 ResultSet rs = stmt.executeQuery(sql)) {
-
-                if (!rs.next()) {
-                    throw new SQLException("Nenhum resultado encontrado ao gerar ID para item");
-                }
-                return rs.getInt(1);
-            }catch (SQLException e) {
-                System.err.println("Erro ao executar consulta SQL: " + e.getMessage());
-                throw new SQLException("Falha ao executar consulta para gerar ID", e);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro de conexão com o banco de dados: " + e.getMessage());
-            try {
-                throw new SQLException("Falha na conexão ao tentar gerar ID para item", e);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
     }
 }

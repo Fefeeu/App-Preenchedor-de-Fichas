@@ -1,11 +1,8 @@
 package br.rpp.inventario.item;
 
-import br.rpp.ficha.Ficha;
-import br.rpp.interfaces.Usavel;
+import br.rpp.interfaces.ItemUsavel;
 
-import java.util.Scanner;
-
-public class ItemConsumivel extends Item implements Usavel {
+public class ItemConsumivel extends Item implements ItemUsavel {
     private int usos = 0;
     private int usosMaximo = 0;
 

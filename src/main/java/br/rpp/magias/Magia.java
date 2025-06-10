@@ -1,6 +1,8 @@
 package br.rpp.magias;
 
+import br.rpp.sql.BD;
 import br.rpp.sql.SQLMagia;
+import br.rpp.sql.Tabelas;
 
 import java.sql.SQLException;
 
@@ -30,7 +32,7 @@ public class Magia {
         this.escola = escola;
         this.tipoAcerto = tipoAcerto;
 
-        idMagia = SQLMagia.gerarIdMagia();
+        idMagia = BD.gerarId(Tabelas.MAGIA.toString());
     }
 
 

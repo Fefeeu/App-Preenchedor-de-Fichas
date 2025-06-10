@@ -78,11 +78,7 @@ public class TabelaMagia {
 
         if(novaMagia != null){
             this.magias.put(novaMagia.getIdMagia(), novaMagia);
-            try {
-                SQLMagia.createMagia(novaMagia, idFicha, idUser);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            SQLMagia.createMagia(novaMagia, idFicha, idUser);
         }
     }
 
@@ -91,15 +87,15 @@ public class TabelaMagia {
         magias.put(id, magia);
     }
 
-    public void usarMagia (int idMagia, int nivel){
+    public void usarMagia (int idMagia){
         Magia magia = magias.get(idMagia);
 
         if (magia == null){
             System.out.println("Magia não conhecida");
             return;
         }
-        if (espacoDeMagia[nivel]<=0) {
-            System.out.println("Espaços de magia esgotados para nivel " + nivel);
+        if (espacoDeMagia[magia.nivel]<=0) {
+            System.out.println("Espaços de magia esgotados para nivel " + magia.nivel);
             return;
         }
 
@@ -110,7 +106,7 @@ public class TabelaMagia {
         } else {
             magia.usarMagia();
         }
-        espacoDeMagia[nivel]--;
+        espacoDeMagia[magia.nivel]--;
     }
 
     public void recuperarSlots() {
