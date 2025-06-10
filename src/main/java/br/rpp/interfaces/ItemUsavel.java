@@ -1,6 +1,6 @@
 package br.rpp.interfaces;
 
-public interface Usavel {
+public interface ItemUsavel {
 
     void usar();
 

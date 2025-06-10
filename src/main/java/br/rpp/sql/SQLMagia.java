@@ -1,29 +1,28 @@
 package br.rpp.sql;
 
-import br.rpp.dado.Dado;
-import br.rpp.inventario.item.*;
+
 import br.rpp.magias.Magia;
 import br.rpp.magias.MagiaCura;
 import br.rpp.magias.MagiaDano;
 
 import java.sql.*;
+import java.util.Objects;
 
 public abstract class SQLMagia {
-    public static int createMagia(Magia magia, int idUser, int idFicha) throws SQLException {
+    public static void createMagia(Magia magia, int idFicha) {
         Connection connection = BD.getConnection();
 
-        String sql = "INSERT INTO magia (" +
-                "idmagia, ficha_user_idUser, ficha_idFicha, tipo, " +
+        String sql = "INSERT INTO " + Tabelas.MAGIA + " (" +
+                "idMagia, ficha_idFicha, tipo, " +
                 "nome, descricao, nivel, tempoConjuracao, duracao, " +
                 "alcance, area, escola, tipoAcerto, ladoDado, numeroDados" +
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
 
             // Chaves primárias (exatamente como na tabela)
             stmt.setInt(index++, magia.getIdMagia());
-            stmt.setInt(index++, idUser);
             stmt.setInt(index++, idFicha);
 
             // Campos obrigatórios com valores padrão
@@ -52,25 +51,16 @@ public abstract class SQLMagia {
 
             stmt.executeUpdate();
 
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-            }
-
-            throw new SQLException("Falha ao obter ID gerado para a magia");
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static Magia readItem(int idMagia) throws SQLException {
+    public static Magia readItem(int idMagia) {
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM magia WHERE idItem = ?";
+        String sql = "SELECT * FROM " + Tabelas.MAGIA + " WHERE idItem = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idMagia);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -80,6 +70,7 @@ public abstract class SQLMagia {
                         // -------------------------- MAGIA DE DANO ----------------------------
                         case "dano": {
                             magia = new MagiaDano(
+                                    rs.getInt("idMagia"),
                                     rs.getString("tipo"),
                                     rs.getString("nome"),
                                     rs.getString("descricao"),
@@ -98,6 +89,7 @@ public abstract class SQLMagia {
                         // -------------------------- MAGIA DE CURA ----------------------------
                         case "cura": {
                             magia = new MagiaCura(
+                                    rs.getInt("idMagia"),
                                     rs.getString("tipo"),
                                     rs.getString("nome"),
                                     rs.getString("descricao"),
@@ -116,6 +108,7 @@ public abstract class SQLMagia {
                         // -------------------------- MAGIA DE EFEITO --------------------------
                         default: {
                             magia = new Magia(
+                                    rs.getInt("idMagia"),
                                     rs.getString("tipo"),
                                     rs.getString("nome"),
                                     rs.getString("descricao"),
@@ -133,47 +126,20 @@ public abstract class SQLMagia {
                     return magia;
                 }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return null; // Retorna null se a magia não for encontrada
     }
 
-    public static void deleteMagia(int id) throws SQLException {
+    public static void deleteMagia(int id) {
         Connection connection = BD.getConnection();
-        String sql = "DELETE FROM magia WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        String sql = "DELETE FROM " + Tabelas.MAGIA + " WHERE idMagia = ?";
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-        }
-    }
-
-    public static int gerarIdMagia() {
-        final String sql = "SELECT COALESCE(MAX(idMagia), 0) + 1 FROM magia";
-
-        try (Connection connection = BD.getConnection()) {
-            if (connection == null || connection.isClosed()) {
-                throw new SQLException("Conexão com o banco de dados não está disponível");
-            }
-
-            try (Statement stmt = connection.createStatement();
-                 ResultSet rs = stmt.executeQuery(sql)) {
-
-                if (!rs.next()) {
-                    throw new SQLException("Nenhum registro encontrado na tabela magia");
-                }
-                return rs.getInt(1);
-
-            } catch (SQLException e) {
-                System.err.println("Erro ao executar consulta SQL: " + e.getMessage());
-                throw new SQLException("Falha ao executar consulta para gerar ID", e);
-            }
-
         } catch (SQLException e) {
-            System.err.println("Erro de conexão com o banco de dados: " + e.getMessage());
-            try {
-                throw new SQLException("Falha na conexão ao tentar gerar ID para magia", e);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
     }
 }

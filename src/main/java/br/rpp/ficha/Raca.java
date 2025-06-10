@@ -5,9 +5,12 @@ public class Raca {
     public String nome;
     public String descricao;
 
-    public void setId(String id) {
+    public Raca(String id, String nome, String descricao) {
         this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
     }
+
     public String getId() {
         return id;
     }

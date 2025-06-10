@@ -1,28 +1,28 @@
 package br.rpp.sql;
 
 import br.rpp.ficha.Raca;
+import br.rpp.usuario.User;
 
 import java.sql.*;
 import java.util.Objects;
 
-public abstract class SQLRaca {
-    public static void createRaca(Raca raca){
+public abstract class SQLUser {
+    public static void createUser(User user){
         Connection connection = BD.getConnection();
 
-        String sql = "INSERT INTO " + Tabelas.RACA + " (" +
-                "idRaca, nome, descricao" +
-                ") VALUES (?, ?, ?)" +
-                "" +
-                "";
+        String sql = "INSERT INTO " + Tabelas.USER + " (" +
+                "idUser, nome, email, senha" +
+                ") VALUES (?, ?, ?)";
 
         try ( PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
 
             // Chaves primárias (exatamente como na tabela)
             try {
-                stmt.setString(index++, raca.getId());
-                stmt.setString(index++, raca.nome);
-                stmt.setString(index, raca.descricao);
+                stmt.setInt(index++, user.getIdUser());
+                stmt.setString(index++, user.getUserName());
+                stmt.setString(index++, user.getEmail());
+                stmt.setString(index, user.getSenha());
 
                 stmt.executeUpdate();
             } catch (SQLException e) {
@@ -33,34 +33,35 @@ public abstract class SQLRaca {
         }
     }
 
-    public static Raca readRaca(String idRaca) {
+    public static User readUser(int idUser) {
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM " + Tabelas.RACA + " WHERE idRaca = ?";
+        String sql = "SELECT * FROM " + Tabelas.USER + " WHERE idItem = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
-            stmt.setString(1, idRaca);
+            stmt.setInt(1, idUser);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new Raca(
-                        rs.getString("idRaca"),
-                        rs.getString("nome"),
-                        rs.getString("descricao")
+                    return new User(
+                            rs.getInt("idUser"),
+                            rs.getString("nome"),
+                            rs.getString("email"),
+                            rs.getString("senha")
                     );
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null; // Retorna null se a magia não for encontrada
+        return null; // Retorna null se o user não for encontrada
     }
 
-    public static void deleteRaca(String idRaca) {
+    public static void deleteUser(int idUser) {
         Connection connection = BD.getConnection();
-        String sql = "DELETE FROM " + Tabelas.RACA + " WHERE idRaca = ?";
+        String sql = "DELETE FROM " + Tabelas.USER + " WHERE idUser = ?";
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             try {
-                stmt.setString(1, idRaca);
+                stmt.setInt(1, idUser);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

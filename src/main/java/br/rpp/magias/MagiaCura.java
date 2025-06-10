@@ -6,10 +6,10 @@ public class MagiaCura extends Magia {
     public int dadoCura;
     public int quantidadeDado;
 
-    public MagiaCura(String tipo, String nome, String descricao, int nivel, String tempoConjuracao,
+    public MagiaCura(int id, String tipo, String nome, String descricao, int nivel, String tempoConjuracao,
                      String duracao, String alcance, String area, String escola, String tipoAcerto,
                      int dadoCura, int quantidadeDado) {
-        super(tipo, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto);
+        super(id, tipo, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto);
         this.dadoCura = dadoCura;
         this.quantidadeDado = quantidadeDado;
     }

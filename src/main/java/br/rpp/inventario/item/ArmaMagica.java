@@ -4,9 +4,9 @@ import br.rpp.dado.Dado;
 import br.rpp.ficha.Ficha;
 import br.rpp.interfaces.Roll20;
 import br.rpp.interfaces.RollADice;
-import br.rpp.interfaces.Usavel;
+import br.rpp.interfaces.ItemUsavel;
 
-public class ArmaMagica extends Arma implements Usavel, Roll20, RollADice {
+public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
     public String efeito;
     private int cargas;
     private int cargasMaxima;

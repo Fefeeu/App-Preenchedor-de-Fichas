@@ -4,131 +4,181 @@ import br.rpp.ficha.Ficha;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class SQLFicha {
-    public static int createFicha(Ficha ficha) throws SQLException {
-        Connection connection = BD.getConnection();
-
-        String sql = "INSERT INTO ficha (" +
-                "  idFicha, user_idUser, vivo, nivel, deslocamento, dadoDeVida, pontosDeVidaBase, pontosDeVidaTemporario, inspiracao," +
-                "  nomePersonagem, classe_idClasse, Raca_idRaca, antecedente, tendencia, xp, idade, altura, peso," +
-                "  olho, pele, cabelo," +
-                "  forca, destreza, constituicao, inteligencia, sabedoria, carisma," +
-                "  p_forca, p_destreza, p_constituicao, p_inteligencia, p_sabedoria, p_carisma," +
-                "  p_acrobacia, p_arcanismo, p_atletismo, p_atuacao, p_blefar, p_furtividade," +
-                "  p_historia, p_intimidacao, p_intuicao, p_investigacao, p_lidarComAnimais, p_medicina," +
-                "  p_natureza, p_percepcao, p_persuasao, p_prestigitacao, p_religiao, p_sobrevivencia," +
-                "  historia, aparencia, personalidade, ideal, ligacao, defeitos" +
-                ") VALUES (" +
-                "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?," +
-                "  ?, ?, ?, ?, ?, ?" +
-                ")";
-
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            int index = 1;
-
-            // Dados básicos (8 parâmetros)
-            stmt.setInt(index++, ficha.getIdFicha()); // idFicha (auto-increment)
-            stmt.setInt(index++, ficha.getIdUser()); // user_idUser (deve ser fornecido)
-            stmt.setBoolean(index++, ficha.getEstado());
-            stmt.setInt(index++, ficha.nivel);
-            stmt.setFloat(index++, ficha.deslocamento);
-            stmt.setInt(index++, ficha.dadoDeVida);
-            stmt.setInt(index++, ficha.pontosVidaBase);
-            stmt.setInt(index++, ficha.vidaTemporaria);
-            stmt.setBoolean(index++, ficha.inspiracao);
-
-            // Info personagem (9 parâmetros)
-            stmt.setString(index++, ficha.caracteristicas.nomePersonagem);
-            stmt.setString(index++, ficha.caracteristicas.idClasse);
-            stmt.setString(index++, ficha.caracteristicas.idRaca);
-            stmt.setString(index++, ficha.caracteristicas.antecedente);
-            stmt.setString(index++, ficha.caracteristicas.tendencia);
-            stmt.setInt(index++, ficha.caracteristicas.xp);
-            stmt.setInt(index++, ficha.caracteristicas.idade);
-            stmt.setFloat(index++, ficha.caracteristicas.altura);
-            stmt.setFloat(index++, ficha.caracteristicas.peso);
-
-            // Aparência (3 parâmetros)
-            stmt.setString(index++, ficha.caracteristicas.olho);
-            stmt.setString(index++, ficha.caracteristicas.pele);
-            stmt.setString(index++, ficha.caracteristicas.cabelo);
-
-            // Atributos (6 parâmetros)
-            stmt.setInt(index++, ficha.atributos.get("forca"));
-            stmt.setInt(index++, ficha.atributos.get("destreza"));
-            stmt.setInt(index++, ficha.atributos.get("constituicao"));
-            stmt.setInt(index++, ficha.atributos.get("inteligencia"));
-            stmt.setInt(index++, ficha.atributos.get("sabedoria"));
-            stmt.setInt(index++, ficha.atributos.get("carisma"));
-
-            // Proficiências em atributos (6 parâmetros)
-            stmt.setBoolean(index++, ficha.pericias.get("forca"));
-            stmt.setBoolean(index++, ficha.pericias.get("destreza"));
-            stmt.setBoolean(index++, ficha.pericias.get("constituicao"));
-            stmt.setBoolean(index++, ficha.pericias.get("inteligencia"));
-            stmt.setBoolean(index++, ficha.pericias.get("sabedoria"));
-            stmt.setBoolean(index++, ficha.pericias.get("carisma"));
-
-            // Perícias (18 parâmetros)
-            stmt.setBoolean(index++, ficha.pericias.get("acrobacia"));
-            stmt.setBoolean(index++, ficha.pericias.get("arcanismo"));
-            stmt.setBoolean(index++, ficha.pericias.get("atletismo"));
-            stmt.setBoolean(index++, ficha.pericias.get("atuacao"));
-            stmt.setBoolean(index++, ficha.pericias.get("blefar"));
-            stmt.setBoolean(index++, ficha.pericias.get("furtividade"));
-            stmt.setBoolean(index++, ficha.pericias.get("historia"));
-            stmt.setBoolean(index++, ficha.pericias.get("intimidacao"));
-            stmt.setBoolean(index++, ficha.pericias.get("intuicao"));
-            stmt.setBoolean(index++, ficha.pericias.get("investigacao"));
-            stmt.setBoolean(index++, ficha.pericias.get("lidar_com_animais"));
-            stmt.setBoolean(index++, ficha.pericias.get("medicina"));
-            stmt.setBoolean(index++, ficha.pericias.get("natureza"));
-            stmt.setBoolean(index++, ficha.pericias.get("percepcao"));
-            stmt.setBoolean(index++, ficha.pericias.get("persuasao"));
-            stmt.setBoolean(index++, ficha.pericias.get("prestigitacao"));
-            stmt.setBoolean(index++, ficha.pericias.get("religiao"));
-            stmt.setBoolean(index++, ficha.pericias.get("sobrevivencia"));
-
-            // Descrições (6 parâmetros - agora incluindo personalidade)
-            stmt.setString(index++, ficha.descricao.historia);
-            stmt.setString(index++, ficha.descricao.aparencia);
-            stmt.setString(index++, ficha.descricao.personalidade);
-            stmt.setString(index++, ficha.descricao.ideal);
-            stmt.setString(index++, ficha.descricao.ligacao);
-            stmt.setString(index, ficha.descricao.defeitos);
-
-            stmt.executeUpdate();
-
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                }
-            }
-        }
-        return -1;
+    public static void createFicha(Ficha ficha){
+        SQLFicha.saveFicha(ficha, "criar");
     }
 
-    public static Ficha readFicha(int idFicha) throws SQLException {
+    public static void updateFicha(Ficha ficha){
+        SQLFicha.saveFicha(ficha, "atualizar");
+    }
+
+    private static void saveFicha(Ficha ficha, String metodo){
+        Connection connection = BD.getConnection();
+        String sql = null;
+        switch (metodo) {
+            case("criar"): {
+                sql = "INSERT INTO " + Tabelas.FICHA + " (" +
+                    "  idFicha, user_idUser, vivo, nivel, deslocamento, dadoDeVida, pontosDeVidaBase, pontosDeVidaTemporario, inspiracao," +
+                    "  nomePersonagem, classe_idClasse, Raca_idRaca, antecedente, tendencia, xp, idade, altura, peso," +
+                    "  olho, pele, cabelo," +
+                    "  forca, destreza, constituicao, inteligencia, sabedoria, carisma," +
+                    "  p_forca, p_destreza, p_constituicao, p_inteligencia, p_sabedoria, p_carisma," +
+                    "  p_acrobacia, p_arcanismo, p_atletismo, p_atuacao, p_blefar, p_furtividade," +
+                    "  p_historia, p_intimidacao, p_intuicao, p_investigacao, p_lidarComAnimais, p_medicina," +
+                    "  p_natureza, p_percepcao, p_persuasao, p_prestigitacao, p_religiao, p_sobrevivencia," +
+                    "  historia, aparencia, personalidade, ideal, ligacao, defeitos, proficiencias, idiomas," +
+                    "  inventario_idInventario, magiaUser_idMagiaUser" +
+                    ") VALUES (" +
+                    "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +    // 9
+                    "  ?, ?, ?, ?, ?, ?, ?, ?, ?," +    // 18
+                    "  ?, ?, ?," +                      // 21
+                    "  ?, ?, ?, ?, ?, ?," +             // 27
+                    "  ?, ?, ?, ?, ?, ?," +             // 33
+                    "  ?, ?, ?, ?, ?, ?," +             // 39
+                    "  ?, ?, ?, ?, ?, ?," +             // 45
+                    "  ?, ?, ?, ?, ?, ?," +             // 51
+                    "  ?, ?, ?, ?, ?, ?, ?, ?," +       // 59
+                    "  ?, ?" +                          // 61
+                    ")";
+            }
+
+            case ("atualizar"): {
+                sql = "UPDATE " + Tabelas.FICHA + " SET " +
+                    "user_idUser = ?, vivo = ?, nivel = ?, deslocamento = ?, dadoDeVida = ?, " +
+                    "pontosDeVidaBase = ?, pontosDeVidaTemporario = ?, inspiracao = ?, " +
+                    "nomePersonagem = ?, classe_idClasse = ?, Raca_idRaca = ?, antecedente = ?, " +
+                    "tendencia = ?, xp = ?, idade = ?, altura = ?, peso = ?, olho = ?, pele = ?, " +
+                    "cabelo = ?, forca = ?, destreza = ?, constituicao = ?, inteligencia = ?, " +
+                    "sabedoria = ?, carisma = ?, p_forca = ?, p_destreza = ?, p_constituicao = ?, " +
+                    "p_inteligencia = ?, p_sabedoria = ?, p_carisma = ?, p_acrobacia = ?, " +
+                    "p_arcanismo = ?, p_atletismo = ?, p_atuacao = ?, p_blefar = ?, p_furtividade = ?, " +
+                    "p_historia = ?, p_intimidacao = ?, p_intuicao = ?, p_investigacao = ?, " +
+                    "p_lidarComAnimais = ?, p_medicina = ?, p_natureza = ?, p_percepcao = ?, " +
+                    "p_persuasao = ?, p_prestigitacao = ?, p_religiao = ?, p_sobrevivencia = ?, " +
+                    "historia = ?, aparencia = ?, personalidade = ?, ideal = ?, ligacao = ?, " +
+                    "defeitos = ?, proficiencias = ?, idiomas = ?, inventario_idInventario = ?, " +
+                    "magiaUser_idMagiaUser = ?" +
+                    "WHERE idFicha = ?";  // Condição para identificar qual ficha atualizar
+            }
+            default: System.out.println("metodo invalido para salvar ficha");
+        }
+
+        if (sql != null) {
+            try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                int index = 1;
+
+                // Dados básicos (8 parâmetros)
+                if(metodo.equals("criar")){
+                    stmt.setInt(index++, ficha.getIdFicha()); // idFicha (auto-increment)
+                }
+                stmt.setInt(index++, ficha.getIdUser()); // user_idUser (deve ser fornecido)
+                stmt.setBoolean(index++, ficha.getEstado());
+                stmt.setInt(index++, ficha.nivel);
+                stmt.setFloat(index++, ficha.deslocamento);
+                stmt.setInt(index++, ficha.dadoDeVida);
+                stmt.setInt(index++, ficha.pontosVidaBase);
+                stmt.setInt(index++, ficha.vidaTemporaria);
+                stmt.setBoolean(index++, ficha.inspiracao);
+
+                // Info personagem (7 parâmetros)
+                stmt.setString(index++, ficha.caracteristicas.nomePersonagem);
+                stmt.setString(index++, ficha.caracteristicas.idClasse);
+                stmt.setString(index++, ficha.caracteristicas.idRaca);
+                stmt.setString(index++, ficha.caracteristicas.antecedente);
+                stmt.setString(index++, ficha.caracteristicas.tendencia);
+                stmt.setInt(index++, ficha.caracteristicas.xp);
+                stmt.setInt(index++, ficha.caracteristicas.idade);
+
+                // Aparência (5 parâmetros)
+                stmt.setFloat(index++, ficha.caracteristicas.altura);
+                stmt.setFloat(index++, ficha.caracteristicas.peso);
+                stmt.setString(index++, ficha.caracteristicas.olho);
+                stmt.setString(index++, ficha.caracteristicas.pele);
+                stmt.setString(index++, ficha.caracteristicas.cabelo);
+
+                // Atributos (6 parâmetros)
+                stmt.setInt(index++, ficha.atributos.get("forca"));
+                stmt.setInt(index++, ficha.atributos.get("destreza"));
+                stmt.setInt(index++, ficha.atributos.get("constituicao"));
+                stmt.setInt(index++, ficha.atributos.get("inteligencia"));
+                stmt.setInt(index++, ficha.atributos.get("sabedoria"));
+                stmt.setInt(index++, ficha.atributos.get("carisma"));
+
+                // Proficiências em atributos (6 parâmetros)
+                stmt.setBoolean(index++, ficha.pericias.get("forca"));
+                stmt.setBoolean(index++, ficha.pericias.get("destreza"));
+                stmt.setBoolean(index++, ficha.pericias.get("constituicao"));
+                stmt.setBoolean(index++, ficha.pericias.get("inteligencia"));
+                stmt.setBoolean(index++, ficha.pericias.get("sabedoria"));
+                stmt.setBoolean(index++, ficha.pericias.get("carisma"));
+
+                // Perícias (18 parâmetros)
+                stmt.setBoolean(index++, ficha.pericias.get("acrobacia"));
+                stmt.setBoolean(index++, ficha.pericias.get("arcanismo"));
+                stmt.setBoolean(index++, ficha.pericias.get("atletismo"));
+                stmt.setBoolean(index++, ficha.pericias.get("atuacao"));
+                stmt.setBoolean(index++, ficha.pericias.get("blefar"));
+                stmt.setBoolean(index++, ficha.pericias.get("furtividade"));
+                stmt.setBoolean(index++, ficha.pericias.get("historia"));
+                stmt.setBoolean(index++, ficha.pericias.get("intimidacao"));
+                stmt.setBoolean(index++, ficha.pericias.get("intuicao"));
+                stmt.setBoolean(index++, ficha.pericias.get("investigacao"));
+                stmt.setBoolean(index++, ficha.pericias.get("lidar_com_animais"));
+                stmt.setBoolean(index++, ficha.pericias.get("medicina"));
+                stmt.setBoolean(index++, ficha.pericias.get("natureza"));
+                stmt.setBoolean(index++, ficha.pericias.get("percepcao"));
+                stmt.setBoolean(index++, ficha.pericias.get("persuasao"));
+                stmt.setBoolean(index++, ficha.pericias.get("prestigitacao"));
+                stmt.setBoolean(index++, ficha.pericias.get("religiao"));
+                stmt.setBoolean(index++, ficha.pericias.get("sobrevivencia"));
+
+                // Descrições (6 parâmetros - agora incluindo personalidade)
+                stmt.setString(index++, ficha.descricao.historia);
+                stmt.setString(index++, ficha.descricao.aparencia);
+                stmt.setString(index++, ficha.descricao.personalidade);
+                stmt.setString(index++, ficha.descricao.ideal);
+                stmt.setString(index++, ficha.descricao.ligacao);
+                stmt.setString(index++, ficha.descricao.defeitos);
+
+                // proficiencias (2 parâmetros)
+                stmt.setString(index++, ficha.caracteristicas.idiomas);
+                stmt.setString(index++, ficha.caracteristicas.proeficiencias);
+
+                // inventario (1 parâmetro)
+                stmt.setInt(index++, ficha.inventario.getId());
+
+                // tabelaMagia ()
+                stmt.setInt(index++, ficha.magias.getId());
+
+                // se for uma atualizacao o id fica no final
+                if(metodo.equals("atualizar")){
+                    stmt.setInt(index, ficha.getIdFicha());
+                }
+
+                stmt.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static Ficha readFicha(int idFicha){
         Connection connection = BD.getConnection();
 
-        String sql = "SELECT * FROM ficha WHERE idFicha = ?";
+        String sql = "SELECT * FROM " + Tabelas.FICHA + " WHERE idFicha = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idFicha);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // Criar a ficha com todos os parâmetros do construtor
                     Ficha ficha = new Ficha(
+                            rs.getInt("idFicha"),
                             rs.getInt("idUser"),
                             rs.getBoolean("vivo"),
                             rs.getInt("nivel"),
@@ -145,8 +195,8 @@ public abstract class SQLFicha {
                             rs.getString("olho"),
                             rs.getString("pele"),
                             rs.getString("cabelo"),
-                            new ArrayList<>(), // idiomas
-                            new ArrayList<>(), // proeficiencia
+                            rs.getString("idiomas"),
+                            rs.getString("proficiencias"),
                             rs.getInt("forca"),
                             rs.getInt("destreza"),
                             rs.getInt("constituicao"),
@@ -195,45 +245,22 @@ public abstract class SQLFicha {
                     return ficha;
                 }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return null; // Retorna null se a ficha não for encontrada
     }
 
-    public static void deleteFicha(int id) throws SQLException {
+    public static void deleteFicha(int id){
         Connection connection = BD.getConnection();
 
-        String sql = "DELETE FROM ficha WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        String sql = "DELETE FROM " + Tabelas.FICHA + " WHERE idFicha = ?";
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, id); // Define o parâmetro ID na query
             stmt.executeUpdate(); // Executa a exclusão
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         // O PreparedStatement é automaticamente fechado ao sair do bloco try
-    }
-
-    public static int gerarIdFicha() {
-        final String sql = "SELECT COALESCE(MAX(idFicha), 0) + 1 FROM ficha";
-
-        try (Connection connection = BD.getConnection()) {
-            assert connection != null;
-            try (Statement stmt = connection.createStatement();
-                 ResultSet rs = stmt.executeQuery(sql)) {
-
-                if (!rs.next()) {
-                    throw new SQLException("Nenhum resultado encontrado ao gerar ID para ficha");
-                }
-                return rs.getInt(1);
-            } catch (SQLException e) {
-                System.err.println("Erro ao executar consulta SQL: " + e.getMessage());
-                throw new SQLException("Falha ao executar consulta para gerar ID", e);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro de conexão com o banco de dados: " + e.getMessage());
-            try {
-                throw new SQLException("Falha na conexão ao tentar gerar ID para ficha", e);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
     }
 }

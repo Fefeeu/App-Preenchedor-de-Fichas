@@ -3,7 +3,10 @@ package br.rpp.ficha;
 import br.rpp.magias.Magia;
 import br.rpp.magias.MagiaCura;
 import br.rpp.magias.MagiaDano;
+import br.rpp.sql.BD;
 import br.rpp.sql.SQLMagia;
+import br.rpp.sql.SQLMagiaUser;
+import br.rpp.sql.Tabelas;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -34,17 +37,19 @@ public class TabelaMagia {
         {0, 4, 3, 3, 3, 3, 2, 2, 1, 1}  // Nível 20
     };
 
-
+    private int id;
     private final HashMap<Integer, Magia> magias = new HashMap<>();
-                                //    Nv 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 (Níveis de magia)
+                        //    Nv 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 (Níveis de magia)
     private int[] espacoDeMagia = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public Ficha ficha;
 
-    public TabelaMagia(Ficha ficha) {
+    public TabelaMagia(int id, Ficha ficha) {
+        this.id = id;
         this.ficha = ficha;
     }
 
-    public void criarMagia(String tipo, int idFicha, int idUser){
+    public void criarMagia(String tipo, int idFicha){
+        int idMagia = BD.gerarId(Tabelas.MAGIA.toString());
         String tipoEfeito = "";
         String nome = "";
         String descricao = "";
@@ -60,29 +65,25 @@ public class TabelaMagia {
 
         switch (tipo) {
             case "efeito":{
-                novaMagia = new Magia(tipoEfeito, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto);
+                novaMagia = new Magia(idMagia, tipoEfeito, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto);
             }
             case "dano":{
                 int dadoDano = 6;
                 int quantidadeDado = 1;
 
-                novaMagia = new MagiaDano(tipoEfeito, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto, dadoDano, quantidadeDado);
+                novaMagia = new MagiaDano(idMagia, tipoEfeito, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto, dadoDano, quantidadeDado);
             }
             case "cura":{
                 int dadoCura = 6;
                 int quantidadeDado = 1;
-                novaMagia = new MagiaCura(tipoEfeito, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto, dadoCura, quantidadeDado);
+                novaMagia = new MagiaCura(idMagia, tipoEfeito, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto, dadoCura, quantidadeDado);
             }
             default: System.out.println("Erro ao criar magia");
         }
 
         if(novaMagia != null){
             this.magias.put(novaMagia.getIdMagia(), novaMagia);
-            try {
-                SQLMagia.createMagia(novaMagia, idFicha, idUser);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            SQLMagia.createMagia(novaMagia, idFicha);
         }
     }
 
@@ -91,15 +92,15 @@ public class TabelaMagia {
         magias.put(id, magia);
     }
 
-    public void usarMagia (int idMagia, int nivel){
+    public void usarMagia (int idMagia){
         Magia magia = magias.get(idMagia);
 
         if (magia == null){
             System.out.println("Magia não conhecida");
             return;
         }
-        if (espacoDeMagia[nivel]<=0) {
-            System.out.println("Espaços de magia esgotados para nivel " + nivel);
+        if (espacoDeMagia[magia.nivel]<=0) {
+            System.out.println("Espaços de magia esgotados para nivel " + magia.nivel);
             return;
         }
 
@@ -110,12 +111,14 @@ public class TabelaMagia {
         } else {
             magia.usarMagia();
         }
-        espacoDeMagia[nivel]--;
+        espacoDeMagia[magia.nivel]--;
+        //TODO: mod no banco
     }
 
     public void recuperarSlots() {
         System.out.println("Recuperando slots de magia");
         this.espacoDeMagia = espacosMagiaNivel[this.ficha.nivel];
+        SQLMagiaUser.updateEspacoMagia(this);
     }
 
     public void recuperarSlotUnico(int nivel) {
@@ -124,6 +127,29 @@ public class TabelaMagia {
             this.espacoDeMagia[nivel]++;
         } else {
             System.out.println("Falha ao recuperar slots de magia");
+        }
+        SQLMagiaUser.updateEspacoMagia(this);
+    }
+
+    public void deletarMagia(Magia magia) {
+        int id = magia.getIdMagia();
+        magias.remove(id);
+        SQLMagia.deleteMagia(id);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getEspacoDeMagia(int nivel) {
+        return this.espacoDeMagia[nivel];
+    }
+
+    public void setEspacoDeMagia(int nivel, int quantidade) {
+        if(quantidade >= 0 && quantidade <= TabelaMagia.espacosMagiaNivel[this.ficha.nivel][nivel]){
+            this.espacoDeMagia[nivel] = quantidade;
+        } else {
+            System.out.println("erro ao setar magia");
         }
     }
 }
