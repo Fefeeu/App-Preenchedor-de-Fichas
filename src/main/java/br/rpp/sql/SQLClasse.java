@@ -8,7 +8,7 @@ import java.util.Objects;
 public class SQLClasse {
     public static void createClasse(Classe classe){
         Connection connection = BD.getConnection();
-        String sql = "INSERT INTO classe (" +
+        String sql = "INSERT INTO " + Tabelas.CLASSE + " (" +
                 "idRaca, nome, descricao" +
                 ") VALUES (?, ?, ?)";
 
@@ -33,7 +33,7 @@ public class SQLClasse {
 
     public static Classe readClasse(String idClasse){
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM classe WHERE idClasse = ?";
+        String sql = "SELECT * FROM " + Tabelas.CLASSE + " WHERE idClasse = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setString(1, idClasse);
@@ -56,7 +56,7 @@ public class SQLClasse {
     public static void deleteClasse(String idClasse){
         Connection connection = BD.getConnection();
 
-        String sql = "DELETE FROM classe WHERE id = ?";
+        String sql = "DELETE FROM " + Tabelas.CLASSE + " WHERE idClasse = ?";
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setString(1, idClasse);
             stmt.executeUpdate();

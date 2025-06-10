@@ -9,9 +9,11 @@ public abstract class SQLRaca {
     public static void createRaca(Raca raca){
         Connection connection = BD.getConnection();
 
-        String sql = "INSERT INTO raca (" +
+        String sql = "INSERT INTO " + Tabelas.RACA + " (" +
                 "idRaca, nome, descricao" +
-                ") VALUES (?, ?, ?)";
+                ") VALUES (?, ?, ?)" +
+                "" +
+                "";
 
         try ( PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
@@ -33,7 +35,7 @@ public abstract class SQLRaca {
 
     public static Raca readRaca(String idRaca) {
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM raca WHERE idItem = ?";
+        String sql = "SELECT * FROM " + Tabelas.RACA + " WHERE idRaca = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setString(1, idRaca);
@@ -55,7 +57,7 @@ public abstract class SQLRaca {
 
     public static void deleteRaca(String idRaca) {
         Connection connection = BD.getConnection();
-        String sql = "DELETE FROM raca WHERE id = ?";
+        String sql = "DELETE FROM " + Tabelas.RACA + " WHERE idRaca = ?";
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             try {
                 stmt.setString(1, idRaca);

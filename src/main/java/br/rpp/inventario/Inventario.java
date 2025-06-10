@@ -10,15 +10,17 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Inventario {
+    private final int id;
     private ArrayList<Item> itens;
-    public int pc = 0; // Peça de Cobre
-    public int pp = 0; // Peça de Prata
-    public int pe = 0; // Peça de Electro
-    public int po = 0; // Peça de Ouro
-    public int pl = 0; // Peça de pLatina
+    private int pc = 0; // Peça de Cobre
+    private int pp = 0; // Peça de Prata
+    private int pe = 0; // Peça de Electro
+    private int po = 0; // Peça de Ouro
+    private int pl = 0; // Peça de pLatina
 
-    public Inventario() {
+    public Inventario(int id) {
         itens = new ArrayList<>();
+        this.id = id;
     }
 
     public Item criarItem(String tipo, int idFicha) { // TODO(front): entrada de dados
@@ -79,7 +81,7 @@ public class Inventario {
             }
             default: novoItem =  new Item(id, "genérico", "genérico", 0.01f, 'o', 0);
         }
-        SQLItem.createItem(novoItem, Objects.requireNonNull(ficha).getIdUser(), ficha.getIdFicha());
+        SQLItem.createItem(this, novoItem, Objects.requireNonNull(ficha).getIdUser(), ficha.getIdFicha());
         return novoItem;
     }
 
@@ -113,6 +115,31 @@ public class Inventario {
         } else {
             System.out.println("compra negada, moeda invalida");
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setMoedas(char moeda, int valor) {
+        switch (moeda){
+            case 'c': this.pc = valor;
+            case 'p': this.pp = valor;
+            case 'e': this.pe = valor;
+            case 'o': this.po = valor;
+            case 'l': this.pl = valor;
+        }
+    }
+
+    public int getMoedas(char moeda) {
+        return switch (moeda) {
+            case 'c' -> this.pc;
+            case 'p' -> this.pp;
+            case 'e' -> this.pe;
+            case 'o' -> this.po;
+            case 'l' -> this.pl;
+            default -> 0;
+        };
     }
 
 }

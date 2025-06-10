@@ -1,28 +1,33 @@
 package br.rpp.sql;
 
+import br.rpp.inventario.Inventario;
 import br.rpp.inventario.item.*;
 
 import java.sql.*;
 import java.util.Objects;
 
 public abstract class SQLItem {
-    public static void createItem(Item item, int idUser, int idFicha) {
+    public static void createItem(Inventario inventario, Item item, int idUser, int idFicha) {
         Connection connection = BD.getConnection();
 
-        String sql = "INSERT INTO item (" +
-            "iditem, ficha_user_idUser, ficha_idFicha, tipo, " +
+        String sql = "INSERT INTO " + Tabelas.ITEM + " (" +
+            "iditem, inventario_idInventario, tipo, " +
             "nome, descricao, peso, moeda, preco, " +
             "usosMaximo, usos, efeito, bonus, bonus_ca, " +
             "proficiencia, numeroDeDados, dadoDeDano, atributo" +
-            ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        ") VALUES (" +
+            "?, ?, ?, " +
+            "?, ?, ?, ?, ?, " +
+            "?, ?, ?, ?, ?, " +
+            "?, ?, ?, ?" +
+        ")";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
 
             // Dados básicos (3 parâmetros - chaves primárias)
             stmt.setInt(index++, item.getId()); // iditem (auto-increment)
-            stmt.setInt(index++, idUser); // ficha_user_idUser (deve ser fornecido)
-            stmt.setInt(index++, idFicha); // ficha_idFicha (deve ser fornecido)
+            stmt.setInt(index++, inventario.getId()); // inventario_idInventario
 
             // Informações principais (6 parâmetros)
             stmt.setString(index++, item.getTipo());
@@ -128,7 +133,7 @@ public abstract class SQLItem {
 
     public static Item readItem(int idItem) {
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM item WHERE idItem = ?";
+        String sql = "SELECT * FROM " + Tabelas.ITEM + " WHERE idItem = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idItem);
@@ -255,7 +260,7 @@ public abstract class SQLItem {
 
     public static void deleteItem(int id) {
         Connection connection = BD.getConnection();
-        String sql = "DELETE FROM item WHERE id = ?";
+        String sql = "DELETE FROM " + Tabelas.ITEM + " WHERE idItem = ?";
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, id); // Define o parâmetro ID na query
             stmt.executeUpdate(); // Executa a exclusão

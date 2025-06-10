@@ -10,7 +10,7 @@ public abstract class SQLUser {
     public static void createUser(User user){
         Connection connection = BD.getConnection();
 
-        String sql = "INSERT INTO user (" +
+        String sql = "INSERT INTO " + Tabelas.USER + " (" +
                 "idUser, nome, email, senha" +
                 ") VALUES (?, ?, ?)";
 
@@ -35,7 +35,7 @@ public abstract class SQLUser {
 
     public static User readUser(int idUser) {
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM user WHERE idItem = ?";
+        String sql = "SELECT * FROM " + Tabelas.USER + " WHERE idItem = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idUser);
@@ -58,7 +58,7 @@ public abstract class SQLUser {
 
     public static void deleteUser(int idUser) {
         Connection connection = BD.getConnection();
-        String sql = "DELETE FROM user WHERE id = ?";
+        String sql = "DELETE FROM " + Tabelas.USER + " WHERE idUser = ?";
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             try {
                 stmt.setInt(1, idUser);

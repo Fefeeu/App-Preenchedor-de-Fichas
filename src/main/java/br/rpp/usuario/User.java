@@ -108,12 +108,13 @@ public class User {
         this.fichas.remove(fichaAntiga.getIdFicha());
         this.fichas.put(fichaAntiga.getIdFicha(), novaFicha);
 
-        //TODO: fazer um metodo para atualizar as colunas
-        SQLFicha.deleteFicha(fichaAntiga.getIdFicha());
-        SQLFicha.createFicha(novaFicha);
+        SQLFicha.updateFicha(novaFicha);
     }
 
-    public void removerFicha() {}
+    public void removerFicha(Ficha ficha) {
+        this.fichas.remove(ficha.getIdFicha());
+        SQLFicha.deleteFicha(ficha.getIdFicha());
+    }
 
     public int getIdUser() {
         return idUser;

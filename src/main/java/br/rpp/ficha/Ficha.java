@@ -3,7 +3,9 @@ package br.rpp.ficha;
 import br.rpp.inventario.Inventario;
 import br.rpp.inventario.item.Equipavel;
 import br.rpp.inventario.item.EquipavelMagico;
+import br.rpp.sql.BD;
 import br.rpp.sql.SQLFicha;
+import br.rpp.sql.Tabelas;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -59,12 +61,13 @@ public class Ficha {
 
         this.iniciativa = this.converteAtributo("destreza");
         this.classeArmadura = 10 + this.converteAtributo("destreza");
+        this.pontosVidaTotal = this.pontosVidaBase + this.converteAtributo("constituicao")*this.nivel;
 
         this.idUser = idUser;
         this.idFicha = idFicha;
 
-        this.magias = new TabelaMagia(this);
-        this.inventario = new Inventario(this);
+        this.magias = new TabelaMagia(BD.gerarId(Tabelas.MAGIAUSER.toString()), this);
+        this.inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()), this);
 
     }
 
