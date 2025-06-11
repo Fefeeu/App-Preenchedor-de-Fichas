@@ -55,8 +55,6 @@ public class Ficha {
         this.vidaTemporaria = vidaTemporaria;
         this.dadoDeVida = dadoDeVida;
         this.descricao = new Descricao(historia, aparencia, personalidade, ideal, ligacao, defeitos);
-        this.pericias = new HashMap<>();
-        this.setPericias();
 
         this.iniciativa = this.converteAtributo("destreza");
         this.classeArmadura = 10 + this.converteAtributo("destreza");
@@ -65,6 +63,8 @@ public class Ficha {
         this.idUser = idUser;
         this.idFicha = idFicha;
 
+        this.pericias = new HashMap<>();
+        this.setPericias();
         this.magias = new TabelaMagia(BD.gerarId(Tabelas.MAGIAUSER.toString()), this);
         this.inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()));
     }
