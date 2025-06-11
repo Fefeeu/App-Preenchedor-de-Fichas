@@ -5,7 +5,7 @@ import br.rpp.ficha.Classe;
 import java.sql.*;
 import java.util.Objects;
 
-public class SQLClasse {
+public abstract class SQLClasse {
     public static void createClasse(Classe classe){
         Connection connection = BD.getConnection();
         String sql = "INSERT INTO " + Tabelas.CLASSE + " (" +
