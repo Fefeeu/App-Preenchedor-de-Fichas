@@ -1,0 +1,13 @@
+.text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid gray;
+    padding: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.details-skills textarea {
+    width: 100%;
+}
