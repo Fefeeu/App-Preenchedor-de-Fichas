@@ -105,6 +105,7 @@ public class User {
                 "ligacao",
                 "defeito"
         );
+
         this.fichas.remove(fichaAntiga.getIdFicha());
         this.fichas.put(fichaAntiga.getIdFicha(), novaFicha);
 

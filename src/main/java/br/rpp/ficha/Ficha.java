@@ -3,12 +3,11 @@ package br.rpp.ficha;
 import br.rpp.inventario.Inventario;
 import br.rpp.inventario.item.Equipavel;
 import br.rpp.inventario.item.EquipavelMagico;
+import br.rpp.inventario.item.Item;
 import br.rpp.sql.BD;
-import br.rpp.sql.SQLFicha;
+import br.rpp.sql.SQLItem;
 import br.rpp.sql.Tabelas;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Ficha {
@@ -22,7 +21,7 @@ public class Ficha {
     public HashMap<String, Boolean> pericias;
     public int nivel;
     private int iniciativa;
-    private Equipavel vestido;
+    private Equipavel vestido = null;
     private int classeArmadura;
     public float deslocamento;
     public int pontosVidaBase;
@@ -67,19 +66,23 @@ public class Ficha {
         this.idFicha = idFicha;
 
         this.magias = new TabelaMagia(BD.gerarId(Tabelas.MAGIAUSER.toString()), this);
-        this.inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()), this);
-
+        this.inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()));
     }
 
     public int converteAtributo(String atributo){
         return this.atributos.get(atributo)/2 - 5;
     }
 
-    public void vestirItem(Equipavel vestimenta){
-        if (vestimenta instanceof EquipavelMagico vestimentaMagica){
-            this.classeArmadura = 10 + this.converteAtributo("classeArmadura") + vestimentaMagica.bonusCA + vestimentaMagica.bonus;
-        } else {
-            this.classeArmadura = 10 + this.converteAtributo("classeArmadura") + vestimenta.bonusCA;
+    public void vestirItem(int id){
+        Item item = SQLItem.readItem(id);
+        Equipavel vestimenta = null;
+        if(item instanceof Equipavel){
+            vestimenta = (Equipavel)item;
+            if (vestimenta instanceof EquipavelMagico vestimentaMagica){
+                this.classeArmadura = 10 + this.converteAtributo("classeArmadura") + vestimentaMagica.bonusCA + vestimentaMagica.bonus;
+            } else{
+                this.classeArmadura = 10 + this.converteAtributo("classeArmadura") + vestimenta.bonusCA;
+            }
         }
     }
 
@@ -170,6 +173,10 @@ public class Ficha {
         this.pericias.put("prestigitacao", false);
         this.pericias.put("religiao", false);
         this.pericias.put("sobrevivencia", false);
+    }
+
+    public void trocarEstado(){
+        this.estado = !estado;
     }
 
     public void proficienciaPericia(String pericia){

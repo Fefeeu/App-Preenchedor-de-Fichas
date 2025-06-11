@@ -1,7 +1,5 @@
 package br.rpp.ficha;
 
-import java.util.ArrayList;
-
 public class Caracteristica {
     public String nomePersonagem;
     //public Classe classe;

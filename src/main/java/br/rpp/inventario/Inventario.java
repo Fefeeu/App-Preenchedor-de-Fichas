@@ -5,7 +5,6 @@ import br.rpp.inventario.item.*;
 import br.rpp.sql.SQLFicha;
 import br.rpp.sql.SQLItem;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 

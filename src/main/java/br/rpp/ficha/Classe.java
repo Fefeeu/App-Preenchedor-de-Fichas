@@ -1,7 +1,7 @@
 package br.rpp.ficha;
 
 public class Classe {
-    private String id;
+    private final String id;
     public String nome;
     public String descricao;
 

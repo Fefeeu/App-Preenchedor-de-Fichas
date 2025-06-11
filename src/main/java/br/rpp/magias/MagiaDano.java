@@ -16,7 +16,6 @@ public class MagiaDano extends Magia {
 
     @Override
     public int usarMagia() {
-        int dano = Dado.rollD(this.dadoDano, this.quantidadeDado);
-        return dano;
+        return Dado.rollD(this.dadoDano, this.quantidadeDado);
     }
 }
