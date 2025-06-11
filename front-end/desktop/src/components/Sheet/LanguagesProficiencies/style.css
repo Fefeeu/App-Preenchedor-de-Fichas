@@ -1,0 +1,22 @@
+.s-languagesproficiencies {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 1rem;
+}
+
+.passive-perception {
+    display: flex;
+    gap: 1rem;
+}
+
+.languages-proficiencies {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.languages-proficiencies textarea {
+    width: 100%;
+}
