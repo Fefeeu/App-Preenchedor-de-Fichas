@@ -1,5 +1,7 @@
 package br.rpp.magias;
 
+import br.rpp.auxiliar.enuns.TiposMagia;
+
 public class Magia {
     private int idMagia;
     public String tipo;
@@ -13,10 +15,10 @@ public class Magia {
     public String escola;
     public String tipoAcerto;
 
-    public Magia(int id, String tipo, String nome, String descricao, int nivel, String tempoConjuracao,
+    public Magia(int id, String nome, String descricao, int nivel, String tempoConjuracao,
                  String duracao, String alcance, String area, String escola, String tipoAcerto) {
         this.idMagia = id;
-        this.tipo = tipo;
+        this.tipo = TiposMagia.EFEITO.toString();
         this.nome = nome;
         this.descricao = descricao;
         this.nivel = nivel;
@@ -26,6 +28,8 @@ public class Magia {
         this.area = area;
         this.escola = escola;
         this.tipoAcerto = tipoAcerto;
+
+
     }
 
 

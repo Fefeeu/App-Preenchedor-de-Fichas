@@ -1,5 +1,6 @@
 package br.rpp.sql;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.inventario.Inventario;
 import br.rpp.inventario.item.*;
 

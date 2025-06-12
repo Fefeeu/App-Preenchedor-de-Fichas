@@ -1,9 +1,9 @@
 package br.rpp.sql;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.ficha.Ficha;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class SQLFicha {
@@ -22,7 +22,7 @@ public abstract class SQLFicha {
             case("criar"): {
                 sql = "INSERT INTO " + Tabelas.FICHA + " (" +
                     "  idFicha, user_idUser, vivo, nivel, deslocamento, dadoDeVida, pontosDeVidaBase, pontosDeVidaTemporario, inspiracao," +
-                    "  nomePersonagem, classe_idClasse, Raca_idRaca, antecedente, tendencia, xp, idade, altura, peso," +
+                    "  nomePersonagem, classe_idClasse, raca_idRaca, antecedente, tendencia, xp, idade, altura, peso," +
                     "  olho, pele, cabelo," +
                     "  forca, destreza, constituicao, inteligencia, sabedoria, carisma," +
                     "  p_forca, p_destreza, p_constituicao, p_inteligencia, p_sabedoria, p_carisma," +
@@ -43,13 +43,14 @@ public abstract class SQLFicha {
                     "  ?, ?, ?, ?, ?, ?, ?, ?," +       // 59
                     "  ?, ?" +                          // 61
                     ")";
+                break;
             }
 
             case ("atualizar"): {
                 sql = "UPDATE " + Tabelas.FICHA + " SET " +
                     "user_idUser = ?, vivo = ?, nivel = ?, deslocamento = ?, dadoDeVida = ?, " +
                     "pontosDeVidaBase = ?, pontosDeVidaTemporario = ?, inspiracao = ?, " +
-                    "nomePersonagem = ?, classe_idClasse = ?, Raca_idRaca = ?, antecedente = ?, " +
+                    "nomePersonagem = ?, classe_idClasse = ?, raca_idRaca = ?, antecedente = ?, " +
                     "tendencia = ?, xp = ?, idade = ?, altura = ?, peso = ?, olho = ?, pele = ?, " +
                     "cabelo = ?, forca = ?, destreza = ?, constituicao = ?, inteligencia = ?, " +
                     "sabedoria = ?, carisma = ?, p_forca = ?, p_destreza = ?, p_constituicao = ?, " +
@@ -62,8 +63,9 @@ public abstract class SQLFicha {
                     "defeitos = ?, proficiencias = ?, idiomas = ?, inventario_idInventario = ?, " +
                     "magiaUser_idMagiaUser = ?" +
                     "WHERE idFicha = ?";  // Condição para identificar qual ficha atualizar
+                break;
             }
-            default: System.out.println("metodo invalido para salvar ficha");
+            default: System.out.println("metodo invalido para salvar ficha" + metodo);
         }
 
         if (sql != null) {
@@ -179,7 +181,7 @@ public abstract class SQLFicha {
                     // Criar a ficha com todos os parâmetros do construtor
                     Ficha ficha = new Ficha(
                             rs.getInt("idFicha"),
-                            rs.getInt("idUser"),
+                            rs.getInt("user_idUser"),
                             rs.getBoolean("vivo"),
                             rs.getInt("nivel"),
                             rs.getString("nomePersonagem"),
@@ -212,8 +214,12 @@ public abstract class SQLFicha {
                             rs.getString("personalidade"),
                             rs.getString("ideal"),
                             rs.getString("ligacao"),
-                            rs.getString("defeitos")
+                            rs.getString("defeitos"),
+                            true
                     );
+
+                    ficha.criarInventario(rs.getInt("inventario_idInventario"));
+                    ficha.criarMagias(rs.getInt("magiaUser_idMagiaUser"));
 
                     // Configurar todas as perícias
 

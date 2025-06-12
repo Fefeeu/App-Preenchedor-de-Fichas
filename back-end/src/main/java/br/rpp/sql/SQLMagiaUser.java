@@ -1,8 +1,12 @@
 package br.rpp.sql;
 
+import br.rpp.auxiliar.enuns.Tabelas;
+import br.rpp.ficha.Ficha;
 import br.rpp.ficha.TabelaMagia;
+import br.rpp.magias.Magia;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class SQLMagiaUser{
@@ -37,18 +41,19 @@ public abstract class SQLMagiaUser{
         }
     }
 
-    public static TabelaMagia readMagiaUser(int idTabelaMagia, int idFicha) {
+    public static TabelaMagia readMagiaUser(int idTabelaMagia, Ficha ficha) {
         Connection connection = BD.getConnection();
         String sql = "SELECT * FROM " + Tabelas.MAGIAUSER + " WHERE idMagiaUser = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idTabelaMagia);
+            TabelaMagia leituraTabela = null;
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    TabelaMagia leituraTabela = new TabelaMagia(
+                    leituraTabela = new TabelaMagia(
                             rs.getInt("idMagiaUser"),
-                            SQLFicha.readFicha(idFicha)
+                            ficha
                     );
                     // for para setar todos os espaços de nivel de magia
                     for(int i = 1; i<=9; i++){
@@ -56,10 +61,34 @@ public abstract class SQLMagiaUser{
                     }
                 }
             }
+
+            String sqlMagias = "SELECT idMagia FROM " + Tabelas.MAGIA + " WHERE magiaUser_idMagiaUser = ?";
+            ArrayList<Integer> magiasIds = new ArrayList<>();
+
+            try (PreparedStatement stmtMagias = connection.prepareStatement(sqlMagias)) {
+                stmtMagias.setInt(1, idTabelaMagia);
+
+                try (ResultSet rsMagias = stmtMagias.executeQuery()) {
+                    while (rsMagias.next()) {
+                        magiasIds.add(rsMagias.getInt("idMagia"));
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            for (Integer magiasId : magiasIds) {
+                Magia magia = SQLMagia.readMagia(magiasId);
+                if (leituraTabela != null) {
+                        leituraTabela.registrarMagia(magia);
+                }
+            }
+            return leituraTabela;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null; // Retorna null se a tabelaMatgia não for encontrada
+        // Retorna null se a tabelaMatgia não for encontrada
     }
 
     public static void deleteMagiaUser(int idTabelaMagia) {

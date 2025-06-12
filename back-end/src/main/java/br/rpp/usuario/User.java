@@ -1,28 +1,29 @@
 package br.rpp.usuario;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.ficha.Ficha;
-import br.rpp.sql.BD;
-import br.rpp.sql.SQLFicha;
-import br.rpp.sql.Tabelas;
+import br.rpp.sql.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class User {
 
-    private final int idUser;
+    private int idUser;
     private String userName;
     private String email;
     private String senha;
     private HashMap<Integer, Ficha> fichas;
 
-    public User(int idUser, String userName, String email, String senha) {
+    public User(int idUser, String userName, String email, String senha, boolean read) {
         this.idUser = idUser;
         this.userName = userName;
         this.email = email;
         this.senha = senha;
-        ArrayList<Ficha> fichas = new ArrayList<>();
+        this.fichas = new HashMap<>();
+
+        if (!read){
+            SQLUser.createUser(this);
+        }
     }
 
     public void criaFicha() {
@@ -32,10 +33,10 @@ public class User {
                 false,
                 20,
                 "nome",
-                "idClasse",
+                "guerreiro",
                 "atecedente",
                 this.userName,
-                "idRaca",
+                "humano",
                 "tendencia",
                 100000,
                 21,
@@ -61,8 +62,13 @@ public class User {
                 "personalidade",
                 "ideal",
                 "ligacao",
-                "defeito"
+                "defeito",
+                false
         );
+
+        SQLInventario.createInventario(novaFicha.inventario);
+        SQLMagiaUser.createMagiaUser(novaFicha.magias);
+
         this.fichas.put(novaFicha.getIdFicha(), novaFicha);
         SQLFicha.createFicha(novaFicha);
     }
@@ -103,13 +109,18 @@ public class User {
                 "personalidade",
                 "ideal",
                 "ligacao",
-                "defeito"
+                "defeito",
+                false
         );
 
         this.fichas.remove(fichaAntiga.getIdFicha());
         this.fichas.put(fichaAntiga.getIdFicha(), novaFicha);
 
         SQLFicha.updateFicha(novaFicha);
+    }
+
+    public void adicionaFicha(Ficha ficha) {
+        this.fichas.put(ficha.getIdFicha(), ficha);
     }
 
     public void removerFicha(Ficha ficha) {
@@ -131,6 +142,10 @@ public class User {
 
     public String getSenha() {
         return senha;
+    }
+
+    public Ficha getFicha(int idFicha) {
+        return this.fichas.get(idFicha);
     }
 
 }

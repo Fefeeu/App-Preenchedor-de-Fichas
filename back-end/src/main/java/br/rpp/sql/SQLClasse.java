@@ -1,5 +1,6 @@
 package br.rpp.sql;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.ficha.Classe;
 
 import java.sql.*;
@@ -9,7 +10,7 @@ public abstract class SQLClasse {
     public static void createClasse(Classe classe){
         Connection connection = BD.getConnection();
         String sql = "INSERT INTO " + Tabelas.CLASSE + " (" +
-                "idRaca, nome, descricao" +
+                "idClasse, nome, descricao" +
                 ") VALUES (?, ?, ?)";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -43,7 +44,8 @@ public abstract class SQLClasse {
                     return new Classe(
                             rs.getString("idClasse"),
                             rs.getString("nome"),
-                            rs.getString("descricao")
+                            rs.getString("descricao"),
+                            true
                     );
                 }
             }

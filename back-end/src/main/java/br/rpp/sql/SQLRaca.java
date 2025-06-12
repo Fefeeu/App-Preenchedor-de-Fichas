@@ -1,5 +1,6 @@
 package br.rpp.sql;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.ficha.Raca;
 
 import java.sql.*;
@@ -11,9 +12,7 @@ public abstract class SQLRaca {
 
         String sql = "INSERT INTO " + Tabelas.RACA + " (" +
                 "idRaca, nome, descricao" +
-                ") VALUES (?, ?, ?)" +
-                "" +
-                "";
+                ") VALUES (?, ?, ?)";
 
         try ( PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;
@@ -45,7 +44,8 @@ public abstract class SQLRaca {
                     return new Raca(
                         rs.getString("idRaca"),
                         rs.getString("nome"),
-                        rs.getString("descricao")
+                        rs.getString("descricao"),
+                        true
                     );
                 }
             }

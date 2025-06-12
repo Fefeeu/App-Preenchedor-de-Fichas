@@ -1,5 +1,6 @@
 package br.rpp.sql;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.inventario.Inventario;
 
 import java.sql.*;
@@ -36,7 +37,7 @@ public abstract class SQLInventario {
 
     public static Inventario readInventario(int idInventario){
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM  WHERE " + Tabelas.INVENTARIO + " = ?";
+        String sql = "SELECT * FROM " + Tabelas.INVENTARIO + " WHERE idInventario = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idInventario);
@@ -51,6 +52,8 @@ public abstract class SQLInventario {
                     novoInventario.setMoedas('e', rs.getInt("pe"));
                     novoInventario.setMoedas('o', rs.getInt("po"));
                     novoInventario.setMoedas('l', rs.getInt("pl"));
+
+                    return novoInventario;
                 }
             }
         } catch (SQLException e) {

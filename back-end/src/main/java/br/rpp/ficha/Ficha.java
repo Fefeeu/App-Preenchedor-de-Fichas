@@ -5,8 +5,10 @@ import br.rpp.inventario.item.Equipavel;
 import br.rpp.inventario.item.EquipavelMagico;
 import br.rpp.inventario.item.Item;
 import br.rpp.sql.BD;
+import br.rpp.sql.SQLInventario;
 import br.rpp.sql.SQLItem;
-import br.rpp.sql.Tabelas;
+import br.rpp.auxiliar.enuns.Tabelas;
+import br.rpp.sql.SQLMagiaUser;
 
 import java.util.HashMap;
 
@@ -39,7 +41,7 @@ public class Ficha {
                  String pele, String cabelo, String idiomas, String proeficiencia,
                  Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma,
                  float deslocamento, int pontosVidaBase, int vidaTemporaria, int dadoDeVida,
-                 String historia, String aparencia, String personalidade, String ideal, String ligacao, String defeitos){
+                 String historia, String aparencia, String personalidade, String ideal, String ligacao, String defeitos, boolean read){
         this.estado = estado;
         this.nivel = nivel;
         this.caracteristicas = new Caracteristica(nomePersonagem, idClasse, antecedente, userName, idRaca, tendencia, xp, idade, altura, peso, olho, pele, cabelo, idiomas, proeficiencia);
@@ -65,8 +67,10 @@ public class Ficha {
 
         this.pericias = new HashMap<>();
         this.setPericias();
-        this.magias = new TabelaMagia(BD.gerarId(Tabelas.MAGIAUSER.toString()), this);
-        this.inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()));
+        if(!read){
+            this.magias = new TabelaMagia(BD.gerarId(Tabelas.MAGIAUSER.toString()), this);
+            this.inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()));
+        }
     }
 
     public int converteAtributo(String atributo){
@@ -84,6 +88,14 @@ public class Ficha {
                 this.classeArmadura = 10 + this.converteAtributo("classeArmadura") + vestimenta.bonusCA;
             }
         }
+    }
+
+    public void criarInventario(int id){
+        this.inventario = SQLInventario.readInventario(id);
+    }
+
+    public void criarMagias(int id){
+        this.magias = SQLMagiaUser.readMagiaUser(id, this);
     }
 
     @Override
