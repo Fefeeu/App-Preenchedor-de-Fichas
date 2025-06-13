@@ -17,6 +17,9 @@ public class UserController {
     // Create user
     @PostMapping("/create")
     public String rootPost(@RequestBody User body) {
+        if(body.getEmail() == null){
+            body.setEmail("emailpadrao.com");
+        }
         return "Hello, " + body.getName() + ". Your email is " + body.getEmail() + ".";
     }
 

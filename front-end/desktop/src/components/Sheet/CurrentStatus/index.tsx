@@ -15,15 +15,23 @@ export function SheetCurrentStatus(){
                 </div>
             </div>
             <div className="c-2">
-                <input type="number"/>/<input type="number"/><label>Pontos de vida atuais</label>
+                <div className="input-group-pv">
+                    <label>PV Totais</label><input type="number" className="max-pv"/>
+                </div>
+                <input type="number" className="current-pv"/>
+                <label>Pontos de vida atuais</label>
             </div>
             <div className="c-3">
-                <input type="number"/><label>PV temp</label>
+                <input type="number" className="temp-pv"/>
+                <label>Pontos de vida temporários</label>
             </div>
             <div className="c-4">
                 <div className="life-dice">
-                    <input type="number"/>/
-                    <select>
+                    <div className="input-group-dices">
+                        <label>Total</label><input type="number" className="max-dice"/>
+                    </div>
+                    <input type="number" className="number-dice"/>
+                    <select className="type-dice">
                         <option>d4</option><label>Dado de vida</label>
                     </select>
                 </div>
