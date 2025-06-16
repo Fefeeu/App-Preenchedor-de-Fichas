@@ -11,3 +11,16 @@
 .details-skills textarea {
     width: 100%;
 }
+
+.details-skills {
+    height: 90vh;
+}
+
+.details-skills textarea {
+    padding: 0.45rem;
+    font-size: 1.2rem;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+

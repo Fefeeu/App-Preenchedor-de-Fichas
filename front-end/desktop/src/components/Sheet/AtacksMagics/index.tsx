@@ -1,12 +1,10 @@
 import "./style.css";
 
-export function SheetAttacksMagics(){
+export function SheetAttacksMagics({register}: any){
     return(
         <div className="s-attacksmagics">
             <button>Adicionar ataque ou magia</button>
-            <textarea>
-
-            </textarea>
+            <textarea {...register('attacksmagics.other')}></textarea>
         </div>
     )
 }
