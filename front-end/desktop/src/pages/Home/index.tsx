@@ -14,7 +14,7 @@ export function HomePage(){
                     <LandingSlider></LandingSlider>
                 </div>
                 <div className="cta">
-                    <button className="btn-cta">
+                    <button className="btn-cta" onClick={() => window.location.href = "/criar-ficha"}>
                         CRIAR FICHA
                     </button>
                 </div>

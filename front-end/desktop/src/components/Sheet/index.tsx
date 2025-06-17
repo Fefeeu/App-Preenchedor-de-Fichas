@@ -9,11 +9,11 @@ import { SheetStatus } from "./Status";
 import { SheetCharacter } from "./Character";
 import { SheetLanguagesProficiencies } from "./LanguagesProficiencies";
 
-
 export function Sheet(){
     const { handleSubmit, register } = useForm();
   
     const onSubmit = (data: any) => {
+        console.log("Submit chamado!");
         console.log("Dados do formulário:", data);
     };
 
@@ -51,7 +51,7 @@ export function Sheet(){
                     </div>
                 </div>
             </div>
-            <button type="submit" className="save-button">Save</button>
+            <button type="submit" className="save-button">salvar ficha</button>
         </form>
     )
 }

@@ -14,7 +14,7 @@ export function Header(){
     const navItems: NavItem[] = [
         { path: "/", label: "HOME" },
         { path: "/criar-ficha", label: "CRIAR FICHA" },
-        { path: "/sobre-nos", label: "SOBRE NÓS" },
+        { path: "/sobre-nos", label: "SOBRE NÓS" }
     ];
 
     return(
@@ -39,7 +39,9 @@ export function Header(){
             </div>
 
             <div className="user">
-                <FaRegUserCircle fontSize={40} />
+                <button className="user-button" onClick={() => window.location.href = "/user"}>
+                    <FaRegUserCircle fontSize={40} />
+                </button>
             </div>
             </header>
     )
