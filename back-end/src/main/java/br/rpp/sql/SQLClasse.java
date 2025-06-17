@@ -19,8 +19,8 @@ public abstract class SQLClasse {
             // Chaves primárias (exatamente como na tabela)
             try {
                 stmt.setString(index++, classe.getId());
-                stmt.setString(index++, classe.nome);
-                stmt.setString(index, classe.descricao);
+                stmt.setString(index++, classe.getNome());
+                stmt.setString(index, classe.getDescricao());
 
                 stmt.executeUpdate();
             } catch (SQLException e) {
@@ -42,10 +42,10 @@ public abstract class SQLClasse {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new Classe(
-                            rs.getString("idClasse"),
-                            rs.getString("nome"),
-                            rs.getString("descricao"),
-                            true
+                        rs.getString("idClasse"),
+                        rs.getString("nome"),
+                        rs.getString("descricao"),
+                        true
                     );
                 }
             }

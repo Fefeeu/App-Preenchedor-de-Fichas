@@ -3,7 +3,7 @@ package br.rpp.inventario.item;
 import br.rpp.interfaces.ItemUsavel;
 
 public class ItemMagico extends Item implements ItemUsavel {
-    public String efeito;
+    private String efeito;
     private int cargas;
     private int cargasMaxima;
 
@@ -45,5 +45,13 @@ public class ItemMagico extends Item implements ItemUsavel {
 
     public int getCargas() {
         return cargas;
+    }
+
+    public String getEfeito() {
+        return efeito;
+    }
+
+    public void setEfeito(String efeito) {
+        this.efeito = efeito;
     }
 }

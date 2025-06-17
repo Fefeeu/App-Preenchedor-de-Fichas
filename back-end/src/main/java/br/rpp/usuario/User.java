@@ -66,8 +66,8 @@ public class User {
                 false
         );
 
-        SQLInventario.createInventario(novaFicha.inventario);
-        SQLMagiaUser.createMagiaUser(novaFicha.magias);
+        SQLInventario.createInventario(novaFicha.getInventario());
+        SQLMagiaUser.createMagiaUser(novaFicha.getMagias());
 
         this.fichas.put(novaFicha.getIdFicha(), novaFicha);
         SQLFicha.createFicha(novaFicha);
@@ -148,4 +148,27 @@ public class User {
         return this.fichas.get(idFicha);
     }
 
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public HashMap<Integer, Ficha> getFichas() {
+        return fichas;
+    }
+
+    public void setFichas(HashMap<Integer, Ficha> fichas) {
+        this.fichas = fichas;
+    }
 }

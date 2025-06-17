@@ -7,15 +7,16 @@ import br.rpp.interfaces.RollADice;
 import br.rpp.interfaces.ItemUsavel;
 
 public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
-    public String efeito;
+    private String efeito;
     private int cargas;
     private int cargasMaxima;
-    public int bonus;
+    private int bonus;
 
-    public ArmaMagica(int id, Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int bonus) {
+    public ArmaMagica(int id, Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int cargasMaxima, int bonus) {
         super(id, ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
         this.efeito = efeito;
         this.cargas = cargas;
+        this.cargasMaxima = cargas;
         this.bonus = bonus;
 
         this.setTipo("armaMagica");
@@ -48,16 +49,12 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
 
     @Override
     public int rodarDadoTeste(String tipo) {
-        int valor = Dado.rollD20(tipo) + this.ficha.atributos.get(atributo) + this.bonus;
-        if (proficiencia) {
-            return valor + Ficha.getProficiencia(this.ficha.nivel);
-        }
-        return valor;
+        return super.rodarDadoTeste(tipo) + this.bonus;
     }
 
     @Override
     public int rodarDado() {
-        return Dado.rollD(this.dadoDeDano, this.quantidadeDeDados) + this.ficha.atributos.get(atributo) + this.bonus;
+        return super.rodarDado() + this.bonus;
     }
 
     public int getCargasMaxima() {
@@ -66,5 +63,21 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
 
     public int getCargas(){
         return cargas;
+    }
+
+    public String getEfeito() {
+        return efeito;
+    }
+
+    public void setEfeito(String efeito) {
+        this.efeito = efeito;
+    }
+
+    public int getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(int bonus) {
+        this.bonus = bonus;
     }
 }

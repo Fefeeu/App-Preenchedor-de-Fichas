@@ -5,57 +5,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddf75fff-d2c8-4c46-8cb4-ec0a577c8ee3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/enuns/TiposAcertosMagia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/enuns/TiposMagia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3c1bda42-fb89-49fa-9c2a-f463d4c405d4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/3c1bda42-fb89-49fa-9c2a-f463d4c405d4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/Qualquer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/TesteAbstrato.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/dado/Dado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/dado/Dado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Caracteristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Caracteristica.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Classe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Classe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Descricao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Descricao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Ficha.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Ficha.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Raca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Raca.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/TabelaMagia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/TabelaMagia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/interfaces/SQLCrud.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/Inventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/Inventario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Arma.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Arma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ArmaMagica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ArmaMagica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Equipavel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Equipavel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/EquipavelMagico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/EquipavelMagico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemConsumivel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemConsumivel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemMagico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemMagico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/magias/Magia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/magias/Magia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaCura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaCura.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaDano.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaDano.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/BD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/BD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLClasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLClasse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLFicha.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLFicha.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLInventario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLMagia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLMagia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLMagiaUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLMagiaUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLRaca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLRaca.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/sql/Tabelas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/enuns/Tabelas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/usuario/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/usuario/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/auxiliar/Dado.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Caracteristica.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Caracteristica.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Classe.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Classe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Descricao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Descricao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Ficha.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Ficha.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Raca.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/ficha/Raca.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/ficha/TabelaMagia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/ficha/TabelaMagia.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/interfaces/Usavel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/magia/Magia.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/magia/MagiaCura.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/magia/MagiaDano.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/interfaces/SQLCrud.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/Inventario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/Inventario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/Arma.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/Arma.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/ArmaMagica.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/ArmaMagica.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/Equipavel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/Equipavel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/EquipavelMagico.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/EquipavelMagico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/ItemConsumivel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/ItemConsumivel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/ItemMagico.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/inventario/item/ItemMagico.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/magias/Magia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/magias/Magia.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/magias/MagiaCura.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/magias/MagiaCura.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/magias/MagiaDano.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/magias/MagiaDano.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/BD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/BD.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLClasse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLClasse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLFicha.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLFicha.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLInventario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLInventario.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLItem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLMagia.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLMagia.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLMagiaUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLMagiaUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLRaca.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLRaca.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/sql/SQLUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/sql/Tabelas.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/rpp/usuario/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/rpp/usuario/User.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +96,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "movendo-projeto",
+    "git-widget-placeholder": "entrada-bd",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/felip/OneDrive/Desktop/estudos/Docs Inatel/C06 - Programacao Orientada a Objetos/POO_RPP/back-end",
     "node.js.detected.package.eslint": "true",
@@ -130,7 +134,7 @@
       <updated>1749598948657</updated>
       <workItem from="1749598950921" duration="4541000" />
       <workItem from="1749667086657" duration="2073000" />
-      <workItem from="1749672260661" duration="21429000" />
+      <workItem from="1749672260661" duration="45010000" />
     </task>
     <servers />
   </component>

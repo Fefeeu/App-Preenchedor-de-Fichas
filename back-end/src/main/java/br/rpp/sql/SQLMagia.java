@@ -25,27 +25,27 @@ public abstract class SQLMagia {
 
             // Chaves primárias (exatamente como na tabela)
             stmt.setInt(index++, magia.getIdMagia());
-            stmt.setInt(index++, ficha.magias.getId());
+            stmt.setInt(index++, ficha.getMagias().getId());
 
             // Campos obrigatórios com valores padrão
-            stmt.setString(index++, magia.tipo);
-            stmt.setString(index++, magia.nome);
-            stmt.setString(index++, magia.descricao);
-            stmt.setInt(index++, magia.nivel);
-            stmt.setString(index++, magia.tempoConjuracao);
-            stmt.setString(index++, magia.duracao);
-            stmt.setString(index++, magia.alcance);
-            stmt.setString(index++, magia.area);
-            stmt.setString(index++, magia.escola);
-            stmt.setString(index++, magia.tipoAcerto);
+            stmt.setString(index++, magia.getTipo());
+            stmt.setString(index++, magia.getNome());
+            stmt.setString(index++, magia.getDescricao());
+            stmt.setInt(index++, magia.getNivel());
+            stmt.setString(index++, magia.getTempoConjuracao());
+            stmt.setString(index++, magia.getDuracao());
+            stmt.setString(index++, magia.getAlcance());
+            stmt.setString(index++, magia.getArea());
+            stmt.setString(index++, magia.getEscola());
+            stmt.setString(index++, magia.getTipoAcerto());
 
             // Campos com valores padrão no banco
             if (magia instanceof MagiaDano magiaDano) {
-                stmt.setInt(index++, magiaDano.dadoDano);    // ladoDado
-                stmt.setInt(index, magiaDano.quantidadeDado); // numeroDados
+                stmt.setInt(index++, magiaDano.getDadoDano());    // ladoDado
+                stmt.setInt(index, magiaDano.getQuantidadeDado()); // numeroDados
             } else if (magia instanceof MagiaCura magiaCura) {
-                stmt.setInt(index++, magiaCura.dadoCura);    // ladoDado
-                stmt.setInt(index, magiaCura.quantidadeDado); // numeroDados
+                stmt.setInt(index++, magiaCura.getDadoCura());    // ladoDado
+                stmt.setInt(index, magiaCura.getQuantidadeDado()); // numeroDados
             } else {
                 stmt.setInt(index++, -1);    // lado padrao
                 stmt.setInt(index, -1); // quantidade padrao

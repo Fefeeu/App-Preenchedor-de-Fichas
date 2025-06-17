@@ -1,9 +1,12 @@
 package br.rpp.sql;
 
 import br.rpp.auxiliar.enuns.Tabelas;
+import br.rpp.ficha.Caracteristica;
+import br.rpp.ficha.Descricao;
 import br.rpp.ficha.Ficha;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Objects;
 
 public abstract class SQLFicha {
@@ -78,82 +81,90 @@ public abstract class SQLFicha {
                 }
                 stmt.setInt(index++, ficha.getIdUser()); // user_idUser (deve ser fornecido)
                 stmt.setBoolean(index++, ficha.getEstado());
-                stmt.setInt(index++, ficha.nivel);
-                stmt.setFloat(index++, ficha.deslocamento);
-                stmt.setInt(index++, ficha.dadoDeVida);
-                stmt.setInt(index++, ficha.pontosVidaBase);
-                stmt.setInt(index++, ficha.vidaTemporaria);
-                stmt.setBoolean(index++, ficha.inspiracao);
+                stmt.setInt(index++, ficha.getNivel());
+                stmt.setFloat(index++, ficha.getDeslocamento());
+                stmt.setInt(index++, ficha.getDadoDeVida());
+                stmt.setInt(index++, ficha.getPontosVidaBase());
+                stmt.setInt(index++, ficha.getVidaTemporaria());
+                stmt.setBoolean(index++, ficha.isInspiracao());
+
+                Caracteristica caracteristicas = ficha.getCaracteristicas();
 
                 // Info personagem (7 parâmetros)
-                stmt.setString(index++, ficha.caracteristicas.nomePersonagem);
-                stmt.setString(index++, ficha.caracteristicas.idClasse);
-                stmt.setString(index++, ficha.caracteristicas.idRaca);
-                stmt.setString(index++, ficha.caracteristicas.antecedente);
-                stmt.setString(index++, ficha.caracteristicas.tendencia);
-                stmt.setInt(index++, ficha.caracteristicas.xp);
-                stmt.setInt(index++, ficha.caracteristicas.idade);
+                stmt.setString(index++, caracteristicas.getNomePersonagem());
+                stmt.setString(index++, caracteristicas.getIdClasse());
+                stmt.setString(index++, caracteristicas.getIdRaca());
+                stmt.setString(index++, caracteristicas.getAntecedente());
+                stmt.setString(index++, caracteristicas.getTendencia());
+                stmt.setInt(index++, caracteristicas.getXp());
+                stmt.setInt(index++, caracteristicas.getIdade());
 
                 // Aparência (5 parâmetros)
-                stmt.setFloat(index++, ficha.caracteristicas.altura);
-                stmt.setFloat(index++, ficha.caracteristicas.peso);
-                stmt.setString(index++, ficha.caracteristicas.olho);
-                stmt.setString(index++, ficha.caracteristicas.pele);
-                stmt.setString(index++, ficha.caracteristicas.cabelo);
+                stmt.setFloat(index++, caracteristicas.getAltura());
+                stmt.setFloat(index++, caracteristicas.getPeso());
+                stmt.setString(index++, caracteristicas.getOlho());
+                stmt.setString(index++, caracteristicas.getPele());
+                stmt.setString(index++, caracteristicas.getCabelo());
+
+                HashMap<String, Integer> atributos = ficha.getAtributos();
 
                 // Atributos (6 parâmetros)
-                stmt.setInt(index++, ficha.atributos.get("forca"));
-                stmt.setInt(index++, ficha.atributos.get("destreza"));
-                stmt.setInt(index++, ficha.atributos.get("constituicao"));
-                stmt.setInt(index++, ficha.atributos.get("inteligencia"));
-                stmt.setInt(index++, ficha.atributos.get("sabedoria"));
-                stmt.setInt(index++, ficha.atributos.get("carisma"));
+                stmt.setInt(index++, atributos.get("forca"));
+                stmt.setInt(index++, atributos.get("destreza"));
+                stmt.setInt(index++, atributos.get("constituicao"));
+                stmt.setInt(index++, atributos.get("inteligencia"));
+                stmt.setInt(index++, atributos.get("sabedoria"));
+                stmt.setInt(index++, atributos.get("carisma"));
+
+                HashMap<String, Boolean> listaPericias = ficha.getPericias();
 
                 // Proficiências em atributos (6 parâmetros)
-                stmt.setBoolean(index++, ficha.pericias.get("forca"));
-                stmt.setBoolean(index++, ficha.pericias.get("destreza"));
-                stmt.setBoolean(index++, ficha.pericias.get("constituicao"));
-                stmt.setBoolean(index++, ficha.pericias.get("inteligencia"));
-                stmt.setBoolean(index++, ficha.pericias.get("sabedoria"));
-                stmt.setBoolean(index++, ficha.pericias.get("carisma"));
+                stmt.setBoolean(index++, listaPericias.get("forca"));
+                stmt.setBoolean(index++, listaPericias.get("destreza"));
+                stmt.setBoolean(index++, listaPericias.get("constituicao"));
+                stmt.setBoolean(index++, listaPericias.get("inteligencia"));
+                stmt.setBoolean(index++, listaPericias.get("sabedoria"));
+                stmt.setBoolean(index++, listaPericias.get("carisma"));
 
                 // Perícias (18 parâmetros)
-                stmt.setBoolean(index++, ficha.pericias.get("acrobacia"));
-                stmt.setBoolean(index++, ficha.pericias.get("arcanismo"));
-                stmt.setBoolean(index++, ficha.pericias.get("atletismo"));
-                stmt.setBoolean(index++, ficha.pericias.get("atuacao"));
-                stmt.setBoolean(index++, ficha.pericias.get("blefar"));
-                stmt.setBoolean(index++, ficha.pericias.get("furtividade"));
-                stmt.setBoolean(index++, ficha.pericias.get("historia"));
-                stmt.setBoolean(index++, ficha.pericias.get("intimidacao"));
-                stmt.setBoolean(index++, ficha.pericias.get("intuicao"));
-                stmt.setBoolean(index++, ficha.pericias.get("investigacao"));
-                stmt.setBoolean(index++, ficha.pericias.get("lidar_com_animais"));
-                stmt.setBoolean(index++, ficha.pericias.get("medicina"));
-                stmt.setBoolean(index++, ficha.pericias.get("natureza"));
-                stmt.setBoolean(index++, ficha.pericias.get("percepcao"));
-                stmt.setBoolean(index++, ficha.pericias.get("persuasao"));
-                stmt.setBoolean(index++, ficha.pericias.get("prestigitacao"));
-                stmt.setBoolean(index++, ficha.pericias.get("religiao"));
-                stmt.setBoolean(index++, ficha.pericias.get("sobrevivencia"));
+                stmt.setBoolean(index++, listaPericias.get("acrobacia"));
+                stmt.setBoolean(index++, listaPericias.get("arcanismo"));
+                stmt.setBoolean(index++, listaPericias.get("atletismo"));
+                stmt.setBoolean(index++, listaPericias.get("atuacao"));
+                stmt.setBoolean(index++, listaPericias.get("blefar"));
+                stmt.setBoolean(index++, listaPericias.get("furtividade"));
+                stmt.setBoolean(index++, listaPericias.get("historia"));
+                stmt.setBoolean(index++, listaPericias.get("intimidacao"));
+                stmt.setBoolean(index++, listaPericias.get("intuicao"));
+                stmt.setBoolean(index++, listaPericias.get("investigacao"));
+                stmt.setBoolean(index++, listaPericias.get("lidar_com_animais"));
+                stmt.setBoolean(index++, listaPericias.get("medicina"));
+                stmt.setBoolean(index++, listaPericias.get("natureza"));
+                stmt.setBoolean(index++, listaPericias.get("percepcao"));
+                stmt.setBoolean(index++, listaPericias.get("persuasao"));
+                stmt.setBoolean(index++, listaPericias.get("prestigitacao"));
+                stmt.setBoolean(index++, listaPericias.get("religiao"));
+                stmt.setBoolean(index++, listaPericias.get("sobrevivencia"));
+
+                Descricao descricao = ficha.getDescricao();
 
                 // Descrições (6 parâmetros - agora incluindo personalidade)
-                stmt.setString(index++, ficha.descricao.historia);
-                stmt.setString(index++, ficha.descricao.aparencia);
-                stmt.setString(index++, ficha.descricao.personalidade);
-                stmt.setString(index++, ficha.descricao.ideal);
-                stmt.setString(index++, ficha.descricao.ligacao);
-                stmt.setString(index++, ficha.descricao.defeitos);
+                stmt.setString(index++, descricao.getHistoria());
+                stmt.setString(index++, descricao.getAparencia());
+                stmt.setString(index++, descricao.getPersonalidade());
+                stmt.setString(index++, descricao.getIdeal());
+                stmt.setString(index++, descricao.getLigacao());
+                stmt.setString(index++, descricao.getDefeitos());
 
                 // proficiencias (2 parâmetros)
-                stmt.setString(index++, ficha.caracteristicas.idiomas);
-                stmt.setString(index++, ficha.caracteristicas.proeficiencias);
+                stmt.setString(index++, caracteristicas.getIdiomas());
+                stmt.setString(index++, caracteristicas.getProeficiencias());
 
                 // inventario (1 parâmetro)
-                stmt.setInt(index++, ficha.inventario.getId());
+                stmt.setInt(index++, ficha.getInventario().getId());
 
                 // tabelaMagia ()
-                stmt.setInt(index++, ficha.magias.getId());
+                stmt.setInt(index++, ficha.getMagias().getId());
 
                 // se for uma atualizacao o id fica no final
                 if(metodo.equals("atualizar")){
@@ -223,30 +234,30 @@ public abstract class SQLFicha {
 
                     // Configurar todas as perícias
 
-                    ficha.pericias.put("forca", rs.getBoolean("p_forca"));
-                    ficha.pericias.put("destreza", rs.getBoolean("p_destreza"));
-                    ficha.pericias.put("constituicao", rs.getBoolean("p_constituicao"));
-                    ficha.pericias.put("inteligencia", rs.getBoolean("p_inteligencia"));
-                    ficha.pericias.put("sabedoria", rs.getBoolean("p_sabedoria"));
-                    ficha.pericias.put("carisma", rs.getBoolean("p_carisma"));
-                    ficha.pericias.put("acrobacia", rs.getBoolean("p_acrobacia"));
-                    ficha.pericias.put("arcanismo", rs.getBoolean("p_arcanismo"));
-                    ficha.pericias.put("atletismo", rs.getBoolean("p_atletismo"));
-                    ficha.pericias.put("atuacao", rs.getBoolean("p_atuacao"));
-                    ficha.pericias.put("blefar", rs.getBoolean("p_blefar"));
-                    ficha.pericias.put("furtividade", rs.getBoolean("p_furtividade"));
-                    ficha.pericias.put("historia", rs.getBoolean("p_historia"));
-                    ficha.pericias.put("intimidacao", rs.getBoolean("p_intimidacao"));
-                    ficha.pericias.put("intuicao", rs.getBoolean("p_intuicao"));
-                    ficha.pericias.put("investigacao", rs.getBoolean("p_investigacao"));
-                    ficha.pericias.put("lidar_com_animais", rs.getBoolean("p_lidarComAnimais"));
-                    ficha.pericias.put("medicina", rs.getBoolean("p_medicina"));
-                    ficha.pericias.put("natureza", rs.getBoolean("p_natureza"));
-                    ficha.pericias.put("percepcao", rs.getBoolean("p_percepcao"));
-                    ficha.pericias.put("persuasao", rs.getBoolean("p_persuasao"));
-                    ficha.pericias.put("prestigitacao", rs.getBoolean("p_prestigitacao"));
-                    ficha.pericias.put("religiao", rs.getBoolean("p_religiao"));
-                    ficha.pericias.put("sobrevivencia", rs.getBoolean("p_sobrevivencia"));
+                    ficha.setPericia("forca", rs.getBoolean("p_forca"));
+                    ficha.setPericia("destreza", rs.getBoolean("p_destreza"));
+                    ficha.setPericia("constituicao", rs.getBoolean("p_constituicao"));
+                    ficha.setPericia("inteligencia", rs.getBoolean("p_inteligencia"));
+                    ficha.setPericia("sabedoria", rs.getBoolean("p_sabedoria"));
+                    ficha.setPericia("carisma", rs.getBoolean("p_carisma"));
+                    ficha.setPericia("acrobacia", rs.getBoolean("p_acrobacia"));
+                    ficha.setPericia("arcanismo", rs.getBoolean("p_arcanismo"));
+                    ficha.setPericia("atletismo", rs.getBoolean("p_atletismo"));
+                    ficha.setPericia("atuacao", rs.getBoolean("p_atuacao"));
+                    ficha.setPericia("blefar", rs.getBoolean("p_blefar"));
+                    ficha.setPericia("furtividade", rs.getBoolean("p_furtividade"));
+                    ficha.setPericia("historia", rs.getBoolean("p_historia"));
+                    ficha.setPericia("intimidacao", rs.getBoolean("p_intimidacao"));
+                    ficha.setPericia("intuicao", rs.getBoolean("p_intuicao"));
+                    ficha.setPericia("investigacao", rs.getBoolean("p_investigacao"));
+                    ficha.setPericia("lidar_com_animais", rs.getBoolean("p_lidarComAnimais"));
+                    ficha.setPericia("medicina", rs.getBoolean("p_medicina"));
+                    ficha.setPericia("natureza", rs.getBoolean("p_natureza"));
+                    ficha.setPericia("percepcao", rs.getBoolean("p_percepcao"));
+                    ficha.setPericia("persuasao", rs.getBoolean("p_persuasao"));
+                    ficha.setPericia("prestigitacao", rs.getBoolean("p_prestigitacao"));
+                    ficha.setPericia("religiao", rs.getBoolean("p_religiao"));
+                    ficha.setPericia("sobrevivencia", rs.getBoolean("p_sobrevivencia"));
 
                     return ficha;
                 }

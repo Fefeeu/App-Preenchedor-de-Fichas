@@ -1048,840 +1048,812 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="302" parent="294" name="classe">
+    <table id="302" parent="294" name="ficha">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="303" parent="294" name="ficha">
+    <table id="303" parent="294" name="inventario">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="304" parent="294" name="inventario">
+    <table id="304" parent="294" name="item">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="305" parent="294" name="item">
+    <table id="305" parent="294" name="magia">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="306" parent="294" name="magia">
+    <table id="306" parent="294" name="magiauser">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="307" parent="294" name="magiauser">
+    <table id="307" parent="294" name="raca">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="308" parent="294" name="raca">
+    <table id="308" parent="294" name="user">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="309" parent="294" name="user">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <column id="310" parent="302" name="idClasse">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>varchar(45)|0s</StoredType>
-    </column>
-    <column id="311" parent="302" name="nome">
-      <Position>2</Position>
-      <StoredType>varchar(45)|0s</StoredType>
-    </column>
-    <column id="312" parent="302" name="descricao">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StoredType>varchar(100)|0s</StoredType>
-    </column>
-    <index id="313" parent="302" name="PRIMARY">
-      <ColNames>idClasse</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="314" parent="302" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="315" parent="303" name="idFicha">
+    <column id="309" parent="302" name="idFicha">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="316" parent="303" name="user_idUser">
+    <column id="310" parent="302" name="user_idUser">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="317" parent="303" name="vivo">
+    <column id="311" parent="302" name="vivo">
       <DefaultExpression>1</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="318" parent="303" name="nivel">
+    <column id="312" parent="302" name="nivel">
       <DefaultExpression>1</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="319" parent="303" name="deslocamento">
+    <column id="313" parent="302" name="deslocamento">
       <DefaultExpression>9</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>float|0s</StoredType>
     </column>
-    <column id="320" parent="303" name="dadoDeVida">
+    <column id="314" parent="302" name="dadoDeVida">
       <DefaultExpression>6</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="321" parent="303" name="pontosDeVidaBase">
+    <column id="315" parent="302" name="pontosDeVidaBase">
       <DefaultExpression>1</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="322" parent="303" name="pontosDeVIdaTemporario">
+    <column id="316" parent="302" name="pontosDeVIdaTemporario">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="323" parent="303" name="inspiracao">
+    <column id="317" parent="302" name="inspiracao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="324" parent="303" name="nomePersonagem">
+    <column id="318" parent="302" name="nomePersonagem">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="325" parent="303" name="classe_idClasse">
+    <column id="319" parent="302" name="classe_idClasse">
       <Position>11</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="326" parent="303" name="raca_idRaca">
+    <column id="320" parent="302" name="raca_idRaca">
       <Position>12</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="327" parent="303" name="antecedente">
+    <column id="321" parent="302" name="antecedente">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>13</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="328" parent="303" name="tendencia">
+    <column id="322" parent="302" name="tendencia">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>14</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="329" parent="303" name="xp">
+    <column id="323" parent="302" name="xp">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>15</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="330" parent="303" name="idade">
+    <column id="324" parent="302" name="idade">
       <Position>16</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="331" parent="303" name="altura">
+    <column id="325" parent="302" name="altura">
       <Position>17</Position>
       <StoredType>float|0s</StoredType>
     </column>
-    <column id="332" parent="303" name="peso">
+    <column id="326" parent="302" name="peso">
       <Position>18</Position>
       <StoredType>float|0s</StoredType>
     </column>
-    <column id="333" parent="303" name="olho">
+    <column id="327" parent="302" name="olho">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>19</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="334" parent="303" name="pele">
+    <column id="328" parent="302" name="pele">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>20</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="335" parent="303" name="cabelo">
+    <column id="329" parent="302" name="cabelo">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>21</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="336" parent="303" name="forca">
+    <column id="330" parent="302" name="forca">
       <DefaultExpression>10</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>22</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="337" parent="303" name="destreza">
+    <column id="331" parent="302" name="destreza">
       <DefaultExpression>10</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>23</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="338" parent="303" name="constituicao">
+    <column id="332" parent="302" name="constituicao">
       <DefaultExpression>10</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>24</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="339" parent="303" name="inteligencia">
+    <column id="333" parent="302" name="inteligencia">
       <DefaultExpression>10</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>25</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="340" parent="303" name="sabedoria">
+    <column id="334" parent="302" name="sabedoria">
       <DefaultExpression>10</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>26</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="341" parent="303" name="carisma">
+    <column id="335" parent="302" name="carisma">
       <DefaultExpression>10</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>27</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="342" parent="303" name="p_forca">
+    <column id="336" parent="302" name="p_forca">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>28</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="343" parent="303" name="p_destreza">
+    <column id="337" parent="302" name="p_destreza">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>29</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="344" parent="303" name="p_constituicao">
+    <column id="338" parent="302" name="p_constituicao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>30</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="345" parent="303" name="p_inteligencia">
+    <column id="339" parent="302" name="p_inteligencia">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>31</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="346" parent="303" name="p_sabedoria">
+    <column id="340" parent="302" name="p_sabedoria">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>32</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="347" parent="303" name="p_carisma">
+    <column id="341" parent="302" name="p_carisma">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>33</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="348" parent="303" name="p_acrobacia">
+    <column id="342" parent="302" name="p_acrobacia">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>34</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="349" parent="303" name="p_arcanismo">
+    <column id="343" parent="302" name="p_arcanismo">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>35</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="350" parent="303" name="p_atletismo">
+    <column id="344" parent="302" name="p_atletismo">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>36</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="351" parent="303" name="p_atuacao">
+    <column id="345" parent="302" name="p_atuacao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>37</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="352" parent="303" name="p_blefar">
+    <column id="346" parent="302" name="p_blefar">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>38</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="353" parent="303" name="p_furtividade">
+    <column id="347" parent="302" name="p_furtividade">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>39</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="354" parent="303" name="p_historia">
+    <column id="348" parent="302" name="p_historia">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>40</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="355" parent="303" name="p_intimidacao">
+    <column id="349" parent="302" name="p_intimidacao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>41</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="356" parent="303" name="p_intuicao">
+    <column id="350" parent="302" name="p_intuicao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>42</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="357" parent="303" name="p_investigacao">
+    <column id="351" parent="302" name="p_investigacao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>43</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="358" parent="303" name="p_lidarComAnimais">
+    <column id="352" parent="302" name="p_lidarComAnimais">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>44</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="359" parent="303" name="p_medicina">
+    <column id="353" parent="302" name="p_medicina">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>45</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="360" parent="303" name="p_natureza">
+    <column id="354" parent="302" name="p_natureza">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>46</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="361" parent="303" name="p_percepcao">
+    <column id="355" parent="302" name="p_percepcao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>47</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="362" parent="303" name="p_persuasao">
+    <column id="356" parent="302" name="p_persuasao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>48</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="363" parent="303" name="p_prestigitacao">
+    <column id="357" parent="302" name="p_prestigitacao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>49</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="364" parent="303" name="p_religiao">
+    <column id="358" parent="302" name="p_religiao">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>50</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="365" parent="303" name="p_sobrevivencia">
+    <column id="359" parent="302" name="p_sobrevivencia">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>51</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="366" parent="303" name="historia">
+    <column id="360" parent="302" name="historia">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>52</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="367" parent="303" name="aparencia">
+    <column id="361" parent="302" name="aparencia">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>53</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="368" parent="303" name="personalidade">
+    <column id="362" parent="302" name="personalidade">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>54</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="369" parent="303" name="ideal">
+    <column id="363" parent="302" name="ideal">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>55</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="370" parent="303" name="ligacao">
+    <column id="364" parent="302" name="ligacao">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>56</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="371" parent="303" name="defeitos">
+    <column id="365" parent="302" name="defeitos">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>57</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="372" parent="303" name="idiomas">
+    <column id="366" parent="302" name="idiomas">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>58</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="373" parent="303" name="proficiencias">
+    <column id="367" parent="302" name="proficiencias">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>59</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="374" parent="303" name="inventario_idInventario">
+    <column id="368" parent="302" name="inventario_idInventario">
       <Position>60</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="375" parent="303" name="magiaUser_idMagiaUser">
+    <column id="369" parent="302" name="magiaUser_idMagiaUser">
       <Position>61</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <foreign-key id="376" parent="303" name="ficha_ibfk_4">
+    <foreign-key id="370" parent="302" name="ficha_ibfk_4">
       <ColNames>user_idUser</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>idUser</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="377" parent="303" name="ficha_ibfk_2">
+    <foreign-key id="371" parent="302" name="ficha_ibfk_2">
       <ColNames>classe_idClasse</ColNames>
       <OnDelete>set-null</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>idClasse</RefColNames>
       <RefTableName>classe</RefTableName>
     </foreign-key>
-    <foreign-key id="378" parent="303" name="ficha_ibfk_1">
+    <foreign-key id="372" parent="302" name="ficha_ibfk_1">
       <ColNames>raca_idRaca</ColNames>
       <OnDelete>set-null</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>idRaca</RefColNames>
       <RefTableName>raca</RefTableName>
     </foreign-key>
-    <foreign-key id="379" parent="303" name="ficha_ibfk_3">
+    <foreign-key id="373" parent="302" name="ficha_ibfk_3">
       <ColNames>inventario_idInventario</ColNames>
       <OnDelete>set-null</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>idInventario</RefColNames>
       <RefTableName>inventario</RefTableName>
     </foreign-key>
-    <index id="380" parent="303" name="PRIMARY">
+    <index id="374" parent="302" name="PRIMARY">
       <ColNames>idFicha
 user_idUser</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="381" parent="303" name="user_idUser">
+    <index id="375" parent="302" name="user_idUser">
       <ColNames>user_idUser</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="382" parent="303" name="classe_idClasse">
+    <index id="376" parent="302" name="classe_idClasse">
       <ColNames>classe_idClasse</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="383" parent="303" name="raca_idRaca">
+    <index id="377" parent="302" name="raca_idRaca">
       <ColNames>raca_idRaca</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="384" parent="303" name="inventario_idInventario">
+    <index id="378" parent="302" name="inventario_idInventario">
       <ColNames>inventario_idInventario</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="385" parent="303" name="PRIMARY">
+    <key id="379" parent="302" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="386" parent="304" name="idInventario">
+    <column id="380" parent="303" name="idInventario">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="387" parent="304" name="pc">
+    <column id="381" parent="303" name="pc">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="388" parent="304" name="pp">
+    <column id="382" parent="303" name="pp">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="389" parent="304" name="pe">
+    <column id="383" parent="303" name="pe">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="390" parent="304" name="po">
+    <column id="384" parent="303" name="po">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="391" parent="304" name="pl">
+    <column id="385" parent="303" name="pl">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <index id="392" parent="304" name="PRIMARY">
+    <index id="386" parent="303" name="PRIMARY">
       <ColNames>idInventario</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="393" parent="304" name="PRIMARY">
+    <key id="387" parent="303" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="394" parent="305" name="idItem">
+    <column id="388" parent="304" name="idItem">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="395" parent="305" name="inventario_idInventario">
+    <column id="389" parent="304" name="inventario_idInventario">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="396" parent="305" name="tipo">
+    <column id="390" parent="304" name="tipo">
       <DefaultExpression>&apos;comum&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>enum(&apos;comum&apos;, &apos;consumivel&apos;, &apos;magico&apos;, &apos;equipavel&apos;, &apos;equipavelMagico&apos;, &apos;arma&apos;, &apos;armaMagica&apos;)|0e</StoredType>
     </column>
-    <column id="397" parent="305" name="nome">
+    <column id="391" parent="304" name="nome">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="398" parent="305" name="descricao">
+    <column id="392" parent="304" name="descricao">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="399" parent="305" name="peso">
+    <column id="393" parent="304" name="peso">
       <DefaultExpression>0.1</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>float|0s</StoredType>
     </column>
-    <column id="400" parent="305" name="moeda">
+    <column id="394" parent="304" name="moeda">
       <DefaultExpression>&apos;o&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StoredType>char(1)|0s</StoredType>
     </column>
-    <column id="401" parent="305" name="preco">
+    <column id="395" parent="304" name="preco">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="402" parent="305" name="usosMaximo">
+    <column id="396" parent="304" name="usosMaximo">
       <Position>9</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="403" parent="305" name="usos">
+    <column id="397" parent="304" name="usos">
       <Position>10</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="404" parent="305" name="efeito">
+    <column id="398" parent="304" name="efeito">
       <Position>11</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="405" parent="305" name="bonus">
+    <column id="399" parent="304" name="bonus">
       <Position>12</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="406" parent="305" name="bonus_ca">
+    <column id="400" parent="304" name="bonus_ca">
       <Position>13</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="407" parent="305" name="proficiencia">
+    <column id="401" parent="304" name="proficiencia">
       <Position>14</Position>
       <StoredType>tinyint|0s</StoredType>
     </column>
-    <column id="408" parent="305" name="numeroDeDados">
+    <column id="402" parent="304" name="numeroDeDados">
       <Position>15</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="409" parent="305" name="dadoDeDano">
+    <column id="403" parent="304" name="dadoDeDano">
       <Position>16</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="410" parent="305" name="atributo">
+    <column id="404" parent="304" name="atributo">
       <Position>17</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <foreign-key id="411" parent="305" name="item_ibfk_1">
+    <foreign-key id="405" parent="304" name="item_ibfk_1">
       <ColNames>inventario_idInventario</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>idInventario</RefColNames>
       <RefTableName>inventario</RefTableName>
     </foreign-key>
-    <index id="412" parent="305" name="PRIMARY">
+    <index id="406" parent="304" name="PRIMARY">
       <ColNames>idItem
 inventario_idInventario</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="413" parent="305" name="inventario_idInventario">
+    <index id="407" parent="304" name="inventario_idInventario">
       <ColNames>inventario_idInventario</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="414" parent="305" name="PRIMARY">
+    <key id="408" parent="304" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="415" parent="306" name="idMagia">
+    <column id="409" parent="305" name="idMagia">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="416" parent="306" name="magiaUser_idMagiaUser">
+    <column id="410" parent="305" name="magiaUser_idMagiaUser">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="417" parent="306" name="tipo">
+    <column id="411" parent="305" name="tipo">
       <DefaultExpression>&apos;efeito&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>enum(&apos;ataque&apos;, &apos;cura&apos;, &apos;efeito&apos;)|0e</StoredType>
     </column>
-    <column id="418" parent="306" name="nome">
+    <column id="412" parent="305" name="nome">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="419" parent="306" name="descricao">
+    <column id="413" parent="305" name="descricao">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="420" parent="306" name="nivel">
+    <column id="414" parent="305" name="nivel">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="421" parent="306" name="tempoConjuracao">
+    <column id="415" parent="305" name="tempoConjuracao">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="422" parent="306" name="duracao">
+    <column id="416" parent="305" name="duracao">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="423" parent="306" name="alcance">
+    <column id="417" parent="305" name="alcance">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="424" parent="306" name="area">
+    <column id="418" parent="305" name="area">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="425" parent="306" name="escola">
+    <column id="419" parent="305" name="escola">
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>11</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="426" parent="306" name="tipoAcerto">
+    <column id="420" parent="305" name="tipoAcerto">
       <DefaultExpression>&apos;nenhum&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>12</Position>
       <StoredType>enum(&apos;resistencia&apos;, &apos;teste&apos;, &apos;nenhum&apos;)|0e</StoredType>
     </column>
-    <column id="427" parent="306" name="ladoDado">
+    <column id="421" parent="305" name="ladoDado">
       <DefaultExpression>6</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>13</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="428" parent="306" name="numeroDados">
+    <column id="422" parent="305" name="numeroDados">
       <DefaultExpression>1</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>14</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <foreign-key id="429" parent="306" name="magia_ibfk_1">
+    <foreign-key id="423" parent="305" name="magia_ibfk_1">
       <ColNames>magiaUser_idMagiaUser</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>idMagiaUser</RefColNames>
       <RefTableName>magiauser</RefTableName>
     </foreign-key>
-    <index id="430" parent="306" name="PRIMARY">
+    <index id="424" parent="305" name="PRIMARY">
       <ColNames>idMagia
 magiaUser_idMagiaUser</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="431" parent="306" name="magiaUser_idMagiaUser">
+    <index id="425" parent="305" name="magiaUser_idMagiaUser">
       <ColNames>magiaUser_idMagiaUser</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="432" parent="306" name="PRIMARY">
+    <key id="426" parent="305" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="433" parent="307" name="idMagiaUser">
+    <column id="427" parent="306" name="idMagiaUser">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="434" parent="307" name="nivel1">
+    <column id="428" parent="306" name="nivel1">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="435" parent="307" name="nivel2">
+    <column id="429" parent="306" name="nivel2">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="436" parent="307" name="nivel3">
+    <column id="430" parent="306" name="nivel3">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="437" parent="307" name="nivel4">
+    <column id="431" parent="306" name="nivel4">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="438" parent="307" name="nivel5">
+    <column id="432" parent="306" name="nivel5">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="439" parent="307" name="nivel6">
+    <column id="433" parent="306" name="nivel6">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="440" parent="307" name="nivel7">
+    <column id="434" parent="306" name="nivel7">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="441" parent="307" name="nivel8">
+    <column id="435" parent="306" name="nivel8">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="442" parent="307" name="nivel9">
+    <column id="436" parent="306" name="nivel9">
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <index id="443" parent="307" name="PRIMARY">
+    <index id="437" parent="306" name="PRIMARY">
       <ColNames>idMagiaUser</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="444" parent="307" name="PRIMARY">
+    <key id="438" parent="306" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="445" parent="308" name="idRaca">
+    <column id="439" parent="307" name="idRaca">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="446" parent="308" name="nome">
+    <column id="440" parent="307" name="nome">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <column id="447" parent="308" name="descricao">
+    <column id="441" parent="307" name="descricao">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <index id="448" parent="308" name="PRIMARY">
+    <index id="442" parent="307" name="PRIMARY">
       <ColNames>idRaca</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="449" parent="308" name="PRIMARY">
+    <key id="443" parent="307" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="450" parent="309" name="idUser">
+    <column id="444" parent="308" name="idUser">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="451" parent="309" name="nome">
+    <column id="445" parent="308" name="nome">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="452" parent="309" name="email">
+    <column id="446" parent="308" name="email">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="453" parent="309" name="senha">
+    <column id="447" parent="308" name="senha">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>varchar(45)|0s</StoredType>
     </column>
-    <index id="454" parent="309" name="PRIMARY">
+    <index id="448" parent="308" name="PRIMARY">
       <ColNames>idUser</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="455" parent="309" name="PRIMARY">
+    <key id="449" parent="308" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

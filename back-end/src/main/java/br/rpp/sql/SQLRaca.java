@@ -20,8 +20,8 @@ public abstract class SQLRaca {
             // Chaves primárias (exatamente como na tabela)
             try {
                 stmt.setString(index++, raca.getId());
-                stmt.setString(index++, raca.nome);
-                stmt.setString(index, raca.descricao);
+                stmt.setString(index++, raca.getNome());
+                stmt.setString(index, raca.getDescricao());
 
                 stmt.executeUpdate();
             } catch (SQLException e) {

@@ -4,8 +4,8 @@ import br.rpp.sql.SQLClasse;
 
 public class Classe {
     private final String id;
-    public String nome;
-    public String descricao;
+    private String nome;
+    private String descricao;
 
     public Classe(String id, String nome, String descricao, boolean read) {
         this.id = id;
@@ -18,5 +18,13 @@ public class Classe {
 
     public String getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 }

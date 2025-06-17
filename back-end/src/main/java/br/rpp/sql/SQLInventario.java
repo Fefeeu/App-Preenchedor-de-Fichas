@@ -2,8 +2,10 @@ package br.rpp.sql;
 
 import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.inventario.Inventario;
+import br.rpp.inventario.item.Item;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class SQLInventario {
@@ -39,12 +41,14 @@ public abstract class SQLInventario {
         Connection connection = BD.getConnection();
         String sql = "SELECT * FROM " + Tabelas.INVENTARIO + " WHERE idInventario = ?";
 
+        Inventario novoInventario = null;
+
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idInventario);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    Inventario novoInventario = new Inventario(
+                    novoInventario = new Inventario(
                             rs.getInt("idInventario")
                     );
                     novoInventario.setMoedas('c', rs.getInt("pc"));
@@ -53,13 +57,35 @@ public abstract class SQLInventario {
                     novoInventario.setMoedas('o', rs.getInt("po"));
                     novoInventario.setMoedas('l', rs.getInt("pl"));
 
-                    return novoInventario;
                 }
             }
+
+            String sqlItens = "SELECT idItem FROM " + Tabelas.ITEM + " WHERE inventario_idInventario = ?";
+            ArrayList<Integer> itensIds = new ArrayList<>();
+
+            try (PreparedStatement stmtItens = connection.prepareStatement(sqlItens)) {
+                stmtItens.setInt(1, idInventario);
+
+                try (ResultSet rsItens = stmtItens.executeQuery()) {
+                    while (rsItens.next()) {
+                        itensIds.add(rsItens.getInt("idItem"));
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            for (Integer itensId : itensIds) {
+                Item item = SQLItem.readItem(itensId);
+                if (novoInventario != null) {
+                    novoInventario.guardarItem(item, true);
+                }
+            }
+            return novoInventario;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null; // Retorna null se a classe não for encontrada
     }
 
     public static void deleteInventario(int idInventario){

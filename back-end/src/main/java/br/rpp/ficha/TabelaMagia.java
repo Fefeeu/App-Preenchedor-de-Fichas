@@ -41,7 +41,7 @@ public class TabelaMagia {
     private HashMap<Integer, Magia> magias = new HashMap<>();
                         //    Nv 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 (Níveis de magia)
     private int[] espacoDeMagia = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    public Ficha ficha;
+    private Ficha ficha;
 
     public TabelaMagia(int id, Ficha ficha) {
         this.id = id;
@@ -95,15 +95,14 @@ public class TabelaMagia {
         this.magias.put(id, magia);
     }
 
-    public void usarMagia (int idMagia){
-        Magia magia = magias.get(idMagia);
+    public void usarMagia (Magia magia){
 
         if (magia == null){
             System.out.println("Magia não conhecida");
             return;
         }
-        if (espacoDeMagia[magia.nivel]<=0) {
-            System.out.println("Espaços de magia esgotados para nivel " + magia.nivel);
+        if (espacoDeMagia[magia.getNivel()]<=0) {
+            System.out.println("Espaços de magia esgotados para nivel " + magia.getNivel());
             return;
         }
 
@@ -114,19 +113,19 @@ public class TabelaMagia {
         } else {
             magia.usarMagia();
         }
-        espacoDeMagia[magia.nivel]--;
+        espacoDeMagia[magia.getNivel()]--;
         //TODO: mod no banco
     }
 
     public void recuperarSlots() {
         System.out.println("Recuperando slots de magia");
-        this.espacoDeMagia = espacosMagiaNivel[this.ficha.nivel];
+        this.espacoDeMagia = espacosMagiaNivel[this.ficha.getNivel()];
         SQLMagiaUser.updateEspacoMagia(this);
     }
 
     public void recuperarSlotUnico(int nivel) {
         System.out.println("Recuperando slots de magia");
-        if (this.espacoDeMagia[nivel] < espacoDeMagia[this.ficha.nivel]) {
+        if (this.espacoDeMagia[nivel] < espacoDeMagia[this.ficha.getNivel()]) {
             this.espacoDeMagia[nivel]++;
         } else {
             System.out.println("Falha ao recuperar slots de magia");
@@ -134,7 +133,7 @@ public class TabelaMagia {
         SQLMagiaUser.updateEspacoMagia(this);
     }
 
-    public void deletarMagia(Magia magia) {
+    public void removerMagia(Magia magia) {
         int id = magia.getIdMagia();
         magias.remove(id);
         SQLMagia.deleteMagia(id);
@@ -149,7 +148,7 @@ public class TabelaMagia {
     }
 
     public void setEspacoDeMagia(int nivel, int quantidade) {
-        if(quantidade >= 0 && quantidade <= TabelaMagia.espacosMagiaNivel[this.ficha.nivel][nivel]){
+        if(quantidade >= 0 && quantidade <= TabelaMagia.espacosMagiaNivel[this.ficha.getNivel()][nivel]){
             this.espacoDeMagia[nivel] = quantidade;
         } else {
             System.out.println("erro ao setar magia");

@@ -1,16 +1,19 @@
 package br.rpp.inventario;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.ficha.Ficha;
 import br.rpp.inventario.item.*;
+import br.rpp.sql.BD;
 import br.rpp.sql.SQLFicha;
 import br.rpp.sql.SQLItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Inventario {
     private final int id;
-    private ArrayList<Item> itens;
+    private HashMap<Integer,Item> itens;
     private int pc = 0; // Peça de Cobre
     private int pp = 0; // Peça de Prata
     private int pe = 0; // Peça de Electro
@@ -18,14 +21,13 @@ public class Inventario {
     private int pl = 0; // Peça de pLatina
 
     public Inventario(int id) {
-        itens = new ArrayList<>();
+        this.itens = new HashMap<>();
         this.id = id;
     }
 
-    public Item criarItem(String tipo, int idFicha) { // TODO(front): entrada de dados
+    public Item criarItem(String tipo, Ficha ficha) { // TODO(front): entrada de dados
         Item novoItem;
-        Ficha ficha = SQLFicha.readFicha(idFicha);
-        int id = 0;
+        int id = BD.gerarId(Tabelas.ITEM.toString());
         String nome = "";       // TODO(front): entrada de dados
         String descricao = "";  // TODO(front): entrada de dados
         float peso = 0.01f;     // TODO(front): entrada de dados
@@ -35,15 +37,18 @@ public class Inventario {
         switch(tipo){
             case "comum":{    // Item
                 novoItem =  new Item(id, nome, descricao, peso, moeda, preco);
+                break;
             }
             case "consumivel":{    // Consumivel
                 int usos = 0;   // TODO(front): entrada de dados
                 novoItem =  new ItemConsumivel(id, nome, descricao, peso, moeda, preco, usos);
+                break;
             }
             case "magico":{    // Magico
                 String efeito = ""; // TODO(front): entrada de
                 int cargas = 0;
                 novoItem =  new ItemMagico(id, nome, descricao, peso, moeda, preco, efeito, cargas);
+                break;
             }
             case "arma":{    // Arma
                 int dado = 1;                   // TODO(front): entrada de dados
@@ -51,6 +56,7 @@ public class Inventario {
                 String atributo = "";           // TODO(front): entrada de dados
                 boolean proficiencia = false;   // TODO(front): entrada de dados
                 novoItem =  new Arma(id, ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
+                break;
             }
             case "armaMagica":{    // Arma Magica
                 int dado = 1;                   // TODO(front): entrada de dados
@@ -63,11 +69,13 @@ public class Inventario {
 
                 novoItem =  new ArmaMagica(id, ficha, nome, descricao, peso, moeda, preco, dado, quantidade,
                         atributo, proficiencia, efeito, usos, bonus);
+                break;
             }
             case "equipavel":{    // Equipavel
                 int bonusCA = 0;                // TODO(front): entrada de dados
                 boolean proficiencia = false;   // TODO(front): entrada de dados
                 novoItem =  new Equipavel(id, nome, descricao, peso, moeda, preco, bonusCA, proficiencia);
+                break;
             }
             case "equipavelMagico":{    // Equipavel Magico
                 int bonusCA = 0;                // TODO(front): entrada de dados
@@ -77,16 +85,19 @@ public class Inventario {
                 int bonus = 0;                  // TODO(front): entrada de dados
                 novoItem =  new EquipavelMagico(id, nome, descricao, peso, moeda, preco, bonusCA,
                         proficiencia, efeito, usos, bonus);
+                break;
             }
             default: novoItem =  new Item(id, "genérico", "genérico", 0.01f, 'o', 0);
         }
-        SQLItem.createItem(this, novoItem, Objects.requireNonNull(ficha).getIdUser(), ficha.getIdFicha());
+        guardarItem(novoItem, false);
         return novoItem;
     }
 
-    public void guardarItem(int idItem) {
-        String tipoDoItem = "comum"; // TODO(front): entrada de dados com seleção de opções
-        itens.add(criarItem(tipoDoItem, idItem));
+    public void guardarItem(Item item, boolean read) {
+        this.itens.put(item.getId(), item);
+        if (!read){
+            SQLItem.createItem(this, item);
+        }
     }
 
     public void descartarItem(Item item){   // TODO(front): seleciona o item e a opcao de descartar
@@ -95,7 +106,7 @@ public class Inventario {
     }
 
     public void venderItem(Item item){  // TODO(front): seleciona o item e a opcao de vender
-        venderItemPersonalizado(item, item.moeda, item.preco);
+        venderItemPersonalizado(item, item.getMoeda(), item.getPreco());
     }
 
     public void venderItemPersonalizado(Item item, char moeda, int valor){  // TODO(front): entrada de dados
@@ -139,6 +150,10 @@ public class Inventario {
             case 'l' -> this.pl;
             default -> 0;
         };
+    }
+
+    public Item getItem(int id) {
+        return itens.get(id);
     }
 
 }

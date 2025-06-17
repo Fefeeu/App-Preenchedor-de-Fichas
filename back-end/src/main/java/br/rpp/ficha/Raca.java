@@ -4,8 +4,8 @@ import br.rpp.sql.SQLRaca;
 
 public class Raca {
     private String id;
-    public String nome;
-    public String descricao;
+    private String nome;
+    private String descricao;
 
     public Raca(String id, String nome, String descricao, boolean read) {
         this.id = id;
@@ -19,5 +19,13 @@ public class Raca {
 
     public String getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 }
