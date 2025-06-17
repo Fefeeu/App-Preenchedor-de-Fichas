@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/BD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLClasse.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLFicha.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLInventario.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLItem.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLMagia.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLMagiaUser.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/br/rpp/sql/SQLUser.java" dialect="GenericSQL" />
+  </component>
+</project>

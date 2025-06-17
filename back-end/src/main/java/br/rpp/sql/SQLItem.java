@@ -1,5 +1,6 @@
 package br.rpp.sql;
 
+import br.rpp.auxiliar.enuns.Tabelas;
 import br.rpp.inventario.Inventario;
 import br.rpp.inventario.item.*;
 
@@ -7,7 +8,7 @@ import java.sql.*;
 import java.util.Objects;
 
 public abstract class SQLItem {
-    public static void createItem(Inventario inventario, Item item, int idUser, int idFicha) {
+    public static void createItem(Inventario inventario, Item item) {
         Connection connection = BD.getConnection();
 
         String sql = "INSERT INTO " + Tabelas.ITEM + " (" +
@@ -31,11 +32,11 @@ public abstract class SQLItem {
 
             // Informações principais (6 parâmetros)
             stmt.setString(index++, item.getTipo());
-            stmt.setString(index++, item.nome);
-            stmt.setString(index++, item.descricao);
-            stmt.setFloat(index++, item.peso);
-            stmt.setString(index++, String.valueOf(item.moeda));
-            stmt.setInt(index++, item.preco);
+            stmt.setString(index++, item.getNome());
+            stmt.setString(index++, item.getDescricao());
+            stmt.setFloat(index++, item.getPeso());
+            stmt.setString(index++, String.valueOf(item.getMoeda()));
+            stmt.setInt(index++, item.getPreco());
 
             switch (item) {
                 // -------------------------- ITEM CONSUMIVEL --------------------------
@@ -58,7 +59,7 @@ public abstract class SQLItem {
                 case ItemMagico itemMagico -> {
                     stmt.setInt(index++, itemMagico.getCargasMaxima());
                     stmt.setInt(index++, itemMagico.getCargas());
-                    stmt.setString(index++, itemMagico.efeito);
+                    stmt.setString(index++, itemMagico.getEfeito());
                     stmt.setInt(index++, -1);   // bonus
 
                     stmt.setInt(index++, -1); // bonus CA
@@ -74,16 +75,16 @@ public abstract class SQLItem {
                     if (item instanceof EquipavelMagico itemEquipavelMagico) {
                         stmt.setInt(index++, itemEquipavelMagico.getCargasMaxima());
                         stmt.setInt(index++, itemEquipavelMagico.getCargas());
-                        stmt.setString(index++, itemEquipavelMagico.efeito);
-                        stmt.setInt(index++, itemEquipavelMagico.bonus);
+                        stmt.setString(index++, itemEquipavelMagico.getEfeito());
+                        stmt.setInt(index++, itemEquipavelMagico.getBonus());
                     } else {
                         stmt.setInt(index++, -1);   // cargas maximas
                         stmt.setInt(index++, -1);   // cargas
                         stmt.setString(index++, "");// efeito
                         stmt.setInt(index++, -1);   // bonus
                     }
-                    stmt.setInt(index++, itemEquipavel.bonusCA);
-                    stmt.setBoolean(index++, itemEquipavel.proficiencia);
+                    stmt.setInt(index++, itemEquipavel.getBonusCA());
+                    stmt.setBoolean(index++, itemEquipavel.getProficiencia());
                     stmt.setInt(index++, -1);
                     stmt.setInt(index++, 1);
                     stmt.setString(index, "");
@@ -94,8 +95,8 @@ public abstract class SQLItem {
                     if (itemArma instanceof ArmaMagica itemArmaMagica) {
                         stmt.setInt(index++, itemArmaMagica.getCargasMaxima());
                         stmt.setInt(index++, itemArmaMagica.getCargas());
-                        stmt.setString(index++, itemArmaMagica.efeito);
-                        stmt.setInt(index++, itemArmaMagica.bonus);
+                        stmt.setString(index++, itemArmaMagica.getEfeito());
+                        stmt.setInt(index++, itemArmaMagica.getBonus());
                     } else {
                         stmt.setInt(index++, -1);   // cargas maximas
                         stmt.setInt(index++, -1);   // cargas
@@ -104,10 +105,10 @@ public abstract class SQLItem {
                     }
                     stmt.setInt(index++, -1); // bonus CA
 
-                    stmt.setBoolean(index++, itemArma.proficiencia);
-                    stmt.setInt(index++, itemArma.quantidadeDeDados);
-                    stmt.setInt(index++, itemArma.dadoDeDano);
-                    stmt.setString(index, itemArma.atributo);
+                    stmt.setBoolean(index++, itemArma.isProficiencia());
+                    stmt.setInt(index++, itemArma.getQuantidadeDeDados());
+                    stmt.setInt(index++, itemArma.getDadoDeDano());
+                    stmt.setString(index, itemArma.getAtributo());
                 }
 
                 // -------------------------- ITEM PADRAO ------------------------------

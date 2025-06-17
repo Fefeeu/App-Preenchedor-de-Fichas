@@ -1,4 +1,4 @@
-package br.rpp.sql;
+package br.rpp.auxiliar.enuns;
 
 // garantir que não haja erro no nome das tabelas
 public enum Tabelas {

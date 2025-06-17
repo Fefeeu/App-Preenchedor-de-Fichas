@@ -1,6 +1,8 @@
 package br.rpp.sql;
 
 
+import br.rpp.auxiliar.enuns.Tabelas;
+import br.rpp.ficha.Ficha;
 import br.rpp.magias.Magia;
 import br.rpp.magias.MagiaCura;
 import br.rpp.magias.MagiaDano;
@@ -9,11 +11,11 @@ import java.sql.*;
 import java.util.Objects;
 
 public abstract class SQLMagia {
-    public static void createMagia(Magia magia, int idFicha) {
+    public static void createMagia(Magia magia, Ficha ficha) {
         Connection connection = BD.getConnection();
 
         String sql = "INSERT INTO " + Tabelas.MAGIA + " (" +
-                "idMagia, ficha_idFicha, tipo, " +
+                "idMagia, magiaUser_idMagiaUser, tipo, " +
                 "nome, descricao, nivel, tempoConjuracao, duracao, " +
                 "alcance, area, escola, tipoAcerto, ladoDado, numeroDados" +
                 ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -23,27 +25,27 @@ public abstract class SQLMagia {
 
             // Chaves primárias (exatamente como na tabela)
             stmt.setInt(index++, magia.getIdMagia());
-            stmt.setInt(index++, idFicha);
+            stmt.setInt(index++, ficha.getMagias().getId());
 
             // Campos obrigatórios com valores padrão
-            stmt.setString(index++, magia.tipo.toLowerCase());
-            stmt.setString(index++, magia.nome);
-            stmt.setString(index++, magia.descricao);
-            stmt.setInt(index++, magia.nivel);
-            stmt.setString(index++, magia.tempoConjuracao);
-            stmt.setString(index++, magia.duracao);
-            stmt.setString(index++, magia.alcance);
-            stmt.setString(index++, magia.area);
-            stmt.setString(index++, magia.escola);
-            stmt.setString(index++, magia.tipoAcerto);
+            stmt.setString(index++, magia.getTipo());
+            stmt.setString(index++, magia.getNome());
+            stmt.setString(index++, magia.getDescricao());
+            stmt.setInt(index++, magia.getNivel());
+            stmt.setString(index++, magia.getTempoConjuracao());
+            stmt.setString(index++, magia.getDuracao());
+            stmt.setString(index++, magia.getAlcance());
+            stmt.setString(index++, magia.getArea());
+            stmt.setString(index++, magia.getEscola());
+            stmt.setString(index++, magia.getTipoAcerto());
 
             // Campos com valores padrão no banco
             if (magia instanceof MagiaDano magiaDano) {
-                stmt.setInt(index++, magiaDano.dadoDano);    // ladoDado
-                stmt.setInt(index, magiaDano.quantidadeDado); // numeroDados
+                stmt.setInt(index++, magiaDano.getDadoDano());    // ladoDado
+                stmt.setInt(index, magiaDano.getQuantidadeDado()); // numeroDados
             } else if (magia instanceof MagiaCura magiaCura) {
-                stmt.setInt(index++, magiaCura.dadoCura);    // ladoDado
-                stmt.setInt(index, magiaCura.quantidadeDado); // numeroDados
+                stmt.setInt(index++, magiaCura.getDadoCura());    // ladoDado
+                stmt.setInt(index, magiaCura.getQuantidadeDado()); // numeroDados
             } else {
                 stmt.setInt(index++, -1);    // lado padrao
                 stmt.setInt(index, -1); // quantidade padrao
@@ -56,9 +58,9 @@ public abstract class SQLMagia {
         }
     }
 
-    public static Magia readItem(int idMagia) {
+    public static Magia readMagia(int idMagia) {
         Connection connection = BD.getConnection();
-        String sql = "SELECT * FROM " + Tabelas.MAGIA + " WHERE idItem = ?";
+        String sql = "SELECT * FROM " + Tabelas.MAGIA + " WHERE idMagia = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
             stmt.setInt(1, idMagia);
@@ -71,7 +73,6 @@ public abstract class SQLMagia {
                         case "dano": {
                             magia = new MagiaDano(
                                     rs.getInt("idMagia"),
-                                    rs.getString("tipo"),
                                     rs.getString("nome"),
                                     rs.getString("descricao"),
                                     rs.getInt("nivel"),
@@ -84,13 +85,13 @@ public abstract class SQLMagia {
                                     rs.getInt("ladoDado"),
                                     rs.getInt("numeroDados")
                             );
+                            break;
                         }
 
                         // -------------------------- MAGIA DE CURA ----------------------------
                         case "cura": {
                             magia = new MagiaCura(
                                     rs.getInt("idMagia"),
-                                    rs.getString("tipo"),
                                     rs.getString("nome"),
                                     rs.getString("descricao"),
                                     rs.getInt("nivel"),
@@ -103,13 +104,13 @@ public abstract class SQLMagia {
                                     rs.getInt("ladoDado"),
                                     rs.getInt("numeroDados")
                             );
+                            break;
                         }
 
                         // -------------------------- MAGIA DE EFEITO --------------------------
                         default: {
                             magia = new Magia(
                                     rs.getInt("idMagia"),
-                                    rs.getString("tipo"),
                                     rs.getString("nome"),
                                     rs.getString("descricao"),
                                     rs.getInt("nivel"),

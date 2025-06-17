@@ -3,6 +3,7 @@ package br.rpp.dado;
 import java.util.Random;
 
 public abstract class Dado {
+
     public static int rollD20(String tipo){
         Random dice = new Random();
         switch(tipo){

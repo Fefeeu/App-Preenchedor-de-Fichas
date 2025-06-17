@@ -41,6 +41,7 @@ public class ItemConsumivel extends Item implements ItemUsavel {
     public int getUsos() {
         return usos;
     }
+
     public int getUsosMaximo() {
         return usosMaximo;
     }
