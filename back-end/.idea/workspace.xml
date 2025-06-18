@@ -7,8 +7,6 @@
     <list default="true" id="ddf75fff-d2c8-4c46-8cb4-ec0a577c8ee3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/banco-de-dados/ficha-exemplo.json" beforeDir="false" afterPath="$PROJECT_DIR$/banco-de-dados/ficha-exemplo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Caracteristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Caracteristica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Ficha.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Ficha.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +80,7 @@
       <updated>1749598948657</updated>
       <workItem from="1749598950921" duration="4541000" />
       <workItem from="1749667086657" duration="2073000" />
-      <workItem from="1749672260661" duration="51241000" />
+      <workItem from="1749672260661" duration="52655000" />
     </task>
     <servers />
   </component>
