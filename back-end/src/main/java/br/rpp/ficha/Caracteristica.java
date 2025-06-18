@@ -18,13 +18,13 @@ public class Caracteristica {
     private String pele;
     private String cabelo;
     private String idiomas;
-    private String proeficiencias;
+    private String proficiencias;
 
     public Caracteristica(String nomePersonagem, String idClasse, String antecedente,
                           String userName, String idRaca, String tendencia,
                           int xp, int idade, float altura, float peso,
                           String olho, String pele, String cabelo,
-                          String idiomas, String proeficiencias)
+                          String idiomas, String proficiencias)
     {
         this.nomePersonagem = nomePersonagem;
         this.classe = SQLClasse.readClasse(idClasse);
@@ -40,7 +40,7 @@ public class Caracteristica {
         this.pele = pele;
         this.cabelo = cabelo;
         this.idiomas = idiomas;
-        this.proeficiencias = proeficiencias;
+        this.proficiencias = proficiencias;
     }
 
     public String getUserName() {
@@ -155,11 +155,11 @@ public class Caracteristica {
         this.idiomas = idiomas;
     }
 
-    public String getProeficiencias() {
-        return proeficiencias;
+    public String getProficiencias() {
+        return proficiencias;
     }
 
-    public void setProeficiencias(String proeficiencias) {
-        this.proeficiencias = proeficiencias;
+    public void setProficiencias(String proficiencias) {
+        this.proficiencias = proficiencias;
     }
 }

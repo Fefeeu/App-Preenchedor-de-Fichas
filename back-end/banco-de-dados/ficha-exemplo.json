@@ -38,6 +38,12 @@
     "defeitos": ""
   },
   "pericias": {
+    "forca": false,
+    "destreza": false,
+    "constituicao": false,
+    "inteligencia": false,
+    "sabedoria": false,
+    "carisma": false,
     "acrobacia": false,
     "arcanismo": false,
     "atletismo": false,
