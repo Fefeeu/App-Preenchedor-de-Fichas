@@ -12,7 +12,7 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
     private int cargasMaxima;
     private int bonus;
 
-    public ArmaMagica(int id, Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int cargasMaxima, int bonus) {
+    public ArmaMagica(int id, Ficha ficha, String nome, String descricao, float peso, char moeda, int preco, int dado, int quantidade, String atributo, boolean proficiencia, String efeito, int cargas, int bonus) {
         super(id, ficha, nome, descricao, peso, moeda, preco, dado, quantidade, atributo, proficiencia);
         this.efeito = efeito;
         this.cargas = cargas;

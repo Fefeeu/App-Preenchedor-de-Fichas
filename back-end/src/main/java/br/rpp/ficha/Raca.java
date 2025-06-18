@@ -8,7 +8,7 @@ public class Raca {
     private String descricao;
 
     public Raca(String id, String nome, String descricao, boolean read) {
-        this.id = id;
+        this.id = id.toLowerCase();
         this.nome = nome;
         this.descricao = descricao;
 

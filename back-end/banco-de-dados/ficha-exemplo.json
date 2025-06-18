@@ -1,0 +1,73 @@
+{
+  "idUser": 0,
+  "estado": false,
+  "nivel": 1,
+  "nomePersonagem": "",
+  "idClasse": "",
+  "antecedente": "",
+  "userName": "",
+  "idRaca": "",
+  "tendencia": "",
+  "xp": 0,
+  "idade": 0,
+  "altura": 0.0,
+  "peso": 0.0,
+  "olho": "",
+  "pele": "",
+  "cabelo": "",
+  "idiomas": "",
+  "proeficiencia": "",
+  "atributos": {
+    "forca": 0,
+    "destreza": 0,
+    "constituicao": 0,
+    "inteligencia": 0,
+    "sabedoria": 0,
+    "carisma": 0
+  },
+  "deslocamento": 0.0,
+  "pontosVidaBase": 0,
+  "vidaTemporaria": 0,
+  "dadoDeVida": 0,
+  "descricao": {
+    "historia": "",
+    "aparencia": "",
+    "personalidade": "",
+    "ideal": "",
+    "ligacao": "",
+    "defeitos": ""
+  },
+  "pericias": {
+    "acrobacia": false,
+    "arcanismo": false,
+    "atletismo": false,
+    "atuacao": false,
+    "enganacao": false,
+    "furtividade": false,
+    "historia": false,
+    "intimidacao": false,
+    "intuicao": false,
+    "investigacao": false,
+    "lidarComAnimais": false,
+    "medicina": false,
+    "natureza": false,
+    "percepcao": false,
+    "persuasao": false,
+    "prestidigitacao": false,
+    "religiao": false,
+    "sobrevivencia": false
+  },
+  "inventario": {
+    "itens": [],
+    "pc": 0,
+    "pp": 0,
+    "pe": 0,
+    "po": 0,
+    "pl": 0
+  },
+  "magias": {
+    "espacosMagia": [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "magiasConhecidas": []
+  },
+  "inspiracao": false
+}
