@@ -19,7 +19,9 @@
 
 .dev-img img {
     border-radius: 50%;
-    border: 0.15rem solid var(--second-color);
+    padding: 0.22rem;
+    background: linear-gradient(to top, var(--primary-color), var(--second-color));
+    background-origin: border-box;
 }
 
 .dev-name h4 {
@@ -39,6 +41,7 @@
 }
 
 .dev:hover {
+    cursor: pointer;
     scale: 1.1;
     border: 2px solid var(--primary-color);
     transition: 0.3s ease-in-out;

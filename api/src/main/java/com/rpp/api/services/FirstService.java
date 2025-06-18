@@ -1,4 +1,4 @@
-package com.rpp.api.service;
+package com.rpp.api.services;
 
 import org.springframework.stereotype.Service;
 
