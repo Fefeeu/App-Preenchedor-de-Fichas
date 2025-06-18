@@ -1,7 +1,7 @@
 package com.rpp.api.controller;
 
-import com.rpp.api.domain.user.User;
 import com.rpp.api.domain.Sheet;
+import com.rpp.api.domain.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +20,7 @@ public class UserController {
         if(body.getEmail() == null){
             body.setEmail("emailpadrao.com");
         }
-        return "Hello, " + body.getNome() + ". Your email is " + body.getEmail() + ".";
+        return "Hello, " + body.getName() + ". Your email is " + body.getEmail() + ".";
     }
 
     // Update user

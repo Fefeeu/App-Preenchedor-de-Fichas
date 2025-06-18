@@ -8,13 +8,20 @@ import { SheetSkills } from "./Skills";
 import { SheetStatus } from "./Status";
 import { SheetCharacter } from "./Character";
 import { SheetLanguagesProficiencies } from "./LanguagesProficiencies";
+import  api  from "../../services/api";
 
 export function Sheet(){
     const { handleSubmit, register } = useForm();
   
     const onSubmit = (data: any) => {
         console.log("Submit chamado!");
-        console.log("Dados do formulário:", data);
+        console.log("Dados do formulário:", data.header);
+        try {
+            const response = api.post(`/pack/test`, data.header);
+            console.log("Dados enviados com sucesso:", response);
+        } catch (error) {
+            console.error("Erro ao enviar os dados:", error);
+        }
     };
 
     return(

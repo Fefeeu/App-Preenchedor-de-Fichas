@@ -12,6 +12,11 @@ public class PackController {
         return "You are in pack";
     }
 
+    @PostMapping("/test")
+    public String test(@RequestBody Sheet body){
+        return "Você criou o personagem: " + body.getCharacterName() + " de classe " + body.getCharacterClass() + " e raça " + body.getCharacterRace();
+    }
+
     // Get sheet by id
     @GetMapping("/{id}")
     public String get(@PathVariable String id){
@@ -19,7 +24,7 @@ public class PackController {
     }
 
     // Get all sheets by user id
-    @GetMapping("/all")
+    @GetMapping("/sheets")
     public String getSheetsByUserId(@PathVariable String id){
         return "Return sheets by User ID: " + id;
     }
