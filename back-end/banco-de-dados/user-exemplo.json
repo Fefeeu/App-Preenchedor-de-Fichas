@@ -1,0 +1,9 @@
+{
+  "usuario": {
+    "idUser": 0,
+    "userName": "",
+    "email": "",
+    "senha": "",
+    "fichas": []
+  }
+}
