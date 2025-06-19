@@ -1,6 +1,7 @@
 package br.rpp.magias;
 
 import br.rpp.auxiliar.enuns.TiposMagia;
+import br.rpp.auxiliar.exeptions.NivelMagiaException;
 
 public class Magia {
     private final int idMagia;
@@ -28,10 +29,7 @@ public class Magia {
         this.area = area;
         this.escola = escola;
         this.tipoAcerto = tipoAcerto;
-
-
     }
-
 
     public int usarMagia(){
         System.out.println("usando magia");
@@ -47,7 +45,12 @@ public class Magia {
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        try {
+            this.tipo = tipo;
+        } catch (NullPointerException e) {
+            System.out.println("valor do tipo não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getNome() {
@@ -55,7 +58,12 @@ public class Magia {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        try {
+            this.nome = nome;
+        } catch (NullPointerException e) {
+            System.out.println("valor do nome não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getDescricao() {
@@ -63,7 +71,12 @@ public class Magia {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        try {
+            this.descricao = descricao;
+        } catch (NullPointerException e) {
+            System.out.println("valor do descricao não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public int getNivel() {
@@ -71,7 +84,16 @@ public class Magia {
     }
 
     public void setNivel(int nivel) {
-        this.nivel = nivel;
+        if(nivel < 0 || nivel > 9) {
+            throw new NivelMagiaException();
+        }
+
+        try {
+            this.nivel = nivel;
+        } catch (NullPointerException e) {
+            System.out.println("valor do nivel não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getTempoConjuracao() {
@@ -79,7 +101,12 @@ public class Magia {
     }
 
     public void setTempoConjuracao(String tempoConjuracao) {
-        this.tempoConjuracao = tempoConjuracao;
+        try {
+            this.tempoConjuracao = tempoConjuracao;
+        } catch (NullPointerException e) {
+            System.out.println("valor do tempoConjuracao não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getDuracao() {
@@ -87,7 +114,12 @@ public class Magia {
     }
 
     public void setDuracao(String duracao) {
-        this.duracao = duracao;
+        try {
+            this.duracao = duracao;
+        } catch (NullPointerException e) {
+            System.out.println("valor do duracao não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getAlcance() {
@@ -95,7 +127,12 @@ public class Magia {
     }
 
     public void setAlcance(String alcance) {
-        this.alcance = alcance;
+        try {
+            this.alcance = alcance;
+        } catch (NullPointerException e) {
+            System.out.println("valor do alcance não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getArea() {
@@ -103,7 +140,12 @@ public class Magia {
     }
 
     public void setArea(String area) {
-        this.area = area;
+        try {
+            this.area = area;
+        } catch (NullPointerException e) {
+            System.out.println("valor do area não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getEscola() {
@@ -111,7 +153,12 @@ public class Magia {
     }
 
     public void setEscola(String escola) {
-        this.escola = escola;
+        try {
+            this.escola = escola;
+        } catch (NullPointerException e) {
+            System.out.println("valor do escola não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getTipoAcerto() {
@@ -119,6 +166,11 @@ public class Magia {
     }
 
     public void setTipoAcerto(String tipoAcerto) {
-        this.tipoAcerto = tipoAcerto;
+        try {
+            this.tipoAcerto = tipoAcerto;
+        } catch (NullPointerException e) {
+            System.out.println("valor do tipoAcerto não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 }

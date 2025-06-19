@@ -1,10 +1,12 @@
 package br.rpp.inventario.item;
 
+import br.rpp.auxiliar.exeptions.ValorNegativoException;
+
 public class Equipavel extends Item {
     private int bonusCA = 0;
     private boolean proficiencia;
 
-    public Equipavel(int id, String nome, String descricao, float peso, char moeda, int preco, int bonusCA, boolean proficiencia){
+    public Equipavel(int id, String nome, String descricao, float peso, char moeda, int preco, int bonusCA, boolean proficiencia) {
         super(id, nome, descricao, peso, moeda, preco);
         this.bonusCA = bonusCA;
         this.proficiencia = proficiencia;
@@ -16,7 +18,16 @@ public class Equipavel extends Item {
     }
 
     public void setBonusCA(int bonusCA) {
-        this.bonusCA = bonusCA;
+        if (bonusCA < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.bonusCA = bonusCA;
+        } catch (NullPointerException e) {
+            System.out.println("valor do bonusCA não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public boolean getProficiencia() {
@@ -24,8 +35,11 @@ public class Equipavel extends Item {
     }
 
     public void setProficiencia(boolean proficiencia) {
-        this.proficiencia = proficiencia;
+        try {
+            this.proficiencia = proficiencia;
+        } catch (NullPointerException e) {
+            System.out.println("valor do proficiencia não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
-
-
 }

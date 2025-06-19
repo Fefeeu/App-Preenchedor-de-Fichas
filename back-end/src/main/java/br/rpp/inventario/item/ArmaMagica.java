@@ -1,5 +1,6 @@
 package br.rpp.inventario.item;
 
+import br.rpp.auxiliar.exeptions.ValorNegativoException;
 import br.rpp.dado.Dado;
 import br.rpp.ficha.Ficha;
 import br.rpp.interfaces.Roll20;
@@ -18,14 +19,12 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
         this.cargas = cargas;
         this.cargasMaxima = cargas;
         this.bonus = bonus;
-
         this.setTipo("armaMagica");
     }
 
-
     @Override
-    public void usar(){
-        if (this.cargas > 0){
+    public void usar() {
+        if (this.cargas > 0) {
             this.cargas--;
         } else {
             System.out.println("Cargas Insuficiente");
@@ -33,17 +32,17 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
     }
 
     @Override
-    public void recuperarUsos(){
+    public void recuperarUsos() {
         this.cargas = this.cargasMaxima;
     }
 
     @Override
-    public void recuperarQuantidadeDeUsos(int usos){
+    public void recuperarQuantidadeDeUsos(int usos) {
         usos = Math.max(0, usos); // garante que não seja negativo
-        if(usos > cargasMaxima - cargas){
+        if(usos > cargasMaxima - cargas) {
             this.cargas = this.cargasMaxima;
         } else {
-            this.cargas+= usos;
+            this.cargas += usos;
         }
     }
 
@@ -61,8 +60,30 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
         return cargasMaxima;
     }
 
-    public int getCargas(){
+    public void setCargasMaxima(int cargasMaxima) {
+        try {
+            this.cargasMaxima = cargasMaxima;
+        } catch (NullPointerException e) {
+            System.out.println("valor do cargasMaxima não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int getCargas() {
         return cargas;
+    }
+
+    public void setCargas(int cargas) {
+        if(cargas < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.cargas = cargas;
+        } catch (NullPointerException e) {
+            System.out.println("valor do cargas não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getEfeito() {
@@ -70,7 +91,12 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
     }
 
     public void setEfeito(String efeito) {
-        this.efeito = efeito;
+        try {
+            this.efeito = efeito;
+        } catch (NullPointerException e) {
+            System.out.println("valor do efeito não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public int getBonus() {
@@ -78,6 +104,15 @@ public class ArmaMagica extends Arma implements ItemUsavel, Roll20, RollADice {
     }
 
     public void setBonus(int bonus) {
-        this.bonus = bonus;
+        if (bonus < 0) {
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.bonus = bonus;
+        } catch (NullPointerException e) {
+            System.out.println("valor do bonus não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 }

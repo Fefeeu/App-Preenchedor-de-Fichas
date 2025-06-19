@@ -1,5 +1,7 @@
 package br.rpp.inventario.item;
 
+import br.rpp.auxiliar.exeptions.DadoInvalidoException;
+import br.rpp.auxiliar.exeptions.ValorMenorQueUmException;
 import br.rpp.dado.Dado;
 import br.rpp.ficha.Ficha;
 import br.rpp.interfaces.Roll20;
@@ -42,7 +44,12 @@ public class Arma extends Item implements Roll20, RollADice {
     }
 
     public void setFicha(Ficha ficha) {
-        this.ficha = ficha;
+        try {
+            this.ficha = ficha;
+        } catch (NullPointerException e) {
+            System.out.println("valor do ficha não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public int getDadoDeDano() {
@@ -50,7 +57,16 @@ public class Arma extends Item implements Roll20, RollADice {
     }
 
     public void setDadoDeDano(int dadoDeDano) {
-        this.dadoDeDano = dadoDeDano;
+        if(!Dado.verificaLados(dadoDeDano)) {
+            throw new DadoInvalidoException();
+        }
+
+        try {
+            this.dadoDeDano = dadoDeDano;
+        } catch (NullPointerException e) {
+            System.out.println("valor do dadoDeDano não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public int getQuantidadeDeDados() {
@@ -58,7 +74,16 @@ public class Arma extends Item implements Roll20, RollADice {
     }
 
     public void setQuantidadeDeDados(int quantidadeDeDados) {
-        this.quantidadeDeDados = quantidadeDeDados;
+        if (quantidadeDeDados < 1) {
+            throw new ValorMenorQueUmException();
+        }
+
+        try {
+            this.quantidadeDeDados = quantidadeDeDados;
+        } catch (NullPointerException e) {
+            System.out.println("valor do quantidadeDeDados não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getAtributo() {
@@ -66,7 +91,12 @@ public class Arma extends Item implements Roll20, RollADice {
     }
 
     public void setAtributo(String atributo) {
-        this.atributo = atributo;
+        try {
+            this.atributo = atributo;
+        } catch (NullPointerException e) {
+            System.out.println("valor do atributo não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public boolean isProficiencia() {
@@ -74,7 +104,12 @@ public class Arma extends Item implements Roll20, RollADice {
     }
 
     public void setProficiencia(boolean proficiencia) {
-        this.proficiencia = proficiencia;
+        try {
+            this.proficiencia = proficiencia;
+        } catch (NullPointerException e) {
+            System.out.println("valor do proficiencia não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     // TODO: criar um metodo, para transformar a arma em magica

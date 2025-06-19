@@ -49,31 +49,31 @@ public class Main {
         System.out.println(usuario.getFicha(1).getMagias().getMagia(2).getDescricao());
 
 
-         usuario.getFicha(1).getInventario().criarItem("comum", 1);
+         usuario.getFicha(1).getInventario().criarItem("comum",  usuario.getFicha(1));
         System.out.println(usuario.getFicha(1).getInventario().getItem(1));
         System.out.println("Item criada com sucesso!");
 
-         usuario.getFicha(1).getInventario().criarItem("consumivel", 1);
+         usuario.getFicha(1).getInventario().criarItem("consumivel",  usuario.getFicha(1));
         System.out.println(usuario.getFicha(1).getInventario().getItem(2));
         System.out.println("Item criada com sucesso!");
 
-         usuario.getFicha(1).getInventario().criarItem("magico", 1);
+         usuario.getFicha(1).getInventario().criarItem("magico",  usuario.getFicha(1));
         System.out.println(usuario.getFicha(1).getInventario().getItem(3));
         System.out.println("Item criada com sucesso!");
 
-         usuario.getFicha(1).getInventario().criarItem("arma", 1);
+         usuario.getFicha(1).getInventario().criarItem("arma",  usuario.getFicha(1));
         System.out.println(usuario.getFicha(1).getInventario().getItem(4));
         System.out.println("Item criada com sucesso!");
 
-         usuario.getFicha(1).getInventario().criarItem("armaMagica", 1);
+         usuario.getFicha(1).getInventario().criarItem("armaMagica",  usuario.getFicha(1));
         System.out.println(usuario.getFicha(1).getInventario().getItem(5));
         System.out.println("Item criada com sucesso!");
 
-         usuario.getFicha(1).getInventario().criarItem("equipavel", 1);
+         usuario.getFicha(1).getInventario().criarItem("equipavel",  usuario.getFicha(1));
         System.out.println(usuario.getFicha(1).getInventario().getItem(6));
         System.out.println("Item criada com sucesso!");
 
-         usuario.getFicha(1).getInventario().criarItem("equipavelMagico", 1);
+         usuario.getFicha(1).getInventario().criarItem("equipavelMagico",  usuario.getFicha(1));
         System.out.println(usuario.getFicha(1).getInventario().getItem(7));
         System.out.println("Item criada com sucesso!");
 

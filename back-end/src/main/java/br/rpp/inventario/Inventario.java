@@ -1,6 +1,7 @@
 package br.rpp.inventario;
 
 import br.rpp.auxiliar.enuns.Tabelas;
+import br.rpp.auxiliar.exeptions.TipoItemException;
 import br.rpp.ficha.Ficha;
 import br.rpp.inventario.item.*;
 import br.rpp.sql.BD;
@@ -87,22 +88,33 @@ public class Inventario {
                         proficiencia, efeito, usos, bonus);
                 break;
             }
-            default: novoItem =  new Item(id, "genérico", "genérico", 0.01f, 'o', 0);
+            default: throw new TipoItemException();
         }
         guardarItem(novoItem, false);
         return novoItem;
     }
 
     public void guardarItem(Item item, boolean read) {
-        this.itens.put(item.getId(), item);
-        if (!read){
-            SQLItem.createItem(this, item);
+        try {
+            this.itens.put(item.getId(), item);
+            if (!read){
+                SQLItem.createItem(this, item);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("item nao encontrado");
+            System.out.println(e.getMessage());
         }
+
     }
 
     public void descartarItem(Item item){   // TODO(front): seleciona o item e a opcao de descartar
-        itens.remove(item);
-        SQLItem.deleteItem(item.getId());
+        try {
+            itens.remove(item);
+            SQLItem.deleteItem(item.getId());
+        } catch (NullPointerException e) {
+            System.out.println("item nao encontrado");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void venderItem(Item item){  // TODO(front): seleciona o item e a opcao de vender
@@ -110,20 +122,25 @@ public class Inventario {
     }
 
     public void venderItemPersonalizado(Item item, char moeda, int valor){  // TODO(front): entrada de dados
-        boolean valido = true;
-        switch (moeda){
-            case 'c': this.pc += valor;
-            case 'p': this.pp += valor;
-            case 'e': this.pe += valor;
-            case 'o': this.po += valor;
-            case 'l': this.pl += valor;
-            default: valido = false;
-        }
-        if(valido){
-            itens.remove(item);
-            SQLItem.deleteItem(item.getId());
-        } else {
-            System.out.println("compra negada, moeda invalida");
+        try {
+            boolean valido = true;
+            switch (moeda){
+                case 'c': this.pc += valor;
+                case 'p': this.pp += valor;
+                case 'e': this.pe += valor;
+                case 'o': this.po += valor;
+                case 'l': this.pl += valor;
+                default: valido = false;
+            }
+            if(valido){
+                itens.remove(item);
+                SQLItem.deleteItem(item.getId());
+            } else {
+                System.out.println("compra negada, moeda invalida");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("item nao encontrado");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -138,6 +155,7 @@ public class Inventario {
             case 'e': this.pe = valor;
             case 'o': this.po = valor;
             case 'l': this.pl = valor;
+            default: System.out.println("moeda invalida");
         }
     }
 

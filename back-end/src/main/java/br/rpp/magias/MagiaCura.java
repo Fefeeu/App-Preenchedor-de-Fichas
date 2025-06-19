@@ -1,6 +1,8 @@
 package br.rpp.magias;
 
 import br.rpp.auxiliar.enuns.TiposMagia;
+import br.rpp.auxiliar.exeptions.DadoInvalidoException;
+import br.rpp.auxiliar.exeptions.ValorMenorQueUmException;
 import br.rpp.dado.Dado;
 
 public class MagiaCura extends Magia {
@@ -26,7 +28,16 @@ public class MagiaCura extends Magia {
     }
 
     public void setDadoCura(int dadoCura) {
-        this.dadoCura = dadoCura;
+        if (!Dado.verificaLados(dadoCura)) {
+            throw new DadoInvalidoException();
+        }
+
+        try{
+            this.dadoCura = dadoCura;
+        } catch(NullPointerException e){
+            System.out.println("valor do dadoCura não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public int getQuantidadeDado() {
@@ -34,6 +45,15 @@ public class MagiaCura extends Magia {
     }
 
     public void setQuantidadeDado(int quantidadeDado) {
-        this.quantidadeDado = quantidadeDado;
+        if (quantidadeDado < 1) {
+            throw new ValorMenorQueUmException();
+        }
+
+        try{
+            this.quantidadeDado = quantidadeDado;
+        } catch(NullPointerException e){
+            System.out.println("valor do quantidadeDado não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 }
