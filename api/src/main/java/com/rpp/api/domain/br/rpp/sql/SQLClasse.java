@@ -32,27 +32,28 @@ public abstract class SQLClasse {
         }
     }
 
-    public static Classe readClasse(String idClasse){
+    public static Classe readClasse(String idClasse) {
         Connection connection = BD.getConnection();
         String sql = "SELECT * FROM " + Tabelas.CLASSE + " WHERE idClasse = ?";
 
         try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
-            stmt.setString(1, idClasse);
+            stmt.setString(1, idClasse.toLowerCase()); // Assume que IDs são case-insensitive
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new Classe(
+                if (!rs.next()) {
+                    throw new RuntimeException("Classe não encontrada: " + idClasse);
+                }
+
+                return new Classe(
                         rs.getString("idClasse"),
                         rs.getString("nome"),
                         rs.getString("descricao"),
                         true
-                    );
-                }
+                );
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao buscar classe: " + e.getMessage(), e);
         }
-        return null; // Retorna null se a classe não for encontrada
     }
 
     public static void deleteClasse(String idClasse){

@@ -1,4 +1,5 @@
 package com.rpp.api.controller.pack;
+import com.rpp.api.domain.br.rpp.ficha.Classe;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -64,7 +64,7 @@ public abstract class SQLFicha {
                     "p_persuasao = ?, p_prestigitacao = ?, p_religiao = ?, p_sobrevivencia = ?, " +
                     "historia = ?, aparencia = ?, personalidade = ?, ideal = ?, ligacao = ?, " +
                     "defeitos = ?, proficiencias = ?, idiomas = ?, inventario_idInventario = ?, " +
-                    "magiaUser_idMagiaUser = ?" +
+                    "magiaUser_idMagiaUser = ? " +
                     "WHERE idFicha = ?";  // Condição para identificar qual ficha atualizar
                 break;
             }

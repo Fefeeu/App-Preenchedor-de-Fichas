@@ -3,10 +3,12 @@ package com.rpp.api.controller.pack;
 import com.rpp.api.domain.Sheet;
 import com.rpp.api.domain.br.rpp.auxiliar.enuns.Tabelas;
 import com.rpp.api.domain.br.rpp.ficha.Ficha;
+import com.rpp.api.domain.br.rpp.ficha.TabelaMagia;
 import com.rpp.api.domain.br.rpp.inventario.Inventario;
 import com.rpp.api.domain.br.rpp.sql.BD;
 import com.rpp.api.domain.br.rpp.sql.SQLFicha;
 import com.rpp.api.domain.br.rpp.sql.SQLInventario;
+import com.rpp.api.domain.br.rpp.sql.SQLMagiaUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +29,26 @@ public class PackController {
     }
 
     // Get sheet by id
-    @GetMapping("/{id}")
-    public String get(@PathVariable String id){
-        return "Return sheet by ID: " + id;
+    @GetMapping("/sheet/{id}")
+    public ResponseEntity<ApiResponse<Ficha>> get(@PathVariable int id){
+        try {
+            Ficha ficha = SQLFicha.readFicha(id);
+
+            ApiResponse<Ficha> response = new ApiResponse<>(
+                    true,
+                    "Ficha de id " + id,
+                    ficha
+            );
+
+            return ResponseEntity.ok(response);
+        } catch (Exception error){
+            ApiResponse<Ficha> errorResponse = new ApiResponse<>(
+                    false,
+                    "Erro ao criar ficha: " + error.getMessage(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 
     // Get all sheets by user id
@@ -42,11 +61,9 @@ public class PackController {
     @PostMapping("/create")
     public ResponseEntity<ApiResponse<Ficha>> create(@RequestBody FichaCreateDTO dto) {
         try {
-            // 1. Criar e persistir o inventário
             Inventario inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()));
-            SQLInventario.createInventario(inventario); // Persiste o inventário no BD
+            SQLInventario.createInventario(inventario);
 
-            // 2. Criar a ficha com o ID do inventário
             Ficha ficha = new Ficha(
                     BD.gerarId(Tabelas.FICHA.toString()),
                     dto.getIdUser(),
@@ -86,16 +103,18 @@ public class PackController {
                     false
             );
 
-            // 3. Associar o inventário à ficha
             ficha.setInventario(inventario);
 
-            // 4. Persistir a ficha
-            SQLFicha.createFicha(ficha);
-
-            // Configurar perícias (se necessário)
             if (dto.getPericias() != null) {
                 dto.getPericias().forEach(ficha::setPericia);
             }
+
+            TabelaMagia magias = new TabelaMagia(BD.gerarId(Tabelas.MAGIAUSER.toString()), ficha);
+            SQLMagiaUser.createMagiaUser(magias);
+
+            ficha.setMagias(magias);
+
+            SQLFicha.createFicha(ficha);
 
             ApiResponse<Ficha> response = new ApiResponse<>(
                     true,
@@ -115,8 +134,75 @@ public class PackController {
 
     // Update sheet
     @PutMapping("/update/{id}")
-    public String update(@PathVariable String id, @RequestBody Sheet body){
-        return "Ficha editada";
+    public ResponseEntity<ApiResponse<Ficha>> update(@PathVariable int id, @RequestBody FichaCreateDTO dto){
+
+        try {
+            Ficha fichaAntiga = SQLFicha.readFicha(id);
+
+            Ficha fichaAtualizada = new Ficha(
+                    id,
+                    dto.getIdUser(),
+                    true, // estado
+                    dto.getNivel(),
+                    dto.getNomePersonagem(),
+                    dto.getIdClasse(),
+                    dto.getAntecedente(),
+                    "Nome do Usuário",
+                    dto.getIdRaca(),
+                    dto.getTendencia(),
+                    dto.getXp(),
+                    25,
+                    1.80f,
+                    70.0f,
+                    "Castanhos",
+                    "Branca",
+                    "Preto",
+                    dto.getIdiomas(),
+                    dto.getDescricao().getProficiencia(),
+                    dto.getAtributos().get("forca"),
+                    dto.getAtributos().get("destreza"),
+                    dto.getAtributos().get("constituicao"),
+                    dto.getAtributos().get("inteligencia"),
+                    dto.getAtributos().get("sabedoria"),
+                    dto.getAtributos().get("carisma"),
+                    dto.getDeslocamento(),
+                    dto.getPontosVidaBase(),
+                    dto.getVidaTemporaria(),
+                    dto.getDadoDeVida(),
+                    "História padrão",
+                    "Aparência padrão",
+                    dto.getDescricao().getPersonalidade(),
+                    dto.getDescricao().getIdeal(),
+                    dto.getDescricao().getLigacao(),
+                    dto.getDescricao().getDefeito(),
+                    true
+            );
+
+            // 4. Manter os relacionamentos existentes
+            fichaAtualizada.setInventario(new Inventario(fichaAntiga.getInventario().getId()));
+            fichaAtualizada.setMagias(new TabelaMagia(fichaAntiga.getMagias().getId(), fichaAtualizada));
+
+            // 5. Atualizar perícias se fornecidas
+            if (dto.getPericias() != null) {
+                dto.getPericias().forEach(fichaAtualizada::setPericia);
+            }
+
+            SQLFicha.updateFicha(fichaAtualizada);
+
+            ApiResponse<Ficha> response = new ApiResponse<>(
+                    true,
+                    "Ficha de id " + id + "atualizada com sucesso",
+                    fichaAtualizada
+            );
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<Ficha> errorResponse = new ApiResponse<>(
+                    false,
+                    "Erro ao criar ficha: " + e.getMessage(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 
     // Delete sheet
