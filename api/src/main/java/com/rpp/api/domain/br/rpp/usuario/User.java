@@ -6,6 +6,7 @@ import com.rpp.api.domain.br.rpp.sql.*;
 
 import java.util.HashMap;
 
+
 public class User {
 
     private int idUser;
@@ -30,8 +31,8 @@ public class User {
         Ficha novaFicha = new Ficha(
                 BD.gerarId(Tabelas.FICHA.toString()),
                 this.idUser,
-                false,
-                20,
+                true,
+                1,
                 "nome",
                 "guerreiro",
                 "atecedente",
@@ -149,19 +150,39 @@ public class User {
     }
 
     public void setIdUser(int idUser) {
-        this.idUser = idUser;
+        try {
+            this.idUser = idUser;
+        } catch (NullPointerException e) {
+            System.out.println("valor do idUser não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        try {
+            this.userName = userName;
+        } catch (NullPointerException e) {
+            System.out.println("valor do userName não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        try {
+            this.email = email;
+        } catch (NullPointerException e) {
+            System.out.println("valor do email não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        try {
+            this.senha = senha;
+        } catch (NullPointerException e) {
+            System.out.println("valor do senha não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public HashMap<Integer, Ficha> getFichas() {
@@ -169,6 +190,11 @@ public class User {
     }
 
     public void setFichas(HashMap<Integer, Ficha> fichas) {
-        this.fichas = fichas;
+        try {
+            this.fichas = fichas;
+        } catch (NullPointerException e) {
+            System.out.println("valor do fichas não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 }

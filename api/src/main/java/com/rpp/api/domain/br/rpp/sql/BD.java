@@ -4,8 +4,8 @@ import java.sql.*;
 
 public abstract class BD {
     static private final String url = "jdbc:mysql://localhost:3306/rpp?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-    static private String usuario = "root";
-    static private String senha = "";
+    static private String usuario = "visualizacao";
+    static private String senha = "rpp1234";
 
     public static Connection getConnection() {
         try {

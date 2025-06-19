@@ -1,5 +1,6 @@
 package com.rpp.api.domain.br.rpp.inventario.item;
 
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.ValorNegativoException;
 import com.rpp.api.domain.br.rpp.interfaces.ItemUsavel;
 
 public class ItemMagico extends Item implements ItemUsavel {
@@ -16,8 +17,8 @@ public class ItemMagico extends Item implements ItemUsavel {
     }
 
     @Override
-    public void usar(){
-        if (this.cargas > 0){
+    public void usar() {
+        if (this.cargas > 0) {
             this.cargas--;
         } else {
             System.out.println("Cargas Insuficiente");
@@ -25,17 +26,17 @@ public class ItemMagico extends Item implements ItemUsavel {
     }
 
     @Override
-    public void recuperarUsos(){
+    public void recuperarUsos() {
         this.cargas = this.cargasMaxima;
     }
 
     @Override
-    public void recuperarQuantidadeDeUsos(int usos){
+    public void recuperarQuantidadeDeUsos(int usos) {
         usos = Math.max(0, usos); // garante que não seja negativo
-        if(usos > cargasMaxima - cargas){
+        if(usos > cargasMaxima - cargas) {
             this.cargas = this.cargasMaxima;
         } else {
-            this.cargas+= usos;
+            this.cargas += usos;
         }
     }
 
@@ -43,8 +44,30 @@ public class ItemMagico extends Item implements ItemUsavel {
         return cargasMaxima;
     }
 
+    public void setCargasMaxima(int cargasMaxima) {
+        try {
+            this.cargasMaxima = cargasMaxima;
+        } catch (NullPointerException e) {
+            System.out.println("valor do cargasMaxima não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
     public int getCargas() {
         return cargas;
+    }
+
+    public void setCargas(int cargas) {
+        if(cargas < 0) {
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.cargas = cargas;
+        } catch (NullPointerException e) {
+            System.out.println("valor do cargas não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getEfeito() {
@@ -52,6 +75,11 @@ public class ItemMagico extends Item implements ItemUsavel {
     }
 
     public void setEfeito(String efeito) {
-        this.efeito = efeito;
+        try {
+            this.efeito = efeito;
+        } catch (NullPointerException e) {
+            System.out.println("valor do efeito não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 }

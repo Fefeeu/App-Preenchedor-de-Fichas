@@ -10,14 +10,12 @@ public class Descricao {
     private String defeitos;
 
     public Descricao(String historia, String aparencia, String personalidade, String ideal, String ligacao, String defeitos) {
-
         this.historia = historia;
         this.aparencia = aparencia;
         this.personalidade = personalidade;
         this.ideal = ideal;
         this.ligacao = ligacao;
         this.defeitos = defeitos;
-
     }
 
     public String getHistoria() {
@@ -25,7 +23,12 @@ public class Descricao {
     }
 
     public void setHistoria(String historia) {
-        this.historia = historia;
+        try {
+            this.historia = historia;
+        } catch (NullPointerException e) {
+            System.out.println("valor do historia não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getAparencia() {
@@ -33,7 +36,12 @@ public class Descricao {
     }
 
     public void setAparencia(String aparencia) {
-        this.aparencia = aparencia;
+        try {
+            this.aparencia = aparencia;
+        } catch (NullPointerException e) {
+            System.out.println("valor do aparencia não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getPersonalidade() {
@@ -41,7 +49,12 @@ public class Descricao {
     }
 
     public void setPersonalidade(String personalidade) {
-        this.personalidade = personalidade;
+        try {
+            this.personalidade = personalidade;
+        } catch (NullPointerException e) {
+            System.out.println("valor do personalidade não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getIdeal() {
@@ -49,7 +62,12 @@ public class Descricao {
     }
 
     public void setIdeal(String ideal) {
-        this.ideal = ideal;
+        try {
+            this.ideal = ideal;
+        } catch (NullPointerException e) {
+            System.out.println("valor do ideal não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getLigacao() {
@@ -57,7 +75,12 @@ public class Descricao {
     }
 
     public void setLigacao(String ligacao) {
-        this.ligacao = ligacao;
+        try {
+            this.ligacao = ligacao;
+        } catch (NullPointerException e) {
+            System.out.println("valor do ligacao não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getDefeitos() {
@@ -65,6 +88,11 @@ public class Descricao {
     }
 
     public void setDefeitos(String defeitos) {
-        this.defeitos = defeitos;
+        try {
+            this.defeitos = defeitos;
+        } catch (NullPointerException e) {
+            System.out.println("valor do defeitos não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 }

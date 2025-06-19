@@ -1,5 +1,7 @@
 package com.rpp.api.domain.br.rpp.inventario.item;
 
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.TipoMoedaException;
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.ValorNegativoException;
 import com.rpp.api.domain.br.rpp.magias.Magia;
 
 public class Item {
@@ -30,7 +32,12 @@ public class Item {
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        try {
+            this.tipo = tipo;
+        } catch (NullPointerException e) {
+            System.out.println("valor do tipo não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getNome() {
@@ -38,7 +45,12 @@ public class Item {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        try {
+            this.nome = nome;
+        } catch (NullPointerException e) {
+            System.out.println("valor do nome não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getDescricao() {
@@ -46,7 +58,12 @@ public class Item {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        try {
+            this.descricao = descricao;
+        } catch (NullPointerException e) {
+            System.out.println("valor do descricao não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public float getPeso() {
@@ -54,7 +71,16 @@ public class Item {
     }
 
     public void setPeso(float peso) {
-        this.peso = peso;
+        if(peso < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.peso = peso;
+        } catch (NullPointerException e) {
+            System.out.println("valor do peso não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public char getMoeda() {
@@ -62,7 +88,16 @@ public class Item {
     }
 
     public void setMoeda(char moeda) {
-        this.moeda = moeda;
+        if (moeda != 'c' && moeda != 'p' && moeda != 'e' && moeda != 'o' && moeda != 'l') {
+            throw new TipoMoedaException();
+        }
+
+        try {
+            this.moeda = moeda;
+        } catch (NullPointerException e) {
+            System.out.println("valor do moeda não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 
     public int getPreco() {
@@ -70,6 +105,15 @@ public class Item {
     }
 
     public void setPreco(int preco) {
-        this.preco = preco;
+        if (preco < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.preco = preco;
+        } catch (NullPointerException e) {
+            System.out.println("valor do preco não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
     }
 }

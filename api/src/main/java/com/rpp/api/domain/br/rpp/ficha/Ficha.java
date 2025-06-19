@@ -1,5 +1,10 @@
 package com.rpp.api.domain.br.rpp.ficha;
 
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.DadoInvalidoException;
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.NivelException;
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.ValorMenorQueUmException;
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.ValorNegativoException;
+import com.rpp.api.domain.br.rpp.dado.Dado;
 import com.rpp.api.domain.br.rpp.inventario.Inventario;
 import com.rpp.api.domain.br.rpp.inventario.item.Equipavel;
 import com.rpp.api.domain.br.rpp.inventario.item.EquipavelMagico;
@@ -13,7 +18,7 @@ import com.rpp.api.domain.br.rpp.sql.SQLMagiaUser;
 import java.util.HashMap;
 
 public class Ficha {
-    private static final int[] proeficiencia = {0, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6};
+    private static final int[] proficiencia = {0, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6};
 
     private final int idFicha;
     private final int idUser;
@@ -38,13 +43,13 @@ public class Ficha {
 
     public Ficha(int idFicha, int idUser, boolean estado, int nivel, String nomePersonagem, String idClasse, String antecedente, String userName,
                  String idRaca, String tendencia, int xp, int idade, float altura, float peso, String olho,
-                 String pele, String cabelo, String idiomas, String proeficiencia,
+                 String pele, String cabelo, String idiomas, String proficiencia,
                  Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma,
                  float deslocamento, int pontosVidaBase, int vidaTemporaria, int dadoDeVida,
                  String historia, String aparencia, String personalidade, String ideal, String ligacao, String defeitos, boolean read){
         this.estado = estado;
         this.nivel = nivel;
-        this.caracteristicas = new Caracteristica(nomePersonagem, idClasse, antecedente, userName, idRaca, tendencia, xp, idade, altura, peso, olho, pele, cabelo, idiomas, proeficiencia);
+        this.caracteristicas = new Caracteristica(nomePersonagem, idClasse, antecedente, userName, idRaca, tendencia, xp, idade, altura, peso, olho, pele, cabelo, idiomas, proficiencia);
         this.atributos = new HashMap<>();
         this.atributos.put("forca", forca);
         this.atributos.put("destreza", destreza);
@@ -73,13 +78,14 @@ public class Ficha {
         }
     }
 
+
     public int converteAtributo(String atributo){
         return this.atributos.get(atributo)/2 - 5;
     }
 
     public void vestirItem(int id){
         Item item = SQLItem.readItem(id);
-        Equipavel vestimenta = null;
+        Equipavel vestimenta;
         if(item instanceof Equipavel){
             vestimenta = (Equipavel)item;
             if (vestimenta instanceof EquipavelMagico vestimentaMagica){
@@ -187,6 +193,189 @@ public class Ficha {
         this.pericias.put("sobrevivencia", false);
     }
 
+    public void setEstado(boolean estado) {
+        try {
+            this.estado = estado;
+        } catch (NullPointerException e) {
+            System.out.println("Valor do estado não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setCaracteristicas(Caracteristica caracteristicas) {
+        try {
+            this.caracteristicas = caracteristicas;
+        } catch (NullPointerException e) {
+            System.out.println("Valor das características não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setAtributos(HashMap<String, Integer> atributos) {
+        try {
+            for(Integer atributo : atributos.values()) {
+                if (atributo < 1) {
+                    throw new ValorMenorQueUmException();
+                }
+            }
+
+            this.atributos = atributos;
+        } catch (NullPointerException e) {
+            System.out.println("Valor dos atributos não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setPericias(HashMap<String, Boolean> pericias) {
+        try {
+            this.pericias = pericias;
+        } catch (NullPointerException e) {
+            System.out.println("Valor das perícias não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setNivel(int nivel) {
+        if (nivel < 1 || nivel > 20) {
+            throw new NivelException();
+        }
+
+        try {
+            this.nivel = nivel;
+        } catch (NullPointerException e) {
+            System.out.println("Valor do nível não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setIniciativa(int iniciativa) {
+        try {
+            this.iniciativa = iniciativa;
+        } catch (NullPointerException e) {
+            System.out.println("Valor da iniciativa não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setVestido(Equipavel vestido) {
+        try {
+            this.vestido = vestido;
+        } catch (NullPointerException e) {
+            System.out.println("Valor do vestido não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setClasseArmadura(int classeArmadura) {
+        try {
+            this.classeArmadura = classeArmadura;
+        } catch (NullPointerException e) {
+            System.out.println("Valor da classe de armadura não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setDeslocamento(float deslocamento) {
+        if(deslocamento < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.deslocamento = deslocamento;
+        } catch (NullPointerException e) {
+            System.out.println("Valor do deslocamento não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setPontosVidaBase(int pontosVidaBase) {
+        if(pontosVidaBase < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.pontosVidaBase = pontosVidaBase;
+        } catch (NullPointerException e) {
+            System.out.println("Valor dos pontos de vida base não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setPontosVidaTotal(int pontosVidaTotal) {
+        if(pontosVidaTotal < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.pontosVidaTotal = pontosVidaTotal;
+        } catch (NullPointerException e) {
+            System.out.println("Valor dos pontos de vida total não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setVidaTemporaria(int vidaTemporaria) {
+        if(vidaTemporaria < 0){
+            throw new ValorNegativoException();
+        }
+
+        try {
+            this.vidaTemporaria = vidaTemporaria;
+        } catch (NullPointerException e) {
+            System.out.println("Valor da vida temporária não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setDadoDeVida(int dadoDeVida) {
+        if(!Dado.verificaLados(dadoDeVida)){
+            throw new DadoInvalidoException();
+        }
+
+        try {
+            this.dadoDeVida = dadoDeVida;
+        } catch (NullPointerException e) {
+            System.out.println("Valor do dado de vida não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setInventario(Inventario inventario) {
+        try {
+            this.inventario = inventario;
+        } catch (NullPointerException e) {
+            System.out.println("Valor do inventário não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setDescricao(Descricao descricao) {
+        try {
+            this.descricao = descricao;
+        } catch (NullPointerException e) {
+            System.out.println("Valor da descrição não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setMagias(TabelaMagia magias) {
+        try {
+            this.magias = magias;
+        } catch (NullPointerException e) {
+            System.out.println("Valor das magias não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setInspiracao(boolean inspiracao) {
+        try {
+            this.inspiracao = inspiracao;
+        } catch (NullPointerException e) {
+            System.out.println("Valor da inspiração não pode ser nulo");
+            System.out.println(e.getMessage());
+        }
+    }
+
     public int getIdUser(){
         return idUser;
     }
@@ -201,41 +390,23 @@ public class Ficha {
 
     public static int getProficiencia(int nivel){
         if (nivel >= 1 && nivel <= 20){
-            return proeficiencia[nivel];
+            return proficiencia[nivel];
         }
         return 2;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
     }
 
     public Caracteristica getCaracteristicas() {
         return caracteristicas;
     }
 
-    public void setCaracteristicas(Caracteristica caracteristicas) {
-        this.caracteristicas = caracteristicas;
-    }
 
     public HashMap<String, Integer> getAtributos() {
         return atributos;
     }
 
-    public void setAtributos(HashMap<String, Integer> atributos) {
-        this.atributos = atributos;
-    }
 
     public HashMap<String, Boolean> getPericias() {
         return pericias;
-    }
-
-    public void setPericias(HashMap<String, Boolean> pericias) {
-        this.pericias = pericias;
     }
 
     public void setPericia(String pericia, boolean proficiencia){
@@ -246,103 +417,52 @@ public class Ficha {
         return nivel;
     }
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
     public int getIniciativa() {
         return iniciativa;
-    }
-
-    public void setIniciativa(int iniciativa) {
-        this.iniciativa = iniciativa;
     }
 
     public Equipavel getVestido() {
         return vestido;
     }
 
-    public void setVestido(Equipavel vestido) {
-        this.vestido = vestido;
-    }
-
     public int getClasseArmadura() {
         return classeArmadura;
-    }
-
-    public void setClasseArmadura(int classeArmadura) {
-        this.classeArmadura = classeArmadura;
     }
 
     public float getDeslocamento() {
         return deslocamento;
     }
 
-    public void setDeslocamento(float deslocamento) {
-        this.deslocamento = deslocamento;
-    }
-
     public int getPontosVidaBase() {
         return pontosVidaBase;
-    }
-
-    public void setPontosVidaBase(int pontosVidaBase) {
-        this.pontosVidaBase = pontosVidaBase;
     }
 
     public int getPontosVidaTotal() {
         return pontosVidaTotal;
     }
 
-    public void setPontosVidaTotal(int pontosVidaTotal) {
-        this.pontosVidaTotal = pontosVidaTotal;
-    }
-
     public int getVidaTemporaria() {
         return vidaTemporaria;
-    }
-
-    public void setVidaTemporaria(int vidaTemporaria) {
-        this.vidaTemporaria = vidaTemporaria;
     }
 
     public int getDadoDeVida() {
         return dadoDeVida;
     }
 
-    public void setDadoDeVida(int dadoDeVida) {
-        this.dadoDeVida = dadoDeVida;
-    }
-
     public Inventario getInventario() {
         return inventario;
-    }
-
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
     }
 
     public Descricao getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(Descricao descricao) {
-        this.descricao = descricao;
-    }
-
     public TabelaMagia getMagias() {
         return magias;
-    }
-
-    public void setMagias(TabelaMagia magias) {
-        this.magias = magias;
     }
 
     public boolean isInspiracao() {
         return inspiracao;
     }
 
-    public void setInspiracao(boolean inspiracao) {
-        this.inspiracao = inspiracao;
-    }
 }

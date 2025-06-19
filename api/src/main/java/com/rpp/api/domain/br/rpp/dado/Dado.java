@@ -1,5 +1,7 @@
 package com.rpp.api.domain.br.rpp.dado;
 
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.DadoInvalidoException;
+
 import java.util.Random;
 
 public abstract class Dado {
@@ -30,24 +32,32 @@ public abstract class Dado {
     }
 
     public static int rollD(int lados){
-        lados = Math.max(1, lados);
+        if(verificaLados(lados)){
+            Random dice = new Random();
 
-        Random dice = new Random();
-
-        return dice.nextInt(lados) + 1;
+            return dice.nextInt(lados) + 1;
+        } else {
+            throw new DadoInvalidoException();
+        }
     }
 
     public static int rollD(int lados, int quantidade){
-        lados = Math.max(1, lados);
-        quantidade = Math.max(1, quantidade);
 
-        Random dice = new Random();
+        if(verificaLados(lados) && quantidade > 0){
+            Random dice = new Random();
 
-        int total = 0;
-        for (int i = 0; i < quantidade; i++){
-            total += dice.nextInt(lados) + 1;
+            int total = 0;
+            for (int i = 0; i < quantidade; i++){
+                total += dice.nextInt(lados) + 1;
+            }
+
+            return total;
+        } else {
+            throw new DadoInvalidoException();
         }
+    }
 
-        return total;
+    public static boolean verificaLados(int lados){
+        return (lados == 2) || (lados == 4) || (lados == 6) || (lados == 8) || (lados == 10) || (lados == 12) || (lados == 20) || (lados == 100);
     }
 }

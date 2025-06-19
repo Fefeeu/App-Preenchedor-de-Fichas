@@ -5,40 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddf75fff-d2c8-4c46-8cb4-ec0a577c8ee3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/DadoInvalidoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/NivelException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/NivelMagiaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/TipoItemException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/TipoMagiaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/TipoMoedaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/ValorMenorQueUmException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/rpp/auxiliar/exeptions/ValorNegativoException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/88dc6227-3c16-49c8-8536-d5e42c4f3a03.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/88dc6227-3c16-49c8-8536-d5e42c4f3a03/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/88dc6227-3c16-49c8-8536-d5e42c4f3a03/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/88dc6227-3c16-49c8-8536-d5e42c4f3a03/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/88dc6227-3c16-49c8-8536-d5e42c4f3a03/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api/src/main/java/com/rpp/api/domain/br/rpp/sql/BD.java" beforeDir="false" afterPath="$PROJECT_DIR$/../api/src/main/java/com/rpp/api/domain/br/rpp/sql/BD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/dado/Dado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/dado/Dado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Caracteristica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Caracteristica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Descricao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Descricao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Ficha.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/Ficha.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/TabelaMagia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/ficha/TabelaMagia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/Inventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/Inventario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Arma.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Arma.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ArmaMagica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ArmaMagica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Equipavel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Equipavel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/EquipavelMagico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/EquipavelMagico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemConsumivel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemConsumivel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemMagico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/inventario/item/ItemMagico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/magias/Magia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/magias/Magia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaCura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaCura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaDano.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/magias/MagiaDano.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/rpp/usuario/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/rpp/usuario/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilitarios/Apresentacao_POO.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../utilitarios/Apresentacao_POO.drawio" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +43,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "exceptions",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/felip/OneDrive/Desktop/estudos/Docs Inatel/C06 - Programacao Orientada a Objetos/POO_RPP/api",
     "node.js.detected.package.eslint": "true",
@@ -114,7 +82,7 @@
       <workItem from="1749598950921" duration="4541000" />
       <workItem from="1749667086657" duration="2073000" />
       <workItem from="1749672260661" duration="55100000" />
-      <workItem from="1750354062562" duration="9087000" />
+      <workItem from="1750354062562" duration="11148000" />
     </task>
     <servers />
   </component>
@@ -133,6 +101,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/br/rpp/usuario/User.java</url>
           <line>170</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/rpp/ficha/Classe.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/rpp/ficha/Classe.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="br.rpp.auxiliar.exeptions.DadoInvalidoExeption" package="br.rpp.auxiliar.exeptions" />

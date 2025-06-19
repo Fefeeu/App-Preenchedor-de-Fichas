@@ -1,6 +1,9 @@
 package com.rpp.api.domain.br.rpp.ficha;
 
 import com.rpp.api.domain.br.rpp.auxiliar.enuns.TiposAcertosMagia;
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.NivelMagiaException;
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.TipoMagiaException;
+import com.rpp.api.domain.br.rpp.auxiliar.exeptions.ValorNegativoException;
 import com.rpp.api.domain.br.rpp.magias.Magia;
 import com.rpp.api.domain.br.rpp.magias.MagiaCura;
 import com.rpp.api.domain.br.rpp.magias.MagiaDano;
@@ -81,40 +84,43 @@ public class TabelaMagia {
                 novaMagia = new MagiaCura(idMagia, nome, descricao, nivel, tempoConjuracao, duracao, alcance, area, escola, tipoAcerto, dadoCura, quantidadeDado);
                 break;
             }
-            default: System.out.println("Erro ao criar magia");
+            default: throw new TipoMagiaException();
         }
 
-        if(novaMagia != null){
-            this.magias.put(novaMagia.getIdMagia(), novaMagia);
-            SQLMagia.createMagia(novaMagia, this.ficha);
-        }
+        this.magias.put(novaMagia.getIdMagia(), novaMagia);
+        SQLMagia.createMagia(novaMagia, this.ficha);
     }
 
     public void registrarMagia(Magia magia) {
-        int id = magia.getIdMagia();
-        this.magias.put(id, magia);
+        try {
+            int id = magia.getIdMagia();
+            this.magias.put(id, magia);
+        } catch (NullPointerException e) {
+            System.out.println("Nao foi possivel registrar uma magia");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void usarMagia (Magia magia){
+        try {
+            if (espacoDeMagia[magia.getNivel()]<=0) {
+                System.out.println("Espaços de magia esgotados para nivel " + magia.getNivel());
+                return;
+            }
 
-        if (magia == null){
-            System.out.println("Magia não conhecida");
-            return;
+            if (magia instanceof MagiaCura magiaCura){
+                magiaCura.usarMagia();
+            } else if (magia instanceof MagiaDano magiaDano){
+                magiaDano.usarMagia();
+            } else {
+                magia.usarMagia();
+            }
+            espacoDeMagia[magia.getNivel()]--;
+            //TODO: mod no banco
+        } catch (NullPointerException e) {
+            System.out.println("Nao foi possivel registrar uma magia");
+            System.out.println(e.getMessage());
         }
-        if (espacoDeMagia[magia.getNivel()]<=0) {
-            System.out.println("Espaços de magia esgotados para nivel " + magia.getNivel());
-            return;
-        }
-
-        if (magia instanceof MagiaCura magiaCura){
-            magiaCura.usarMagia();
-        } else if (magia instanceof MagiaDano magiaDano){
-            magiaDano.usarMagia();
-        } else {
-            magia.usarMagia();
-        }
-        espacoDeMagia[magia.getNivel()]--;
-        //TODO: mod no banco
     }
 
     public void recuperarSlots() {
@@ -124,6 +130,10 @@ public class TabelaMagia {
     }
 
     public void recuperarSlotUnico(int nivel) {
+        if(nivel < 0 || nivel > 9) {
+            throw new NivelMagiaException();
+        }
+
         System.out.println("Recuperando slots de magia");
         if (this.espacoDeMagia[nivel] < espacoDeMagia[this.ficha.getNivel()]) {
             this.espacoDeMagia[nivel]++;
@@ -134,9 +144,14 @@ public class TabelaMagia {
     }
 
     public void removerMagia(Magia magia) {
-        int id = magia.getIdMagia();
-        magias.remove(id);
-        SQLMagia.deleteMagia(id);
+        try {
+            int id = magia.getIdMagia();
+            magias.remove(id);
+            SQLMagia.deleteMagia(id);
+        } catch (NullPointerException e) {
+            System.out.println("Nao foi possivel remover magia");
+            System.out.println(e.getMessage());
+        }
     }
 
     public int getId() {
@@ -148,10 +163,15 @@ public class TabelaMagia {
     }
 
     public void setEspacoDeMagia(int nivel, int quantidade) {
-        if(quantidade >= 0 && quantidade <= TabelaMagia.espacosMagiaNivel[this.ficha.getNivel()][nivel]){
-            this.espacoDeMagia[nivel] = quantidade;
-        } else {
-            System.out.println("erro ao setar magia");
+        try {
+            if(quantidade >= 0 && quantidade <= TabelaMagia.espacosMagiaNivel[this.ficha.getNivel()][nivel]){
+                this.espacoDeMagia[nivel] = quantidade;
+            } else {
+                throw new NivelMagiaException();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("nível ou quantidade inválidos para espacoDeMagia");
+            System.out.println(e.getMessage());
         }
     }
 
