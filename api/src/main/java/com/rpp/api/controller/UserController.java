@@ -1,7 +1,6 @@
 package com.rpp.api.controller;
 
 import com.rpp.api.domain.Sheet;
-import com.rpp.api.domain.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,15 +11,6 @@ public class UserController {
     @GetMapping("/{id}")
     public String getUser(@PathVariable String id){
         return "Get user by id: " + id;
-    }
-
-    // Create user
-    @PostMapping("/create")
-    public String rootPost(@RequestBody User body) {
-        if(body.getEmail() == null){
-            body.setEmail("emailpadrao.com");
-        }
-        return "Hello, " + body.getName() + ". Your email is " + body.getEmail() + ".";
     }
 
     // Update user
