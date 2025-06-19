@@ -13,7 +13,7 @@ import br.rpp.sql.SQLMagiaUser;
 import java.util.HashMap;
 
 public class Ficha {
-    private static final int[] proeficiencia = {0, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6};
+    private static final int[] proficiencia = {0, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6};
 
     private final int idFicha;
     private final int idUser;
@@ -38,13 +38,13 @@ public class Ficha {
 
     public Ficha(int idFicha, int idUser, boolean estado, int nivel, String nomePersonagem, String idClasse, String antecedente, String userName,
                  String idRaca, String tendencia, int xp, int idade, float altura, float peso, String olho,
-                 String pele, String cabelo, String idiomas, String proeficiencia,
+                 String pele, String cabelo, String idiomas, String proficiencia,
                  Integer forca, Integer destreza, Integer constituicao, Integer inteligencia, Integer sabedoria, Integer carisma,
                  float deslocamento, int pontosVidaBase, int vidaTemporaria, int dadoDeVida,
                  String historia, String aparencia, String personalidade, String ideal, String ligacao, String defeitos, boolean read){
         this.estado = estado;
         this.nivel = nivel;
-        this.caracteristicas = new Caracteristica(nomePersonagem, idClasse, antecedente, userName, idRaca, tendencia, xp, idade, altura, peso, olho, pele, cabelo, idiomas, proeficiencia);
+        this.caracteristicas = new Caracteristica(nomePersonagem, idClasse, antecedente, userName, idRaca, tendencia, xp, idade, altura, peso, olho, pele, cabelo, idiomas, proficiencia);
         this.atributos = new HashMap<>();
         this.atributos.put("forca", forca);
         this.atributos.put("destreza", destreza);
@@ -79,7 +79,7 @@ public class Ficha {
 
     public void vestirItem(int id){
         Item item = SQLItem.readItem(id);
-        Equipavel vestimenta = null;
+        Equipavel vestimenta;
         if(item instanceof Equipavel){
             vestimenta = (Equipavel)item;
             if (vestimenta instanceof EquipavelMagico vestimentaMagica){
@@ -201,7 +201,7 @@ public class Ficha {
 
     public static int getProficiencia(int nivel){
         if (nivel >= 1 && nivel <= 20){
-            return proeficiencia[nivel];
+            return proficiencia[nivel];
         }
         return 2;
     }
