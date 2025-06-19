@@ -39,7 +39,7 @@ input[type="number"] {
 
 .body-sheet {
     display: flex;
-    gap: 1.5rem;
+    justify-content: space-between;
 }
 
 ul {

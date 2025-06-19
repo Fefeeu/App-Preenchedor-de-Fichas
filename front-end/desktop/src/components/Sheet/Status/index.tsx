@@ -50,7 +50,7 @@ export function SheetStatus({ register }: any) {
           </div>
           <input 
             type="number" 
-            {...register('status.for')}
+            {...register('atributos.forca')}
             onChange={(e) => handleStatusChange(e, 'for')}
             value={status.for}
           />
@@ -62,7 +62,7 @@ export function SheetStatus({ register }: any) {
           </div>
           <input 
             type="number" 
-            {...register('status.dex')}
+            {...register('atributos.destreza')}
             onChange={(e) => handleStatusChange(e, 'dex')}
             value={status.dex}
           />
@@ -74,7 +74,7 @@ export function SheetStatus({ register }: any) {
           </div>
           <input 
             type="number" 
-            {...register('status.con')}
+            {...register('atributos.constituicao')}
             onChange={(e) => handleStatusChange(e, 'con')}
             value={status.con}
           />
@@ -86,7 +86,7 @@ export function SheetStatus({ register }: any) {
           </div>
           <input 
             type="number" 
-            {...register('status.int')}
+            {...register('atributos.inteligencia')}
             onChange={(e) => handleStatusChange(e, 'int')}
             value={status.int}
           />
@@ -98,7 +98,7 @@ export function SheetStatus({ register }: any) {
           </div>
           <input 
             type="number" 
-            {...register('status.wis')}
+            {...register('atributos.sabedoria')}
             onChange={(e) => handleStatusChange(e, 'wis')}
             value={status.wis}
           />
@@ -110,7 +110,7 @@ export function SheetStatus({ register }: any) {
           </div>
           <input 
             type="number" 
-            {...register('status.cha')}
+            {...register('atributos.carisma')}
             onChange={(e) => handleStatusChange(e, 'cha')}
             value={status.cha}
           />

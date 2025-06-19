@@ -4,7 +4,7 @@ export function SheetAttacksMagics({register}: any){
     return(
         <div className="s-attacksmagics">
             <button>Adicionar ataque ou magia</button>
-            <textarea {...register('attacksmagics.other')}></textarea>
+            <textarea></textarea>
         </div>
     )
 }

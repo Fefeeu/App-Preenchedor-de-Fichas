@@ -15,9 +15,9 @@ export function Sheet(){
   
     const onSubmit = (data: any) => {
         console.log("Submit chamado!");
-        console.log("Dados do formulário:", data.header);
+        console.log("Dados do formulário:", data);
         try {
-            const response = api.post(`/pack/test`, data.header);
+            const response = api.post(`/pack/create`, data);
             console.log("Dados enviados com sucesso:", response);
         } catch (error) {
             console.error("Erro ao enviar os dados:", error);

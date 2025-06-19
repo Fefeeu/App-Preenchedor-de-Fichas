@@ -4,13 +4,13 @@ export function SheetHeader({ register }: any){
     return (
         <div className="s-header">
             <div className="name">
-                <input type="text" {...register('header.characterName')}/>
+                <input type="text" {...register('nomePersonagem')}/>
                 <label>NOME DO PERSONAGEM</label>
             </div>
             <div className="details">
                 <div className="c-1">
                     <div className="input-group">
-                        <select {...register('header.characterClass')}>
+                        <select {...register('idClasse')}>
                             <option value="">Classe</option>
                             <option value="Barbaro">Bárbaro</option>
                             <option value="Bardo">Bardo</option>
@@ -27,7 +27,7 @@ export function SheetHeader({ register }: any){
                             <option value="Artifice">Artífice</option>
                         </select>
                     </div>
-                    <select {...register('header.characterRace')}>
+                    <select {...register('idRaca')}>
                         <option value="">Raça</option>
                         <option value="Anao">Anão</option>
                         <option value="Elfo">Elfo</option>
@@ -41,7 +41,7 @@ export function SheetHeader({ register }: any){
                     </select>
                 </div>
                 <div className="c-2">
-                    <select {...register('header.characterBackground')}>
+                    <select {...register('antecedente')}>
                         <option value="">Antecedente</option>
                         <option value="acolito">Acólito</option>
                         <option value="artesao de guilda">Artesão de Guilda</option>
@@ -57,7 +57,7 @@ export function SheetHeader({ register }: any){
                         <option value="sabio">Sábio</option>
                         <option value="soldado">Soldado</option>
                     </select>
-                    <select {...register('header.characterAlignment')}>
+                    <select {...register('tendencia')}>
                         <option value="">Tendência</option>
                         <option value="leal e bom">Leal e Bom (LB)</option>
                         <option value="neutro e bom">Neutro e Bom (NB)</option>
@@ -73,11 +73,11 @@ export function SheetHeader({ register }: any){
                 <div className="c-3">
                     <div className="input-group">
                         <label>XP:</label>
-                        <input type="number" {...register('header.characterExperience')}/>
+                        <input type="number" {...register('xp')}/>
                     </div>
                     <div className="input-group">
                         <label>Nível:</label>
-                        <input type="number" {...register('header.characterLevel')}/>
+                        <input type="number" {...register('nivel')}/>
                     </div>
                 </div>
             </div>

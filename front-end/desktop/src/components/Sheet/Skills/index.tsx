@@ -4,30 +4,30 @@ export function SheetSkills({register}: any){
     return(
         <div className="s-skills">
             <div className="inspiration">
-                <input type="checkbox" {...register('skills.inspiration')}/><label>INSPIRAÇÃO</label>
+                <input type="checkbox" {...register('inspiracao')}/><label>INSPIRAÇÃO</label>
             </div>
             <div className="proficiency">
-                <input type="number" {...register('skills.proficiency')}/><label>BÔNUS DE PROFICIÊNCIA</label>
+                <input type="number"/><label>BÔNUS DE PROFICIÊNCIA</label>
             </div>
             <div className="saving-throw">
                 <ul>
                     <li>
-                        <input type="checkbox"/><input type="number" {...register('skills.saveStr')}/><label>Força</label>
+                        <input type="checkbox" {...register('pericias.forca')}/><label>Força</label>
                     </li>
                     <li>
-                        <input type="checkbox"/><input type="number" {...register('skills.saveDex')}/><label>Destreza</label>
+                        <input type="checkbox" {...register('pericias.destreza')}/><label>Destreza</label>
                     </li>
                     <li>
-                        <input type="checkbox"/><input type="number" {...register('skills.saveCon')}/><label>Constituição</label>
+                        <input type="checkbox" {...register('pericias.constituicao')}/><label>Constituição</label>
                     </li>
                     <li>
-                        <input type="checkbox"/><input type="number" {...register('skills.saveInt')}/><label>Inteligência</label>
+                        <input type="checkbox" {...register('pericias.inteligencia')}/><label>Inteligência</label>
                     </li>
                     <li>
-                        <input type="checkbox"/><input type="number" {...register('skills.saveWis')}/><label>Sabedoria</label>
+                        <input type="checkbox" {...register('pericias.sabedoria')}/><label>Sabedoria</label>
                     </li>
                     <li>
-                        <input type="checkbox"/><input type="number" {...register('skills.saveCha')}/><label>Carisma</label>
+                        <input type="checkbox" {...register('pericias.carisma')}/><label>Carisma</label>
                     </li>
                 </ul>
                 <label>TESTES DE RESISTÊNCIA</label>
@@ -35,93 +35,75 @@ export function SheetSkills({register}: any){
             <div className="skills">
                 <ul>
                     <li>
-                        <input type="checkbox" {...register('skills.acrobacia.proficiente')}/>
-                        <input type="number" {...register('skills.acrobacia.valor')}/>
+                        <input type="checkbox" {...register('pericias.acrobacia')}/>
                         <label>Acrobacia (Des)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.arcanismo.proficiente')}/>
-                        <input type="number" {...register('skills.arcanismo.valor')}/>
+                        <input type="checkbox" {...register('pericias.arcanismo')}/>
                         <label>Arcanismo (Int)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.atletismo.proficiente')}/>
-                        <input type="number" {...register('skills.atletismo.valor')}/>
+                        <input type="checkbox" {...register('pericias.atletismo')}/>
                         <label>Atletismo (For)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.atuacao.proficiente')}/>
-                        <input type="number" {...register('skills.atuacao.valor')}/>
+                        <input type="checkbox" {...register('pericias.atuacao')}/>
                         <label>Atuação (Car)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.blefar.proficiente')}/>
-                        <input type="number" {...register('skills.blefar.valor')}/>
-                        <label>Blefar (Car)</label>
+                        <input type="checkbox" {...register('pericias.enganacao')}/>
+                        <label>Enganação (Car)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.furtividade.proficiente')}/>
-                        <input type="number" {...register('skills.furtividade.valor')}/>
+                        <input type="checkbox" {...register('pericias.furtividade')}/>
                         <label>Furtividade (Des)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.historia.proficiente')}/>
-                        <input type="number" {...register('skills.historia.valor')}/>
+                        <input type="checkbox" {...register('pericias.historia')}/>
                         <label>História (Int)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.intimidacao.proficiente')}/>
-                        <input type="number" {...register('skills.intimidacao.valor')}/>
+                        <input type="checkbox" {...register('pericias.intimidacao')}/>
                         <label>Intimidação (Car)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.intuicao.proficiente')}/>
-                        <input type="number" {...register('skills.intuicao.valor')}/>
+                        <input type="checkbox" {...register('pericias.intuicao')}/>
                         <label>Intuição (Sab)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.investigacao.proficiente')}/>
-                        <input type="number" {...register('skills.investigacao.valor')}/>
+                        <input type="checkbox" {...register('pericias.investigacao')}/>
                         <label>Investigação (Int)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.animais.proficiente')}/>
-                        <input type="number" {...register('skills.animais.valor')}/>
+                        <input type="checkbox" {...register('pericias.lidarComAnimais')}/>
                         <label>Lidar com Animais (Sab)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.medicina.proficiente')}/>
-                        <input type="number" {...register('skills.medicina.valor')}/>
+                        <input type="checkbox" {...register('pericias.medicina')}/>
                         <label>Medicina (Sab)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.natureza.proficiente')}/>
-                        <input type="number" {...register('skills.natureza.valor')}/>
+                        <input type="checkbox" {...register('pericias.natureza')}/>
                         <label>Natureza (Int)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.percepcao.proficiente')}/>
-                        <input type="number" {...register('skills.percepcao.valor')}/>
+                        <input type="checkbox" {...register('pericias.percepcao')}/>
                         <label>Percepção (Sab)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.persuasao.proficiente')}/>
-                        <input type="number" {...register('skills.persuasao.valor')}/>
+                        <input type="checkbox" {...register('pericias.persuasao')}/>
                         <label>Persuasão (Car)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.prestidigitacao.proficiente')}/>
-                        <input type="number" {...register('skills.prestidigitacao.valor')}/>
+                        <input type="checkbox" {...register('pericias.prestidigitacao')}/>
                         <label>Prestidigitação (Des)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.religiao.proficiente')}/>
-                        <input type="number" {...register('skills.religiao.valor')}/>
+                        <input type="checkbox" {...register('pericias.religiao')}/>
                         <label>Religião (Int)</label>
                     </li>
                     <li>
-                        <input type="checkbox" {...register('skills.sobrevivencia.proficiente')}/>
-                        <input type="number" {...register('skills.sobrevivencia.valor')}/>
+                        <input type="checkbox" {...register('pericias.sobrevivencia')}/>
                         <label>Sobrevivência (Sab)</label>
                     </li>
                 </ul>

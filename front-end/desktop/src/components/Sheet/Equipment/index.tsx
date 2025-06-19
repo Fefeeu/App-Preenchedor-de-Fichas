@@ -10,7 +10,7 @@ export function SheetEquipment({ register }: any){
                         <input 
                             id="equipment-pc"
                             type="number" 
-                            {...register('equipment.pc')}
+                            {...register('inventario.pc')}
                         />
                     </li>
                     <li>
@@ -18,7 +18,7 @@ export function SheetEquipment({ register }: any){
                         <input 
                             id="equipment-pp"
                             type="number" 
-                            {...register('equipment.pp')}
+                            {...register('inventario.pp')}
                         />
                     </li>
                     <li>
@@ -26,7 +26,7 @@ export function SheetEquipment({ register }: any){
                         <input 
                             id="equipment-pe"
                             type="number" 
-                            {...register('equipment.pe')}
+                            {...register('inventario.pe')}
                         />
                     </li>
                     <li>
@@ -34,7 +34,7 @@ export function SheetEquipment({ register }: any){
                         <input 
                             id="equipment-po"
                             type="number" 
-                            {...register('equipment.po')}
+                            {...register('inventario.po')}
                         />
                     </li>
                     <li>
@@ -42,14 +42,14 @@ export function SheetEquipment({ register }: any){
                         <input 
                             id="equipment-pl"
                             type="number" 
-                            {...register('equipment.pl')}
+                            {...register('inventario.pl')}
                         />
                     </li>
                 </ul>
             </div>
             <button>Adicionar equipamento</button>
             <div className="equipment-list">
-                <textarea {...register('equipment.other')}></textarea>
+                <textarea {...register('inventario.itens')}></textarea>
             </div>
             <label>EQUIPAMENTOS</label>
         </div>
