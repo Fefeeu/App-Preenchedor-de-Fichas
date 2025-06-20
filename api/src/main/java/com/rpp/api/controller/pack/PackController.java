@@ -22,11 +22,6 @@ public class PackController {
         return "You are in pack";
     }
 
-    @PostMapping("/test")
-    public String test(@RequestBody Sheet body){
-        return "Você criou o personagem: " + body.getCharacterName() + " de classe " + body.getCharacterClass() + " e raça " + body.getCharacterRace();
-    }
-
     // Get sheet by id
     @GetMapping("/sheet/{id}")
     public ResponseEntity<ApiResponse<Ficha>> get(@PathVariable int id){
