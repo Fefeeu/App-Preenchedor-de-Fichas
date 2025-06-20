@@ -57,7 +57,6 @@ export function SheetEquipment({ register, defaultValues }: SheetEquipmentProps)
       <div className="equipment-list">
         <textarea
           {...register("inventario.itens")}
-          defaultValue={defaultValues?.inventario?.itens ?? ""}
         ></textarea>
       </div>
       <label>EQUIPAMENTOS</label>

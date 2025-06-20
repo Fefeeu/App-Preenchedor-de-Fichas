@@ -6,10 +6,10 @@ export function SheetCurrentStatus({ register, defaultValues }: SheetCurrentStat
     <div className="s-currentstatus">
       <div className="c-1">
         <div className="ca">
-          <input type="number" defaultValue={10} /><label>CA</label>
+          <input type="number" defaultValue={10}/><label>CA</label>
         </div>
         <div className="initiative">
-          <input type="number" defaultValue={0} /><label>Iniciativa</label>
+          <input type="number" defaultValue={0}/><label>Iniciativa</label>
         </div>
         <div className="movement">
           <input
@@ -30,7 +30,7 @@ export function SheetCurrentStatus({ register, defaultValues }: SheetCurrentStat
             defaultValue={defaultValues?.pontosVidaBase ?? 10}
           />
         </div>
-        <input type="number" className="current-pv" defaultValue={defaultValues?.pontosVidaBase ?? 10} />
+        <input type="number" className="current-pv" defaultValue={10} />
         <label>Pontos de vida atuais</label>
       </div>
       <div className="c-3">

@@ -3,7 +3,7 @@ import "./style.css";
 export function SheetAttacksMagics(){
     return(
         <div className="s-attacksmagics">
-            <button>Adicionar ataque ou magia</button>
+            <button onClick={() => console.log("ainda em produção")}>Adicionar ataque ou magia</button>
             <textarea></textarea>
         </div>
     )

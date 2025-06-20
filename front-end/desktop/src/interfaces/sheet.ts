@@ -64,6 +64,7 @@ export interface Descricao {
 
 export interface CharacterSheet {
   nomePersonagem: string;
+  classeArmadura: number;
   idClasse: string;
   idRaca: string;
   antecedente: string;
@@ -155,6 +156,7 @@ export interface SheetLanguagesProficienciesProps {
 export interface SheetCurrentStatusProps {
   register: any;
   defaultValues?: {
+    classeArmadura?: number;
     deslocamento?: number;
     pontosVidaBase?: number;
     vidaTemporaria?: number;
@@ -166,12 +168,12 @@ export interface SheetEquipmentProps {
   register: any;
   defaultValues?: {
     inventario?: {
+      id?: number;
       pc?: number;
       pp?: number;
       pe?: number;
       po?: number;
       pl?: number;
-      itens?: string;
     };
   };
 }

@@ -90,6 +90,11 @@ public class PackController {
     public ResponseEntity<ApiResponse<Ficha>> create(@RequestBody FichaCreateDTO dto) {
         try {
             Inventario inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()));
+            inventario.setMoedas('c', dto.getInventario().getPc());
+            inventario.setMoedas('p', dto.getInventario().getPp());
+            inventario.setMoedas('e', dto.getInventario().getPe());
+            inventario.setMoedas('o', dto.getInventario().getPo());
+            inventario.setMoedas('l', dto.getInventario().getPl());
             SQLInventario.createInventario(inventario);
 
             Ficha ficha = new Ficha(
@@ -166,6 +171,15 @@ public class PackController {
 
         try {
             Ficha fichaAntiga = SQLFicha.readFicha(id);
+
+            Inventario inventario = fichaAntiga.getInventario();
+            inventario.setMoedas('c', dto.getInventario().getPc());
+            inventario.setMoedas('p', dto.getInventario().getPp());
+            inventario.setMoedas('e', dto.getInventario().getPe());
+            inventario.setMoedas('o', dto.getInventario().getPo());
+            inventario.setMoedas('l', dto.getInventario().getPl());
+
+            SQLInventario.updateInventario(inventario);
 
             Ficha fichaAtualizada = new Ficha(
                     id,

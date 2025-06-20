@@ -33,6 +33,7 @@ export function Sheet({ initialData }: { initialData?: CharacterSheet }) {
     try {
       if (id) {
         const response = await api.put(`/pack/update/${id}`, data);
+        console.log(data);
         if (response.data.success) {
           toast.success("Ficha atualizada com sucesso!");
         }
@@ -42,7 +43,7 @@ export function Sheet({ initialData }: { initialData?: CharacterSheet }) {
           toast.success("Ficha criada com sucesso! Redirecionando...");
         }
         setTimeout(() => {
-          navigate(`/sheet/${response.data.data.id}`);
+          navigate(`/sheet/${response.data.data.idFicha}`);
         }, 2000);
       }
     } catch (error) {
