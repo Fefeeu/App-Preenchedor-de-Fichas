@@ -1,0 +1,34 @@
+.s-header, .details{
+    display: flex;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.name input {
+    font-size: 1.75rem;
+    padding: 0.25rem;
+}
+
+.s-header {
+    padding: 1rem 0rem;
+    border-bottom: 1px solid gray;
+    justify-content: space-between;
+}
+
+.details {
+    gap: 2rem;
+}
+
+.s-header .details .c-1, .s-header .details .c-2, .s-header .details .c-3{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.s-header select {
+    padding: 0.25rem;
+}

@@ -1,0 +1,7 @@
+package com.rpp.api.domain.br.rpp.auxiliar.exeptions;
+
+public class TipoItemException extends RuntimeException {
+    public TipoItemException() {
+        super("Tipo de Item Invalido");
+    }
+}

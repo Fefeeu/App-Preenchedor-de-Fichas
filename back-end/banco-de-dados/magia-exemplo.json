@@ -1,0 +1,17 @@
+{
+  "magia": {
+    "idMagia": 0,
+    "tipo": "",
+    "nome": "",
+    "descricao": "",
+    "nivel": 0,
+    "tempoConjuracao": "",
+    "duracao": "",
+    "alcance": "",
+    "area": "",
+    "escola": "",
+    "tipoAcerto": "",
+    "quantidadeDado": 1,
+    "dado": 6
+  }
+}

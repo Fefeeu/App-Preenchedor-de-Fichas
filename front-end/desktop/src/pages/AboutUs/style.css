@@ -1,0 +1,48 @@
+.devs {
+    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.title h1 {
+    font-size: 2.8rem;
+    margin: 0;
+}
+
+.subtitle h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.dev-img img {
+    border-radius: 50%;
+    padding: 0.22rem;
+    background: linear-gradient(to top, var(--primary-color), var(--second-color));
+    background-origin: border-box;
+}
+
+.dev-name h4 {
+    font-size: 1.2rem;
+    margin: 0;
+    margin-top: 0.45rem;
+    padding: 0;
+}
+
+.dev-description p {
+    margin: 0;
+}
+
+.dev {
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.dev:hover {
+    cursor: pointer;
+    scale: 1.1;
+    border: 2px solid var(--primary-color);
+    transition: 0.3s ease-in-out;
+}

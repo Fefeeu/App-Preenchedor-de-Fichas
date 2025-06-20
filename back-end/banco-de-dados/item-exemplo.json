@@ -1,0 +1,20 @@
+{
+  "item": {
+    "id": 0,
+    "nome": "",
+    "descricao": "",
+    "peso": 0.0,
+    "moeda": "c",
+    "preco": 0,
+    "tipo": "comum",
+    "cargas": 0,
+    "cargasMaxima": 0,
+    "efeito": "",
+    "proficiencia": false,
+    "bonus": 0,
+    "bonusCA": 0,
+    "quantidadeDeDados": 1,
+    "dadoDeDano": 6,
+    "atributo": "forca"
+  }
+}
