@@ -5,6 +5,8 @@ import { LoginPage } from "../pages/Login";
 import { SignupPage } from "../pages/Signup";
 import { CreateSheetPage } from "../pages/CreateSheet";
 import { AboutUsPage } from "../pages/AboutUs";
+import { UserPage } from "../pages/User";
+import { ReadSheetPage } from "../pages/ReadSheet";
 
 export function AppRouter(){
     return (
@@ -15,7 +17,8 @@ export function AppRouter(){
             <Route path="/pack" element={<PackPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/user" element={<SignupPage/>}/>
+            <Route path="/user" element={<UserPage/>}/>
+            <Route path="/sheet/:id" element={<ReadSheetPage/>}/>
         </Routes>
     );
 }

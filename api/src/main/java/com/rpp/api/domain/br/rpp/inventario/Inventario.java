@@ -126,11 +126,17 @@ public class Inventario {
             boolean valido = true;
             switch (moeda){
                 case 'c': this.pc += valor;
+                break;
                 case 'p': this.pp += valor;
+                break;
                 case 'e': this.pe += valor;
+                break;
                 case 'o': this.po += valor;
+                break;
                 case 'l': this.pl += valor;
+                break;
                 default: valido = false;
+                break;
             }
             if(valido){
                 itens.remove(item);
@@ -151,11 +157,17 @@ public class Inventario {
     public void setMoedas(char moeda, int valor) {
         switch (moeda){
             case 'c': this.pc = valor;
+            break;
             case 'p': this.pp = valor;
+            break;
             case 'e': this.pe = valor;
+            break;
             case 'o': this.po = valor;
+            break;
             case 'l': this.pl = valor;
+            break;
             default: System.out.println("moeda invalida");
+            break;
         }
     }
 

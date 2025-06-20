@@ -4,10 +4,13 @@ import com.rpp.api.domain.br.rpp.auxiliar.enuns.Tabelas;
 import com.rpp.api.domain.br.rpp.ficha.Caracteristica;
 import com.rpp.api.domain.br.rpp.ficha.Descricao;
 import com.rpp.api.domain.br.rpp.ficha.Ficha;
+import com.rpp.api.domain.br.rpp.ficha.FichaResumoDTO;
 
 import java.sql.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
+import java.util.ArrayList;
 
 public abstract class SQLFicha {
     public static void createFicha(Ficha ficha){
@@ -64,7 +67,7 @@ public abstract class SQLFicha {
                     "p_persuasao = ?, p_prestigitacao = ?, p_religiao = ?, p_sobrevivencia = ?, " +
                     "historia = ?, aparencia = ?, personalidade = ?, ideal = ?, ligacao = ?, " +
                     "defeitos = ?, proficiencias = ?, idiomas = ?, inventario_idInventario = ?, " +
-                    "magiaUser_idMagiaUser = ?" +
+                    "magiaUser_idMagiaUser = ? " +
                     "WHERE idFicha = ?";  // Condição para identificar qual ficha atualizar
                 break;
             }
@@ -266,6 +269,39 @@ public abstract class SQLFicha {
             throw new RuntimeException(e);
         }
         return null; // Retorna null se a ficha não for encontrada
+    }
+
+    public static List<FichaResumoDTO> getFichasByUser(int userId) {
+        Connection connection = BD.getConnection();
+        List<FichaResumoDTO> fichas = new ArrayList<>();
+
+        String sql = "SELECT f.idFicha, f.nomePersonagem, f.nivel, " +
+                "c.nome AS classe_nome, r.nome AS raca_nome " +
+                "FROM " + Tabelas.FICHA + " f " +
+                "LEFT JOIN " + Tabelas.CLASSE + " c ON f.classe_idClasse = c.idClasse " +
+                "LEFT JOIN " + Tabelas.RACA + " r ON f.Raca_idRaca = r.idRaca " +
+                "WHERE f.user_idUser = ?";
+
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    FichaResumoDTO ficha = new FichaResumoDTO(
+                            rs.getInt("idFicha"),
+                            rs.getString("nomePersonagem"),
+                            rs.getString("classe_nome"),
+                            rs.getString("raca_nome"),
+                            rs.getInt("nivel")
+                    );
+                    fichas.add(ficha);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar fichas do usuário", e);
+        }
+
+        return fichas;
     }
 
     public static void deleteFicha(int id){

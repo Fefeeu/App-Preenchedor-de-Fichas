@@ -3,6 +3,23 @@
     flex-direction: column;
 }
 
+.full-sheet button {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--second-color);
+    border-radius: 0.25rem;
+    background-color: transparent;
+    color: var(--second-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.full-sheet button:hover {
+    color: var(--primary-color);
+    transition: 0.2s ease-in-out;
+    scale: 1.02;
+}
+
 .header-sheet {
     padding: 0.25rem;
 }
@@ -61,19 +78,36 @@ ul {
 
 
 .big-column-1 {
-    width: 31.5%;
+    width: 30%;
 }
 
 .big-column-2 {
-    width: 33%;
+    width: 34%;
 }
 
 .big-column-3 {
-    width: 31.5%;
+    width: 30%;
 }
 
 .section {
     display: flex;
-    justify-content: space-between;
+    gap: 1.5rem;
     width: 100%;
+}
+
+button.save-button {
+    width: 30%;
+    padding: 0.5rem;
+    border: 2px solid var(--second-color);
+    border-radius: 0.25rem;
+    background-color: transparent;
+    color: var(--second-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button.save-button:hover {
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    transition: 0.2s ease-in-out;
 }

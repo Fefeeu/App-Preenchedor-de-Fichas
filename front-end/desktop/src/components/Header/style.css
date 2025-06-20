@@ -41,4 +41,10 @@ header {
 
 .user-button {
     background-color: transparent;
+    cursor: pointer;
+}
+
+.user-button:hover {
+    color: var(--second-color);
+    transition: 0.3s ease-in-out;
 }

@@ -1,15 +1,24 @@
 import "./style.css";
+import type { SheetLanguagesProficienciesProps } from "../../../interfaces/sheet";
 
-export function SheetLanguagesProficiencies ({register}: any){
-    return(
-        <div className="s-languagesproficiencies">
-            <div className="passive-perception">
-                <input type="number"/><label>PERCEPÇÃO PASSIVA (SABEDORIA)</label>
-            </div>
-            <div className="languages-proficiencies">
-                <button>Adicionar idioma ou proficiência</button>
-                <textarea {...register('idiomas')}></textarea>
-            </div>
-        </div>
-    )
+export function SheetLanguagesProficiencies({ register, defaultValues }: SheetLanguagesProficienciesProps) {
+  return (
+    <div className="s-languagesproficiencies">
+      <div className="passive-perception">
+        <input
+          type="number"
+          {...register("percepcaoPassiva")}
+          defaultValue={defaultValues?.percepcaoPassiva ?? 10}
+        />
+        <label>PERCEPÇÃO PASSIVA (SABEDORIA)</label>
+      </div>
+      <div className="languages-proficiencies">
+        <button type="button">Adicionar idioma ou proficiência</button>
+        <textarea
+          {...register("idiomas")}
+          defaultValue={defaultValues?.idiomas ?? ""}
+        />
+      </div>
+    </div>
+  );
 }

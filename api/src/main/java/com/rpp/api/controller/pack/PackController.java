@@ -3,16 +3,16 @@ package com.rpp.api.controller.pack;
 import com.rpp.api.domain.Sheet;
 import com.rpp.api.domain.br.rpp.auxiliar.enuns.Tabelas;
 import com.rpp.api.domain.br.rpp.ficha.Ficha;
+import com.rpp.api.domain.br.rpp.ficha.FichaResumoDTO;
 import com.rpp.api.domain.br.rpp.ficha.TabelaMagia;
 import com.rpp.api.domain.br.rpp.inventario.Inventario;
-import com.rpp.api.domain.br.rpp.sql.BD;
-import com.rpp.api.domain.br.rpp.sql.SQLFicha;
-import com.rpp.api.domain.br.rpp.sql.SQLInventario;
-import com.rpp.api.domain.br.rpp.sql.SQLMagiaUser;
+import com.rpp.api.domain.br.rpp.sql.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.rpp.api.controller.response.ApiResponse;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pack")
@@ -31,13 +31,27 @@ public class PackController {
     // Get sheet by id
     @GetMapping("/sheet/{id}")
     public ResponseEntity<ApiResponse<Ficha>> get(@PathVariable int id){
+        boolean success;
+        String message;
+        Ficha data;
+
         try {
             Ficha ficha = SQLFicha.readFicha(id);
 
+            if(ficha == null){
+                success = false;
+                message = "Ficha não encontrada";
+                data = null;
+            } else {
+                success = true;
+                message = "Ficha de id " + id + " encontrada";
+                data = ficha;
+            }
+
             ApiResponse<Ficha> response = new ApiResponse<>(
-                    true,
-                    "Ficha de id " + id,
-                    ficha
+                    success,
+                    message,
+                    data
             );
 
             return ResponseEntity.ok(response);
@@ -52,9 +66,23 @@ public class PackController {
     }
 
     // Get all sheets by user id
-    @GetMapping("/sheets")
-    public String getSheetsByUserId(@PathVariable String id){
-        return "Return sheets by User ID: " + id;
+    @GetMapping("/sheets/{id}")
+    public ApiResponse<List<FichaResumoDTO>> getSheetsByUserId(@PathVariable int id){
+        try {
+            List<FichaResumoDTO> fichas = SQLFicha.getFichasByUser(id);
+
+            return new ApiResponse<>(
+                    true,
+                    "Fichas do usuário de id " + id,
+                    fichas
+            );
+        } catch (Exception error){
+            return new ApiResponse<>(
+                    false,
+                    "ocorreu um erro ao buscar suas fichas: " + error,
+                    null
+            );
+        }
     }
 
     // Create sheet
@@ -198,7 +226,7 @@ public class PackController {
         } catch (Exception e) {
             ApiResponse<Ficha> errorResponse = new ApiResponse<>(
                     false,
-                    "Erro ao criar ficha: " + e.getMessage(),
+                    "Erro ao atualizar a ficha: " + e.getMessage(),
                     null
             );
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
@@ -207,7 +235,25 @@ public class PackController {
 
     // Delete sheet
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable String id, @RequestBody Sheet body){
-        return "Ficha deletada";
+    public ResponseEntity<ApiResponse<Integer>> delete(@PathVariable int id){
+        try {
+            SQLFicha.deleteFicha(id);
+
+            ApiResponse<Integer> response = new ApiResponse<>(
+                    true,
+                    "Ficha de id " + id + " deletada com sucesso",
+                    id
+            );
+
+            return ResponseEntity.ok(response);
+        } catch (Exception error){
+            ApiResponse<Integer> errorResponse = new ApiResponse<>(
+                    false,
+                    "Erro ao deletar ficha: " + error.getMessage(),
+                    id
+            );
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 }

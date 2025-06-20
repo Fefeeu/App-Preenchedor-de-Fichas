@@ -1,47 +1,61 @@
 import "./style.css";
+import type { SheetHeaderProps } from "../../../interfaces/sheet";
 
-export function SheetHeader({ register }: any){
+export function SheetHeader({ register, defaultValues }: SheetHeaderProps) {
     return (
         <div className="s-header">
             <div className="name">
-                <input type="text" {...register('nomePersonagem')}/>
+                <input 
+                    type="text" 
+                    {...register('nomePersonagem')} 
+                    defaultValue={defaultValues?.nomePersonagem || ''}
+                />
                 <label>NOME DO PERSONAGEM</label>
             </div>
             <div className="details">
                 <div className="c-1">
                     <div className="input-group">
-                        <select {...register('idClasse')}>
+                        <select 
+                            {...register('idClasse')}
+                            defaultValue={defaultValues?.idClasse || ''}
+                        >
                             <option value="">Classe</option>
-                            <option value="Barbaro">Bárbaro</option>
-                            <option value="Bardo">Bardo</option>
-                            <option value="Bruxo">Bruxo</option>
-                            <option value="Clerigo">Clérigo</option>
-                            <option value="Druida">Druida</option>
-                            <option value="Feiticeiro">Feiticeiro</option>
-                            <option value="Guerreiro">Guerreiro</option>
-                            <option value="Ladino">Ladino</option>
-                            <option value="Mago">Mago</option>
-                            <option value="Monge">Monge</option>
-                            <option value="Paladino">Paladino</option>
-                            <option value="Patrulheiro">Patrulheiro</option>
-                            <option value="Artifice">Artífice</option>
+                            <option value="barbaro">Bárbaro</option>
+                            <option value="bardo">Bardo</option>
+                            <option value="bruxo">Bruxo</option>
+                            <option value="clerigo">Clérigo</option>
+                            <option value="druida">Druida</option>
+                            <option value="feiticeiro">Feiticeiro</option>
+                            <option value="guerreiro">Guerreiro</option>
+                            <option value="ladino">Ladino</option>
+                            <option value="mago">Mago</option>
+                            <option value="monge">Monge</option>
+                            <option value="paladino">Paladino</option>
+                            <option value="patrulheiro">Patrulheiro</option>
+                            <option value="artifice">Artífice</option>
                         </select>
                     </div>
-                    <select {...register('idRaca')}>
+                    <select 
+                        {...register('idRaca')}
+                        defaultValue={defaultValues?.idRaca || ''}
+                    >
                         <option value="">Raça</option>
-                        <option value="Anao">Anão</option>
-                        <option value="Elfo">Elfo</option>
-                        <option value="Halfling">Halfling</option>
-                        <option value="Humano">Humano</option>
-                        <option value="Draconato">Draconato</option>
-                        <option value="Gnomo">Gnomo</option>
-                        <option value="MeioElfo">Meio-Elfo</option>
-                        <option value="MeioOrc">Meio-Orc</option>
-                        <option value="Tiefling">Tiefling</option>
+                        <option value="anao">Anão</option>
+                        <option value="elfo">Elfo</option>
+                        <option value="halfling">Halfling</option>
+                        <option value="humano">Humano</option>
+                        <option value="draconato">Draconato</option>
+                        <option value="gnomo">Gnomo</option>
+                        <option value="meioElfo">Meio-Elfo</option>
+                        <option value="meioOrc">Meio-Orc</option>
+                        <option value="tiefling">Tiefling</option>
                     </select>
                 </div>
                 <div className="c-2">
-                    <select {...register('antecedente')}>
+                    <select 
+                        {...register('antecedente')}
+                        defaultValue={defaultValues?.antecedente || ''}
+                    >
                         <option value="">Antecedente</option>
                         <option value="acolito">Acólito</option>
                         <option value="artesao de guilda">Artesão de Guilda</option>
@@ -57,7 +71,10 @@ export function SheetHeader({ register }: any){
                         <option value="sabio">Sábio</option>
                         <option value="soldado">Soldado</option>
                     </select>
-                    <select {...register('tendencia')}>
+                    <select 
+                        {...register('tendencia')}
+                        defaultValue={defaultValues?.tendencia || ''}
+                    >
                         <option value="">Tendência</option>
                         <option value="leal e bom">Leal e Bom (LB)</option>
                         <option value="neutro e bom">Neutro e Bom (NB)</option>
@@ -73,11 +90,19 @@ export function SheetHeader({ register }: any){
                 <div className="c-3">
                     <div className="input-group">
                         <label>XP:</label>
-                        <input type="number" {...register('xp')}/>
+                        <input 
+                            type="number" 
+                            {...register('xp')}
+                            defaultValue={defaultValues?.xp || ''}
+                        />
                     </div>
                     <div className="input-group">
                         <label>Nível:</label>
-                        <input type="number" {...register('nivel')}/>
+                        <input 
+                            type="number" 
+                            {...register('nivel')}
+                            defaultValue={defaultValues?.nivel || ''}
+                        />
                     </div>
                 </div>
             </div>
