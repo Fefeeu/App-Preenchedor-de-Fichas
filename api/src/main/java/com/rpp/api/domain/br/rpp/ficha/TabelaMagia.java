@@ -116,7 +116,6 @@ public class TabelaMagia {
                 magia.usarMagia();
             }
             espacoDeMagia[magia.getNivel()]--;
-            //TODO: mod no banco
         } catch (NullPointerException e) {
             System.out.println("Nao foi possivel registrar uma magia");
             System.out.println(e.getMessage());
