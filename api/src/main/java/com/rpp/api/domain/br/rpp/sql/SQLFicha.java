@@ -4,7 +4,7 @@ import com.rpp.api.domain.br.rpp.auxiliar.enuns.Tabelas;
 import com.rpp.api.domain.br.rpp.ficha.Caracteristica;
 import com.rpp.api.domain.br.rpp.ficha.Descricao;
 import com.rpp.api.domain.br.rpp.ficha.Ficha;
-import com.rpp.api.domain.br.rpp.ficha.FichaResumoDTO;
+import com.rpp.api.controller.pack.FichaResumoDTO;
 import com.rpp.api.domain.br.rpp.inventario.Inventario;
 
 import java.sql.*;
