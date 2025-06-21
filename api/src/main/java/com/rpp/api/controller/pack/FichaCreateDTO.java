@@ -12,7 +12,6 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FichaCreateDTO {
-
     private String nomePersonagem;
     private String idClasse;
     private String idRaca;
@@ -29,5 +28,6 @@ public class FichaCreateDTO {
     private int dadoDeVida;
     private int idUser = 1;
     private DescricaoDTO descricao;
+    private InventarioDTO inventario;
 }
 

@@ -7,6 +7,7 @@ import com.rpp.api.domain.br.rpp.inventario.item.*;
 import com.rpp.api.domain.br.rpp.sql.BD;
 import com.rpp.api.domain.br.rpp.sql.SQLFicha;
 import com.rpp.api.domain.br.rpp.sql.SQLItem;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,10 +16,15 @@ import java.util.Objects;
 public class Inventario {
     private final int id;
     private HashMap<Integer,Item> itens;
+    @Getter
     private int pc = 0; // Peça de Cobre
+    @Getter
     private int pp = 0; // Peça de Prata
+    @Getter
     private int pe = 0; // Peça de Electro
+    @Getter
     private int po = 0; // Peça de Ouro
+    @Getter
     private int pl = 0; // Peça de pLatina
 
     public Inventario(int id) {
@@ -156,18 +162,30 @@ public class Inventario {
 
     public void setMoedas(char moeda, int valor) {
         switch (moeda){
-            case 'c': this.pc = valor;
-            break;
-            case 'p': this.pp = valor;
-            break;
-            case 'e': this.pe = valor;
-            break;
-            case 'o': this.po = valor;
-            break;
-            case 'l': this.pl = valor;
-            break;
-            default: System.out.println("moeda invalida");
-            break;
+            case 'c': {
+                this.pc = valor;
+                break;
+            }
+            case 'p': {
+                this.pp = valor;
+                break;
+            }
+            case 'e': {
+                this.pe = valor;
+                break;
+            }
+            case 'o': {
+                this.po = valor;
+                break;
+            }
+            case 'l': {
+                this.pl = valor;
+                break;
+            }
+            default: {
+                System.out.println("moeda invalida");
+                break;
+            }
         }
     }
 

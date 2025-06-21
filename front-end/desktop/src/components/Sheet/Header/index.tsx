@@ -9,6 +9,7 @@ export function SheetHeader({ register, defaultValues }: SheetHeaderProps) {
                     type="text" 
                     {...register('nomePersonagem')} 
                     defaultValue={defaultValues?.nomePersonagem || ''}
+                    required
                 />
                 <label>NOME DO PERSONAGEM</label>
             </div>
@@ -18,6 +19,7 @@ export function SheetHeader({ register, defaultValues }: SheetHeaderProps) {
                         <select 
                             {...register('idClasse')}
                             defaultValue={defaultValues?.idClasse || ''}
+                            required
                         >
                             <option value="">Classe</option>
                             <option value="barbaro">Bárbaro</option>
@@ -38,6 +40,7 @@ export function SheetHeader({ register, defaultValues }: SheetHeaderProps) {
                     <select 
                         {...register('idRaca')}
                         defaultValue={defaultValues?.idRaca || ''}
+                        required
                     >
                         <option value="">Raça</option>
                         <option value="anao">Anão</option>
@@ -46,8 +49,8 @@ export function SheetHeader({ register, defaultValues }: SheetHeaderProps) {
                         <option value="humano">Humano</option>
                         <option value="draconato">Draconato</option>
                         <option value="gnomo">Gnomo</option>
-                        <option value="meioElfo">Meio-Elfo</option>
-                        <option value="meioOrc">Meio-Orc</option>
+                        <option value="meio-elfo">Meio-Elfo</option>
+                        <option value="meio-orc">Meio-Orc</option>
                         <option value="tiefling">Tiefling</option>
                     </select>
                 </div>
@@ -55,6 +58,7 @@ export function SheetHeader({ register, defaultValues }: SheetHeaderProps) {
                     <select 
                         {...register('antecedente')}
                         defaultValue={defaultValues?.antecedente || ''}
+                        required
                     >
                         <option value="">Antecedente</option>
                         <option value="acolito">Acólito</option>
@@ -74,6 +78,7 @@ export function SheetHeader({ register, defaultValues }: SheetHeaderProps) {
                     <select 
                         {...register('tendencia')}
                         defaultValue={defaultValues?.tendencia || ''}
+                        required
                     >
                         <option value="">Tendência</option>
                         <option value="leal e bom">Leal e Bom (LB)</option>

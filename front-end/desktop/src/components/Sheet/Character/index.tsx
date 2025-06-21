@@ -40,7 +40,7 @@ export function SheetCharacter({ register, defaultValues }: SheetCharacterProps)
       </div>
       <div className="details-skills">
         <textarea
-          placeholder="Details and Skills"
+          placeholder="Idiomas, habilidades, proficiências..."
           {...register("descricao.proficiencia")}
           defaultValue={defaultValues?.descricao?.proficiencia ?? ""}
         />

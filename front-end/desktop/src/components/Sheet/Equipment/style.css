@@ -5,4 +5,15 @@
 
 .equipment-list textarea, button{
     width: 100%;
+    overflow: hidden;
+}
+
+.coins {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.coins ul {
+    padding: 0;
 }

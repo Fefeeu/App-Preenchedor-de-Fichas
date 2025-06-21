@@ -56,7 +56,6 @@ public abstract class SQLInventario {
                     novoInventario.setMoedas('e', rs.getInt("pe"));
                     novoInventario.setMoedas('o', rs.getInt("po"));
                     novoInventario.setMoedas('l', rs.getInt("pl"));
-
                 }
             }
 
@@ -81,10 +80,40 @@ public abstract class SQLInventario {
                     novoInventario.guardarItem(item, true);
                 }
             }
+
             return novoInventario;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void updateInventario(Inventario inventario) {
+        Connection connection = BD.getConnection();
+        String sql = "UPDATE " + Tabelas.INVENTARIO + " SET " +
+                "pc = ?, " +
+                "pp = ?, " +
+                "pe = ?, " +
+                "po = ?, " +
+                "pl = ? " +
+                "WHERE idInventario = ?";
+
+        try (PreparedStatement stmt = Objects.requireNonNull(connection).prepareStatement(sql)) {
+            int index = 1;
+
+            // Valores das moedas
+            stmt.setInt(index++, inventario.getMoedas('c'));
+            stmt.setInt(index++, inventario.getMoedas('p'));
+            stmt.setInt(index++, inventario.getMoedas('e'));
+            stmt.setInt(index++, inventario.getMoedas('o'));
+            stmt.setInt(index++, inventario.getMoedas('l'));
+
+            // ID do inventário (condição WHERE)
+            stmt.setInt(index, inventario.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar inventário: " + e.getMessage(), e);
         }
     }
 

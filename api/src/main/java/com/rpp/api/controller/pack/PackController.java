@@ -2,7 +2,6 @@ package com.rpp.api.controller.pack;
 
 import com.rpp.api.domain.br.rpp.auxiliar.enuns.Tabelas;
 import com.rpp.api.domain.br.rpp.ficha.Ficha;
-import com.rpp.api.domain.br.rpp.ficha.FichaResumoDTO;
 import com.rpp.api.domain.br.rpp.ficha.TabelaMagia;
 import com.rpp.api.domain.br.rpp.inventario.Inventario;
 import com.rpp.api.domain.br.rpp.sql.*;
@@ -20,11 +19,6 @@ public class PackController {
     @GetMapping
     public String pack(){
         return "You are in pack";
-    }
-
-    @PostMapping("/test")
-    public String test(@RequestBody Sheet body){
-        return "Você criou o personagem: " + body.getCharacterName() + " de classe " + body.getCharacterClass() + " e raça " + body.getCharacterRace();
     }
 
     // Get sheet by id
@@ -89,6 +83,11 @@ public class PackController {
     public ResponseEntity<ApiResponse<Ficha>> create(@RequestBody FichaCreateDTO dto) {
         try {
             Inventario inventario = new Inventario(BD.gerarId(Tabelas.INVENTARIO.toString()));
+            inventario.setMoedas('c', dto.getInventario().getPc());
+            inventario.setMoedas('p', dto.getInventario().getPp());
+            inventario.setMoedas('e', dto.getInventario().getPe());
+            inventario.setMoedas('o', dto.getInventario().getPo());
+            inventario.setMoedas('l', dto.getInventario().getPl());
             SQLInventario.createInventario(inventario);
 
             Ficha ficha = new Ficha(
@@ -165,6 +164,15 @@ public class PackController {
 
         try {
             Ficha fichaAntiga = SQLFicha.readFicha(id);
+
+            Inventario inventario = fichaAntiga.getInventario();
+            inventario.setMoedas('c', dto.getInventario().getPc());
+            inventario.setMoedas('p', dto.getInventario().getPp());
+            inventario.setMoedas('e', dto.getInventario().getPe());
+            inventario.setMoedas('o', dto.getInventario().getPo());
+            inventario.setMoedas('l', dto.getInventario().getPl());
+
+            SQLInventario.updateInventario(inventario);
 
             Ficha fichaAtualizada = new Ficha(
                     id,

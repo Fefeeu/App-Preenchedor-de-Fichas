@@ -45,7 +45,7 @@ export function convertToCharacterSheet(data: any): CharacterSheet {
       sobrevivencia: data.pericias?.sobrevivencia ?? false,
       inteligencia: data.pericias?.inteligencia ?? false,
     },
-    idiomas: data.caracteristicas?.idiomas ?? "",
+    idiomas: data.caracteristicas?.proficiencias ?? "",
     deslocamento: String(data.deslocamento ?? ""),
     pontosVidaBase: String(data.pontosVidaBase ?? ""),
     vidaTemporaria: String(data.vidaTemporaria ?? ""),
@@ -63,9 +63,10 @@ export function convertToCharacterSheet(data: any): CharacterSheet {
       ideal: data.descricao?.ideal ?? "",
       ligacao: data.descricao?.ligacao ?? "",
       defeito: data.descricao?.defeitos ?? "",
-      proficiencia: data.caracteristicas?.proficiencias ?? "",
+      proficiencia: data.caracteristicas?.idiomas ?? "",
       historia: data.descricao?.historia ?? "",
-        aparencia: data.descricao?.aparencia ?? "",
+      aparencia: data.descricao?.aparencia ?? "",
     },
+    classeArmadura: data.classeArmadura ?? 10,
   };
 }
