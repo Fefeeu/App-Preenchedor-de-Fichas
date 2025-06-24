@@ -13,9 +13,6 @@ public class Main {
     public static void main(String[] args) {
         // TODO: ARRUMA TODOS OS EXEPTIONS, MEXER EM TODOS OS QUE TEM O throws SQLException
 
-         Classe classe = new Classe("guerreiro", "guerreiro", "um gerreiro", false);
-         Raca raca = new Raca("humano", "humano", "humano", false);
-
 
          User usuario = new User(BD.gerarId(Tabelas.USER.toString()), "fefe", "email@teste.com", "1234", false);
          usuario = SQLUser.readUser(1);
