@@ -1,17 +1,19 @@
-CREATE DATABASE rpp;
+CREATE DATABASE IF NOT EXISTS rpp;
 USE rpp;
 
+/*
 CREATE USER 'visualizacao'@'localhost' IDENTIFIED BY 'rpp1234';	
 GRANT SELECT ON rpp.* TO 'visualizacao'@'localhost';
 GRANT INSERT ON rpp.* TO 'visualizacao'@'localhost';
+*/
 
-CREATE TABLE `classe` (
+CREATE TABLE IF NOT EXISTS `classe` (
   `idClasse` varchar(45) NOT NULL,
   `nome` varchar(45) DEFAULT NULL,
   `descricao` varchar(100) NOT NULL
 );
 
-CREATE TABLE `ficha` (
+CREATE TABLE IF NOT EXISTS `ficha` (
   `idFicha` int NOT NULL,
   `user_idUser` int NOT NULL,
   `vivo` tinyint NOT NULL DEFAULT 1,
@@ -75,7 +77,7 @@ CREATE TABLE `ficha` (
   `magiaUser_idMagiaUser` int DEFAULT NULL
 );
 
-CREATE TABLE `inventario` (
+CREATE TABLE IF NOT EXISTS `inventario` (
   `idInventario` int NOT NULL,
   `pc` int NOT NULL DEFAULT 0,
   `pp` int NOT NULL DEFAULT 0,
@@ -84,7 +86,7 @@ CREATE TABLE `inventario` (
   `pl` int NOT NULL DEFAULT 0
 );
 
-CREATE TABLE `item` (
+CREATE TABLE IF NOT EXISTS `item` (
   `idItem` int NOT NULL,
   `inventario_idInventario` int NOT NULL,
   `tipo` enum('comum','consumivel','magico','equipavel','equipavelMagico','arma','armaMagica') NOT NULL DEFAULT 'comum',
@@ -121,7 +123,7 @@ CREATE TABLE `magia` (
   `numeroDados` int NOT NULL DEFAULT 1
 );
 
-CREATE TABLE `magiauser` (
+CREATE TABLE IF NOT EXISTS `magiauser` (
   `idMagiaUser` int NOT NULL,
   `nivel1` int NOT NULL DEFAULT 0,
   `nivel2` int NOT NULL DEFAULT 0,
@@ -134,13 +136,13 @@ CREATE TABLE `magiauser` (
   `nivel9` int NOT NULL DEFAULT 0
 );
 
-CREATE TABLE `raca` (
+CREATE TABLE IF NOT EXISTS `raca` (
   `idRaca` varchar(45) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(100) NOT NULL
 );
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `idUser` int NOT NULL,
   `nome` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -190,3 +192,33 @@ ALTER TABLE `item`
 
 ALTER TABLE `magia`
   ADD CONSTRAINT `magia_ibfk_1` FOREIGN KEY (`magiaUser_idMagiaUser`) REFERENCES `magiauser` (`idMagiaUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
+/*  
+INSERT INTO raca (idRaca, nome, descricao) VALUES
+  ('anao', 'Anão', 'Resistente e habilidoso em montanhas'),
+  ('elfo', 'Elfo', 'Gracioso e com afinidade arcana'),
+  ('halfling', 'Halfling', 'Pequeno, ágil e sortudo'),
+  ('humano', 'Humano', 'Adaptável e versátil'),
+  ('draconato', 'Draconato', 'Híbrido humanoide com traços de dragão'),
+  ('gnomo', 'Gnomo', 'Pequeno, inventivo e ilusionista'),
+  ('meio-elfo', 'Meio-Elfo', 'Mistura de humano e elfo, diplomata'),
+  ('meio-orc', 'Meio-Orc', 'Forte e resistente, com herança orc'),
+  ('tiefling', 'Tiefling', 'Herança infernal e poderes sombrios');
+*/
+
+/*
+INSERT INTO classe (idClasse, nome, descricao) VALUES
+  ('barbaro', 'Bárbaro', 'Guerreiro feroz com fúria em batalha'),
+  ('bardo', 'Bardo', 'Artista mágico que inspira aliados'),
+  ('bruxo', 'Bruxo', 'Conjurador com pacto sobrenatural'),
+  ('clerigo', 'Clérigo', 'Devoto com magias divinas'),
+  ('druida', 'Druida', 'Guardião da natureza que se transforma'),
+  ('feiticeiro', 'Feiticeiro', 'Magia inata no sangue'),
+  ('guerreiro', 'Guerreiro', 'Mestre em combate físico'),
+  ('ladino', 'Ladino', 'Especialista em furtividade'),
+  ('mago', 'Mago', 'Estudioso de magias arcanas'),
+  ('monge', 'Monge', 'Guerreiro espiritual com artes marciais'),
+  ('paladino', 'Paladino', 'Cavaleiro sagrado com juramentos'),
+  ('patrulheiro', 'Patrulheiro', 'Caçador e explorador'),
+  ('artifice', 'Artífice', 'Inventor de engenhocas mágicas');
+*/
